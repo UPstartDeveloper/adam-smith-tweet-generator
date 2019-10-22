@@ -23,10 +23,10 @@ def get_input():
     return render_template("form.html")
 
 
-@app.route("/word")
+@app.route("/word", methods=["POST"])
 def parse_data():
     """Generates anagrams from the input string."""
-    input = request.args.get("string")
+    input = request.form.get("string")
     anagrams = list()
     words_to_choose_from = get_words()
     # determine which words are anagrams of the input
