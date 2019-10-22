@@ -16,31 +16,29 @@ def decide_if_sentence(input):
     return len(input) > 1
 
 
-def reverse(input_str):
+def reverse(input):
     """Returns the input string in reverse.
-       Param: input_str(list): can be either a single word or multiple strings
+       Param: input(list): can be either a single word or multiple strings
     """
     # if input_str is a sentence, then outputs words in sentence in reverse
-    space = " "
-    if space in input_str:
+    if decide_if_sentence(input) is True:
         sentence = list()
-        for word in input_str:
+        for word in input:
             sentence.append(word)
-            sentence.append(space)
 
         # output reverse sentence
         sentence_length = len(sentence)
         for i in range(sentence_length):
             last_word_index = sentence_length - (i + 1)
             last_word = sentence[last_word_index]
-            print(last_word, end=space)
+            print(last_word, end=" ")
 
         go_to_next_line()
 
     # if input_str is a single word, then outputs letters in reverse
     else:
         word = list()
-        for letter in input_str:
+        for letter in input:
             word.append(letter)
 
         # output word in reverse
