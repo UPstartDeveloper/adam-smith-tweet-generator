@@ -38,7 +38,7 @@ def reverse(input):
     # if input_str is a single word, then outputs letters in reverse
     else:
         word = list()
-        for letter in input:
+        for letter in input[0]:
             word.append(letter)
 
         # output word in reverse
