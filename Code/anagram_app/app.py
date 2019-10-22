@@ -11,6 +11,8 @@ def get_input():
 
 @app.route("/word")
 def parse_data():
+    """Generates anagrams from the input string."""
+    input = request.args.get("string")
     anagrams = list()
     return redirect(url_for("show_anagrams", anagrams=anagrams))
 
