@@ -17,6 +17,25 @@ def get_words():
     return words_no_newline
 
 
+def determine_anagram(word, possible_anagram):
+    """Determines if a word might be the anagram of another word.
+       Params:
+       word(str) and possible_anagram(str)
+       Return bool
+    """
+    # possible_anagram cannot be a anagram if it isn't the same length as word
+    if not len(word) == len(possible_anagram):
+        return False
+    # possible_anagram must have all same letters as word
+    elif word == possible_anagram:
+        return False
+    for letter in possible_anagram:
+        if letter not in word:
+            return False
+    # all tests passed, then return True
+    return True
+
+
 @app.route("/")
 def get_input():
     """Show form for user to input a string to make anagrams from (a word)."""
@@ -29,12 +48,11 @@ def parse_data():
     input = request.form.get("string")
     anagrams = list()
     words_to_choose_from = get_words()
-    # determine which words are anagrams of the input
-    for word in words_to_choose_from:
-        for letter in input:
-            if letter in word:
-                if len(input) == len(word) and (not input == word):
-                    anagrams.append(word)
+    # determine 10 words that are anagrams of the input
+    while len(anagrams) < 10:
+        for word in words_to_choose_from:
+            if determine_anagram(input, word) is True:
+                anagrams.append(word)
     return redirect(url_for("show_anagrams", anagrams=anagrams))
 
 

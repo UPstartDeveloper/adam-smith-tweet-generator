@@ -1,8 +1,10 @@
 <h1>Here Are Your Anagrams!</h1>
 
     <ol>
-    {% for anagram in anagrams %}
-        <li>{{ anagram }}</li>
+    {% for list in anagrams %}
+        {% for string in list %}
+        <li>{{ string }}</li>
+        {% endfor %}
     {% endfor %}
     </ol>
 

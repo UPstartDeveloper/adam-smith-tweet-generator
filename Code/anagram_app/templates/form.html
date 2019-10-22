@@ -1,6 +1,6 @@
 <h1>Welcome to the Anagram Generator!</h1>
 
-<form action="/word" method="POST">
+<form action="{{ url_for('parse_data') }}" method="POST">
     Input a word, see me generate anagrams from it:<br>
     <input type="text" name="string">
     <br>
