@@ -8,9 +8,17 @@ def go_to_next_line():
     print("")
 
 
+def decide_if_sentence(input):
+    """Decide if the input is multiple word or many (making it a sentence)
+       Param: input(list)
+       Return: bool
+    """
+    return len(input) > 1
+
+
 def reverse(input_str):
     """Returns the input string in reverse.
-       Param: input_str(str): can be either a single word or a sentence
+       Param: input_str(list): can be either a single word or multiple strings
     """
     # if input_str is a sentence, then outputs words in sentence in reverse
     space = " "
