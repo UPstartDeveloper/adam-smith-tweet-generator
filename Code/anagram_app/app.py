@@ -42,3 +42,7 @@ def parse_data():
 def show_anagrams(anagrams):
     """Display anagrams."""
     return render_template("result.html", anagrams=anagrams)
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
