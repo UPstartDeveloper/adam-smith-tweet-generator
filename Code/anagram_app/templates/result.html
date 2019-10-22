@@ -1,0 +1,12 @@
+<h1>Here Are Your Anagrams!<h1>
+
+    {% for anagram in anagrams %}
+    <ol>
+        <li>{{ anagram }}</li>
+    </ol>
+    {% endfor %}
+
+    <!-- Link Back to Home -->
+    <form action="/">
+        <input type="submit" value="Back to Home">
+    </form>
