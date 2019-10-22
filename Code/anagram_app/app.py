@@ -20,17 +20,23 @@ def get_words():
 def determine_anagram(word, possible_anagram):
     """Determines if a word might be the anagram of another word.
        Params:
-       word(str) and possible_anagram(str)
+       word(str)
+       possible_anagram(str)
        Return bool
     """
     # possible_anagram cannot be a anagram if it isn't the same length as word
     if not len(word) == len(possible_anagram):
         return False
-    # possible_anagram must have all same letters as word
+    # possible_anagram must be different from word
     elif word == possible_anagram:
         return False
+    # possible_anagram must have all same letters as word
     for letter in possible_anagram:
         if letter not in word:
+            return False
+
+    for letter in word:
+        if letter not in possible_anagram:
             return False
     # all tests passed, then return True
     return True
@@ -49,10 +55,9 @@ def parse_data():
     anagrams = list()
     words_to_choose_from = get_words()
     # determine 10 words that are anagrams of the input
-    while len(anagrams) < 10:
-        for word in words_to_choose_from:
-            if determine_anagram(input, word) is True:
-                anagrams.append(word)
+    for word in words_to_choose_from:
+        if determine_anagram(input, word) is True:
+            anagrams.append(word)
     return redirect(url_for("show_anagrams", anagrams=anagrams))
 
 
