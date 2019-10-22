@@ -7,7 +7,7 @@ def random_words_from_dictionary(num_requested):
         Return a sentence of words randomly chosen from a file.
         Param: num_requested(int): number of words in sentence
     """
-    # choose a random set of words from the words file
+    # get words from the words file
     file = open("/usr/share/dict/words", "r")
     words_list = file.readlines()
     file.close()
