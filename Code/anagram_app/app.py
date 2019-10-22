@@ -11,10 +11,11 @@ def get_input():
 
 @app.route("/word")
 def parse_data():
-    return redirect(url_for("show_anagrams"))  # anagrams=anagrams)
+    anagrams = list()
+    return redirect(url_for("show_anagrams", anagrams=anagrams))
 
 
-@app.route("/anagrams")
-def show_anagrams():
+@app.route("/anagrams/<anagrams>")
+def show_anagrams(anagrams):
     """Display anagrams."""
-    return render_template("result.html")
+    return render_template("result.html", anagrams=anagrams)
