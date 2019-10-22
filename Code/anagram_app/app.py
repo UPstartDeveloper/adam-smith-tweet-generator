@@ -76,10 +76,8 @@ def parse_data():
 @app.route("/anagrams/<anagrams>")
 def show_anagrams(anagrams):
     """Display anagrams."""
-    '''
-    # clean the anagrams
-    #clean_anagrams = remove_non_alpha(anagrams)
-    '''
+    # turn anagrams into a list
+    anagrams = list(anagrams)
     return render_template("result.html", anagrams=anagrams)
 
 
