@@ -1,11 +1,11 @@
 <h1>Here Are Your Anagrams!</h1>
 
     <ol>
-    {% for list in anagrams %}
-        {% for string in list %}
-        <li>{{ string }}</li>
+        {% for char in anagrams %}
+            {% if char != "[" and char != "," and char != "'" and char != "]" %}
+                <li>{{ char }}</li>
+            {% endif %}
         {% endfor %}
-    {% endfor %}
     </ol>
 
     <!-- Link Back to Home -->

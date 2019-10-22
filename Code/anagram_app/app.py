@@ -42,6 +42,18 @@ def determine_anagram(word, possible_anagram):
     return True
 
 
+"""
+def remove_non_alpha(anagrams):
+    '''Remove chars such as [, ', ], and commas that appear in the list of
+       anagram strings.
+       Param: anagrams(list)
+       Return: clean(list)
+    ''
+    clean = list()
+    for str in anagrams
+"""
+
+
 @app.route("/")
 def get_input():
     """Show form for user to input a string to make anagrams from (a word)."""
@@ -64,6 +76,10 @@ def parse_data():
 @app.route("/anagrams/<anagrams>")
 def show_anagrams(anagrams):
     """Display anagrams."""
+    '''
+    # clean the anagrams
+    #clean_anagrams = remove_non_alpha(anagrams)
+    '''
     return render_template("result.html", anagrams=anagrams)
 
 
