@@ -72,7 +72,7 @@ def determine_hist_type(histogram):
     if isinstance(histogram, dict) is True:
         # determine if keys in dict are word strings or numbers
         words_or_num = list(histogram.keys())
-        if isintance(words_or_num, str) is True:
+        if isinstance(words_or_num[0], str) is True:
             return "dict_with_str_keys"
         else:
             return "dict_with_num_keys"
@@ -80,7 +80,7 @@ def determine_hist_type(histogram):
         # determine if histogram is made of lists or tuples
         if isinstance(histogram[0], list) is True:
             return "list_lists"
-        elif isinstance(histogram, tuple) is True:
+        elif isinstance(histogram[0], tuple) is True:
             return "list_tuples"
 
 
@@ -90,7 +90,7 @@ def unique_words(histogram):
        Return: int
     """
     if determine_hist_type(histogram) == "dict_with_str_keys":
-        return len(histogram.keys())
+        return len(list(histogram.keys()))
     elif determine_hist_type(histogram) == "dict_with_num_keys":
         pass
     elif determine_hist_type(histogram) == "list_lists":
@@ -99,18 +99,23 @@ def unique_words(histogram):
         pass
 
 
-"""
 def frequency(word, histogram):
     '''Returns the frequency of a word in a text.
        Param: word(str): word being analyzed
               histogram(dict, list of lists or tuples): represents source text
        Returns: int
     '''
-    # determine data type of histogram
-    if isinstance(hist)
-"""
+    if determine_hist_type(histogram) == "dict_with_str_keys":
+        return histogram[word]
+    elif determine_hist_type(histogram) == "dict_with_num_keys":
+        pass
+    elif determine_hist_type(histogram) == "list_lists":
+        pass
+    elif determine_hist_type(histogram) == "list_tuples":
+        pass
 
 
 if __name__ == "__main__":
     # print(histogram_as_dict(sys.argv[1]))
-    print(unique_words(histogram_as_dict(sys.argv[1])))
+    # print(unique_words(histogram_as_dict(sys.argv[1])))
+    print(frequency('newsletter', histogram_as_dict(sys.argv[1])))
