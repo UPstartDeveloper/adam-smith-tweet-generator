@@ -91,7 +91,8 @@ def histogram(file_name):
     words_list = get_clean_words(file_name)
     # make a dict of the data
     # histogram = create_histogram_dict(words_list)
-    histogram = create_histogram_list_of_lists(words_list)
+    # histogram = create_histogram_list_of_lists(words_list)
+    histogram = create_histogram_list_of_tuples(words_list)
 
     return histogram
 
@@ -142,7 +143,9 @@ def frequency(word, histogram):
     elif determine_hist_type(histogram) == "dict_with_num_keys":
         pass
     elif determine_hist_type(histogram) == "list_lists":
-        pass
+        for i in range(len(histogram)):
+            if histogram[i] == word:
+                returnn histogram[i][1]
     elif determine_hist_type(histogram) == "list_tuples":
         pass
 
