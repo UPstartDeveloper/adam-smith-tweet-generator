@@ -50,7 +50,19 @@ def create_histogram_dict(words_list):
     return histogram
 
 
-def histogram_as_dict(file_name):
+def create_histogram_list_of_lists(words_list):
+    pass
+
+
+def create_histogram_list_of_tuples(words_list):
+    pass
+
+
+def create_histogram_dict_inverted(words_list):
+    pass
+
+
+def histogram(file_name):
     """Return a histogram of the appearances of words from a .txt file.
        Param: file_name(str): name of file with source text (.txt)
        Return: histogram(dict): every key a unique word,
@@ -60,6 +72,7 @@ def histogram_as_dict(file_name):
     words_list = get_clean_words(file_name)
     # make a dict of the data
     histogram = create_histogram_dict(words_list)
+    # histogram = create_histogram_list_of_lists(words_list)
 
     return histogram
 
@@ -116,6 +129,6 @@ def frequency(word, histogram):
 
 
 if __name__ == "__main__":
-    # print(histogram_as_dict(sys.argv[1]))
-    # print(unique_words(histogram_as_dict(sys.argv[1])))
-    print(frequency('newsletter', histogram_as_dict(sys.argv[1])))
+    # print(histogram(sys.argv[1]))
+    # print(unique_words(histogram(sys.argv[1])))
+    print(frequency('newsletter', histogram(sys.argv[1])))
