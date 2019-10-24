@@ -110,6 +110,16 @@ def create_histogram_inverted(words_list):
     """
     histogram = list()
     unique_words = find_unique_words(words_list)
+    count_of_appearances = 0
+    for word in unique_words:
+        count_of_appearances += 1
+        appearances = 0
+        words_having_appearances = list()
+        for i in range(len(words_list)):
+            if word == word_list[i].lower():
+                appearances += 1
+        if count_of_appearances == appearances:
+            words_having_appearances.append(word)
 
 
 def histogram(file_name):
