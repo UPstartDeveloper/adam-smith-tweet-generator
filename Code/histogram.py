@@ -51,7 +51,26 @@ def create_histogram_dict(words_list):
 
 
 def create_histogram_list_of_lists(words_list):
-    pass
+    """Return a list to represent a histogram of word frequency in a text.
+       List contains a list for each unique word in the text.
+       First element in the nested list is the word; and the second element is
+       the number of appearances that word makes in the text.
+       Param: words_list(list): list of strings representing the text
+       Return: histogram(list)
+    """
+    histogram = list()
+    unique_words = list()  # record all unique words
+    # generate histogram
+    for word in words_list:
+        # if word not recorded, make a new list for it in histogram
+        if word not in unique_words:
+            histogram.append([word, 1])
+            unique_words.append(word)
+        # find the list containing non-unique words, and increment appearances
+        else:
+            word_index = unique_words.index(word)
+            histogram[word_index][1] += 1
+    return histogram
 
 
 def create_histogram_list_of_tuples(words_list):
@@ -71,8 +90,8 @@ def histogram(file_name):
     """
     words_list = get_clean_words(file_name)
     # make a dict of the data
-    histogram = create_histogram_dict(words_list)
-    # histogram = create_histogram_list_of_lists(words_list)
+    # histogram = create_histogram_dict(words_list)
+    histogram = create_histogram_list_of_lists(words_list)
 
     return histogram
 
