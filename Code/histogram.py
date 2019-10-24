@@ -9,10 +9,12 @@ def get_clean_words(file_name):
     """
     words = []
     with open(file_name, "r") as file:
+        # make a list ofd words, contains non alphabetic chars
         words = file.read().split()
         # remove all occurences of non-alpha chars from data
+        clean_words = []
         for word in words:
-            word.join([char for char in word if not (
+            clean_word = ([char for char in word if not (
                 char == "." or
                 char == "?" or
                 char == "!" or
@@ -22,7 +24,14 @@ def get_clean_words(file_name):
                 char == "(" or
                 char == ")"
             )])
-    return words
+            clean_words.append(clean_word)
+        # make a list of whole words only containing letters
+        clean_words_as_str = []
+        for list_of_chars in clean_words:
+            whole_word = ""
+            clean_words_as_str.append(whole_word.join(list_of_chars))
+
+    return clean_words_as_str
 
 
 def histogram_as_dict(file_name):
@@ -33,6 +42,7 @@ def histogram_as_dict(file_name):
                of the word in the text
     """
     words_list = get_clean_words(file_name)
+
     # make a dict of the data
     histogram = dict()
     words = histogram.keys()
@@ -43,28 +53,6 @@ def histogram_as_dict(file_name):
             histogram[word.lower()] += 1
 
     return histogram
-
-    """
-    words_list = []
-    with open(file_name, "r") as file:
-        # words_list = [line.split(",") for line in file.readlines()]
-        for line in file:
-            for word in line:
-                words_list.append(word)
-    # words_list = remove_newlines(words_list)
-    # print(words)
-    # make a dict of the data
-    histogram = dict()
-    words = histogram.keys()
-    for word in words_list:
-        # for word in list:
-        if word not in words:
-            histogram[word] = 1
-        else:
-            histogram[word] += 1
-
-    return histogram
-    """
 
 
 if __name__ == "__main__":
