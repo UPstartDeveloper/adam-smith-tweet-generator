@@ -174,14 +174,13 @@ def determine_hist_type(histogram):
     """
     if isinstance(histogram, dict) is True:
         # determine if keys in dict are word strings or numbers
-        words_or_num = list(histogram.keys())
-        if isinstance(words_or_num[0], str) is True:
-            return "dict_with_str_keys"
-        else:
-            return "dict_with_num_keys"
+        return "dict"
     elif isinstance(histogram, list) is True:
-        # determine if histogram is made of lists or tuples
-        return "list"
+        # determine if histogram is inverted or not
+        if isinstance(histogram[0], str) is True:
+            return "list"
+        else:
+            return "inverted_list"
 
 
 def unique_words(histogram):
@@ -189,12 +188,12 @@ def unique_words(histogram):
        Param: histogram(dict, list of lists, or list of tuples)
        Return: int
     """
-    if determine_hist_type(histogram) == "dict_with_str_keys":
+    if determine_hist_type(histogram) == "dict":
         return len(list(histogram.keys()))
-    elif determine_hist_type(histogram) == "dict_with_num_keys":
-        pass
     elif determine_hist_type(histogram) == "list":
         return len(histogram)
+    elif determine_hist_type(histogram) == "list":
+        pass
 
 
 def frequency(word, histogram):
@@ -203,14 +202,14 @@ def frequency(word, histogram):
               histogram(dict, list of lists or tuples): represents source text
        Returns: int
     '''
-    if determine_hist_type(histogram) == "dict_with_str_keys":
+    if determine_hist_type(histogram) == "dict":
         return histogram[word]
-    elif determine_hist_type(histogram) == "dict_with_num_keys":
-        pass
     elif determine_hist_type(histogram) == "list":
         for i in range(len(histogram)):
             if histogram[i] == word:
                 return histogram[i][1]
+    elif determine_hist_type(histogram) == "list":
+        pass
 
 
 if __name__ == "__main__":
