@@ -64,5 +64,21 @@ def histogram_as_dict(file_name):
     return histogram
 
 
+def unique_words(histogram):
+    """Return total count of unique words in a source text.
+       Param: histogram(dict, list of lists, or list of tuples)
+       Return: int
+    """
+    # determine data type of histogram
+    if isinstance(histogram, dict):
+        # determine if histogram is inverted
+        unique_words_or_numbers = list(histogram.keys())
+        if isinstance(unique_words_or_numbers[0], str):
+            return len(histogram.keys())
+        else:
+            pass
+
+
 if __name__ == "__main__":
-    print(histogram_as_dict(sys.argv[1]))
+    # print(histogram_as_dict(sys.argv[1]))
+    print(unique_words(histogram_as_dict(sys.argv[1])))
