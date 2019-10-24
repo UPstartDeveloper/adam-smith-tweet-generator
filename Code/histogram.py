@@ -34,6 +34,22 @@ def get_clean_words(file_name):
     return clean_words_as_str
 
 
+def create_histogram_dict(words_list):
+    """Return a dictionary representing a histogram of words in a list.
+       Param: words_list(list): list of strings representing words
+       Return: histogram(dict): each key a unique word, values are number of
+               word appearances
+    """
+    histogram = dict()
+    words = histogram.keys()
+    for word in words_list:
+        if word.lower() not in words:
+            histogram[word.lower()] = 1
+        else:
+            histogram[word.lower()] += 1
+    return histogram
+
+
 def histogram_as_dict(file_name):
     """Return a histogram of the appearances of words from a .txt file.
        Param: file_name(str): name of file with source text (.txt)
@@ -42,15 +58,8 @@ def histogram_as_dict(file_name):
                of the word in the text
     """
     words_list = get_clean_words(file_name)
-
     # make a dict of the data
-    histogram = dict()
-    words = histogram.keys()
-    for word in words_list:
-        if word.lower() not in words:
-            histogram[word.lower()] = 1
-        else:
-            histogram[word.lower()] += 1
+    histogram = create_histogram_dict(words_list)
 
     return histogram
 
