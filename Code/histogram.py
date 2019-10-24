@@ -1,4 +1,5 @@
 import sys
+import re
 
 
 def get_clean_words(file_name):
@@ -8,15 +9,19 @@ def get_clean_words(file_name):
     """
     words = []
     with open(file_name, "r") as file:
-        list_of_lines = [line.strip("\n") for line in file.readlines()]
-        lists_of_words = [line.split(" ") for line in list_of_lines]
-        # add all word strings together in one big list
-        all_words = []
-        for list in lists_of_words:
-            for str in list:
-                if not (str == ""):
-                    all_words.append(str)
-    words = all_words
+        words = file.read().split()
+        # remove all occurences of non-alpha chars from data
+        for word in words:
+            word.join([char for char in word if not (
+                char == "." or
+                char == "?" or
+                char == "!" or
+                char == "," or
+                char == ":" or
+                char == ";" or
+                char == "(" or
+                char == ")"
+            )])
     return words
 
 
@@ -32,10 +37,10 @@ def histogram_as_dict(file_name):
     histogram = dict()
     words = histogram.keys()
     for word in words_list:
-        if word not in words:
-            histogram[word] = 1
+        if word.lower() not in words:
+            histogram[word.lower()] = 1
         else:
-            histogram[word] += 1
+            histogram[word.lower()] += 1
 
     return histogram
 
