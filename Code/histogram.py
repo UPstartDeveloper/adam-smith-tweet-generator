@@ -193,7 +193,10 @@ def unique_words(histogram):
     elif determine_hist_type(histogram) == "list":
         return len(histogram)
     elif determine_hist_type(histogram) == "list":
-        pass
+        count_of_words = 0
+        for tuple in histogram:
+            count_of_words += len(tuple[1])
+        return count_of_words
 
 
 def frequency(word, histogram):
@@ -209,7 +212,9 @@ def frequency(word, histogram):
             if histogram[i] == word:
                 return histogram[i][1]
     elif determine_hist_type(histogram) == "list":
-        pass
+        for tuple in histogram:
+            if word in tuple[1]:
+                return tuple[0]
 
 
 if __name__ == "__main__":
