@@ -100,6 +100,12 @@ def create_histogram_list_of_tuples(words_list):
     return histogram
 
 
+class Word:
+    def __init__(self, word, appearances=0):
+        self.word = word
+        self.appearances = appearances
+
+
 def create_histogram_inverted(words_list):
     """Create a histogram of word frequency from a source text.
        Each tuple's first element is a number representing the
@@ -107,6 +113,17 @@ def create_histogram_inverted(words_list):
        Each value is a list of words which appear that number of times.
        Param: words_list(list)
        Return: histogram(list): contains nested tuples with nested lists
+    """
+    unique_words = find_unique_words(words_list)
+    unique_words_as_obj = [Word(word) for word in unique_words]
+    # count up appearances for each Word
+    for word in unique_words_as_obj:
+        for word_from_text in words_list:
+            if word.word == word_from_text:
+                word.appearances += 1
+    # make a histogram by grouping Word objects with equal appearances together
+    histogram = list()
+    count_of_appearances = 0
     """
     histogram = list()
     unique_words = find_unique_words(words_list)
@@ -120,6 +137,7 @@ def create_histogram_inverted(words_list):
                 appearances += 1
         if count_of_appearances == appearances:
             words_having_appearances.append(word)
+    """
 
 
 def histogram(file_name):
