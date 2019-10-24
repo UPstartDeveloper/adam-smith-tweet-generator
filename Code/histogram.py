@@ -91,6 +91,12 @@ def unique_words(histogram):
     """
     if determine_hist_type(histogram) == "dict_with_str_keys":
         return len(histogram.keys())
+    elif determine_hist_type(histogram) == "dict_with_num_keys":
+        pass
+    elif determine_hist_type(histogram) == "list_lists":
+        pass
+    elif determine_hist_type(histogram) == "list_tuples":
+        pass
 
 
 """
