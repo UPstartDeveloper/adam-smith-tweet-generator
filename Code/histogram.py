@@ -63,12 +63,12 @@ def create_histogram_list_of_lists(words_list):
     # generate histogram
     for word in words_list:
         # if word not recorded, make a new list for it in histogram
-        if word not in unique_words:
-            histogram.append([word, 1])
-            unique_words.append(word)
+        if word.lower() not in unique_words:
+            histogram.append([word.lower(), 1])
+            unique_words.append(word.lower())
         # find the list containing non-unique words, and increment appearances
         else:
-            word_index = unique_words.index(word)
+            word_index = unique_words.index(word.lower())
             histogram[word_index][1] += 1
     return histogram
 
@@ -126,7 +126,7 @@ def unique_words(histogram):
     elif determine_hist_type(histogram) == "dict_with_num_keys":
         pass
     elif determine_hist_type(histogram) == "list_lists":
-        pass
+        return len(histogram)
     elif determine_hist_type(histogram) == "list_tuples":
         pass
 
@@ -149,5 +149,5 @@ def frequency(word, histogram):
 
 if __name__ == "__main__":
     # print(histogram(sys.argv[1]))
-    # print(unique_words(histogram(sys.argv[1])))
-    print(frequency('newsletter', histogram(sys.argv[1])))
+    print(unique_words(histogram(sys.argv[1])))
+    # print(frequency('newsletter', histogram(sys.argv[1])))
