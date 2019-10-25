@@ -252,7 +252,7 @@ def total_count(histogram):
 def calculate_mean(histogram):
     """Return the mean number of appearances for word frequency.
        Divide total lword count of text by the number of unique words.
-       Param: histogram(list)
+       Param: histogram(list or dict)
        Return: float
     """
     if determine_hist_type(histogram) == "list":
@@ -263,7 +263,7 @@ def calculate_mean(histogram):
 
 def calculate_median(histogram):
     """Return the median word frequency from a histogram.
-         Param: histogram(list)
+         Param: histogram(list or dict)
          Return: float
     """
     if determine_hist_type(histogram) == "list":
@@ -279,6 +279,15 @@ def calculate_median(histogram):
             return histogram[(length - 1) / 2][1]
 
 
+def calculate_mode(histogram):
+    """Return the number of appearances made by the most frequent word.
+       Param: histogram(list or dict)
+       Return: int
+    """
+    most_frequent_word = most_least_frequent(histogram)[0]
+    return frequency(most_frequent_word, histogram)
+
+
 if __name__ == "__main__":
     # print(histogram(sys.argv[1]))
     # print(unique_words(histogram(sys.argv[1])))
@@ -292,3 +301,4 @@ if __name__ == "__main__":
     print(f"Number of words used: {unique_words}.")
     print(f"Mean word frequency: {calculate_mean(histogram)}.")
     print(f"Median word frequency: {calculate_median(histogram)}.")
+    print(f"Mode word frequency: {calculate_mode(histogram)}.")
