@@ -50,7 +50,7 @@ def create_histogram_dict(words_list):
     return histogram
 
 
-def find_unique_words(words_list):
+def find_unique_words(words_list, unique_words):
     """Record all unique words in a list of strings."""
     # record all unique words
     unique_words = list()
@@ -58,6 +58,23 @@ def find_unique_words(words_list):
         if word.lower() not in unique_words:
             unique_words.append(word.lower())
     return unique_words
+
+
+def make_word_appearance_pairs(words_list):
+    """Return a list of word and the number of appearances
+       they make in a list.
+    """
+    histogram = list()
+    unique_words = find_unique_words(words_list)
+    # count up appearances of each unique word, then make tuple in histogram
+    for word in unique_words:
+        appearances = 0
+        for word_from_text in words_list:
+            if word == word_from_text.lower():
+                appearances += 1
+        histogram.append([word, appearances])
+
+    return histogram
 
 
 def create_histogram_list_of_lists(words_list):
@@ -68,35 +85,16 @@ def create_histogram_list_of_lists(words_list):
        Param: words_list(list): list of strings representing the text
        Return: histogram(list)
     """
-    histogram = list()
-    unique_words = find_unique_words(words_list)
-    # generate histogram
-    for word in words_list:
-        # if word not recorded, make a new list for it in histogram
-        if word.lower() not in unique_words:
-            histogram.append([word.lower(), 1])
-            unique_words.append(word.lower())
-        # find the list containing non-unique words, and increment appearances
-        else:
-            word_index = unique_words.index(word.lower())
-            histogram[word_index][1] += 1
-    return histogram
+    return make_word_appearance_pairs(words_list)
 
 
 def create_histogram_list_of_tuples(words_list):
     """Return the equivalent of the previous function, using tuples (instead of
        lists) nested inside a list.
     """
-    histogram = list()
-    unique_words = find_unique_words(words_list)
-    # count up appearances of each unique word, then make tuple in histogram
-    for word in unique_words:
-        appearances = 0
-        for word_from_text in words_list:
-            if word == word_from_text.lower():
-                appearances += 1
-        histogram.append((word, appearances))
-
+    histogram = make_word_appearance_pairs(words_list)
+    # make each nested list a tuple
+    histogram = [tuple(list) for list in histogram]
     return histogram
 
 
@@ -195,7 +193,7 @@ def unique_words(histogram):
     elif determine_hist_type(histogram) == "inverted_list":
         count_of_words = 0
         for tuple in histogram:
-            count_of_words += len(tuple[1])
+            count_of_words += tuple[1]
         return count_of_words
 
 
@@ -247,6 +245,10 @@ if __name__ == "__main__":
     # print(histogram(sys.argv[1]))
     # print(unique_words(histogram(sys.argv[1])))
     # print(frequency('newsletter', histogram(sys.argv[1])))
-    with open(sys.argv[1]) as file:
-        if file.name == "adam_smith.txt":
-            print("Analysis of THE WEALTH OF NATIONS (1776), by Adam Smith")
+    histogram = histogram(sys.argv[1])
+    most_least_frequent = most_least_frequent(histogram)
+    unique_words = unique_words(histogram)
+    print("Analysis for THE WEALTH OF NATIONS (1776), by Adam Smith:")
+    print(f"Most frequent word: {most_least_frequent[0]}")
+    print(f"Least frequent word: {most_least_frequent[1]}")
+    print(f"Number of words used: {unique_words}.")
