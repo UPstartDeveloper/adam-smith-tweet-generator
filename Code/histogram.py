@@ -160,9 +160,9 @@ def histogram(file_name):
     words_list = get_clean_words(file_name)
     # make a dict of the data
     # histogram = create_histogram_dict(words_list)
-    # histogram = create_histogram_list_of_lists(words_list)
+    histogram = create_histogram_list_of_lists(words_list)
     # histogram = create_histogram_list_of_tuples(words_list)
-    histogram = create_histogram_inverted(words_list)
+    # histogram = create_histogram_inverted(words_list)
 
     return histogram
 
@@ -192,7 +192,7 @@ def unique_words(histogram):
         return len(list(histogram.keys()))
     elif determine_hist_type(histogram) == "list":
         return len(histogram)
-    elif determine_hist_type(histogram) == "list":
+    elif determine_hist_type(histogram) == "inverted_list":
         count_of_words = 0
         for tuple in histogram:
             count_of_words += len(tuple[1])
@@ -211,13 +211,38 @@ def frequency(word, histogram):
         for i in range(len(histogram)):
             if histogram[i] == word:
                 return histogram[i][1]
-    elif determine_hist_type(histogram) == "list":
+    elif determine_hist_type(histogram) == "inverted_list":
         for tuple in histogram:
             if word in tuple[1]:
                 return tuple[0]
+
+
+def most_least_frequent(histogram):
+    """Return a tuple of the most and least frequent
+        words in a histogram.
+    """
+    # implement for a histogram that uses list of lists
+    if determine_hist_type(histogram) == "list":
+        # find the most frequent word
+        appearances = 0
+        most_frequent_word = ""
+        for list in histogram:
+            if list[1] > appearances:
+                appearances = list[1]
+                most_frequent_word = list[0]
+        # find the least frequent word
+        least_frequent_word = ""
+        for list in histogram:
+            if list[1] < appearances:
+                appearances = list[1]
+                least_frequent_word = list[0]
+        return (most_frequent_word, least_frequent_word)
 
 
 if __name__ == "__main__":
     # print(histogram(sys.argv[1]))
     # print(unique_words(histogram(sys.argv[1])))
     # print(frequency('newsletter', histogram(sys.argv[1])))
+    with open(sys.argv[1]) as file:
+        if file.name == "adam_smith.txt":
+            print("Analysis of THE WEALTH OF NATIONS (1776), by Adam Smith")
