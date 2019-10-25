@@ -224,18 +224,22 @@ def most_least_frequent(histogram):
     # implement for a histogram that uses list of lists
     if determine_hist_type(histogram) == "list":
         # find the most frequent word
-        appearances = 0
+        frequency_to_beat = 0
         most_frequent_word = ""
         for list in histogram:
-            if list[1] > appearances:
-                appearances = list[1]
-                most_frequent_word = list[0]
+            word = list[0]
+            frequency = frequency(word, histogram)
+            if frequency > frequency_to_beat:
+                most_frequent_word = word
+                frequency_to_beat = frequency
         # find the least frequent word
         least_frequent_word = ""
         for list in histogram:
-            if list[1] < appearances:
-                appearances = list[1]
-                least_frequent_word = list[0]
+            word = list[0]
+            frequency = frequency(word, histogram)
+            if frequency < frequency_to_beat:
+                least_frequent_word = word
+                frequency_to_beat = frequency
         return (most_frequent_word, least_frequent_word)
 
 
