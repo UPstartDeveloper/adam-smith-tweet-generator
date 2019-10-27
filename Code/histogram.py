@@ -50,7 +50,7 @@ def create_histogram_dict(words_list):
     return histogram
 
 
-def find_unique_words(words_list, unique_words):
+def find_unique_words(words_list):
     """Record all unique words in a list of strings."""
     # record all unique words
     unique_words = list()
