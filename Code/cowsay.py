@@ -17,6 +17,20 @@ def split_message(message, lines):
        Return: sublines(list):
     """
     sublines = list()
+    message_words = message.split()
+    print(message_words)
+    index = 0
+    for i in range(lines + 1):
+        speech_line = "< "
+        word_to_add = message_words[index] + " "
+        while (len(speech_line) + len(word_to_add)) <= 23:
+            speech_line += message[index]
+            index += 1
+        speech_line += ">"
+        sublines.append(speech_line)
+    return sublines
+    """
+    sublines = list()
     for i in range(lines + 1):
         speech_line = ""
         speech_line += "< "
@@ -30,6 +44,7 @@ def split_message(message, lines):
         speech_line += " >\n"
         sublines.append(speech_line)
     return sublines
+    """
 
 
 def form_message(sublines, message_divider):
