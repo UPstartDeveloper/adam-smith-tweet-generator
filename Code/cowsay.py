@@ -12,6 +12,18 @@ def draw_speech(message):
     bubble = ""
     bubble_top_and_bottom = "-------------------------"
     bubble += bubble_top_and_bottom
+    limit_line_length = len(bubble_top_and_bottom)
+    # calculate number of lines the speech bubble will length-wise
+    lines = len(message) // limit_line_length
+    # split message into substring to go on each line
+
+    # only 1 line needed to display method
+    if lines == 0:
+        bubble += bubble_top_and_bottom
+        bubble += f"< {message} >"
+        bubble += bubble_top_and_bottom
+    else:
+        pass
     return bubble
 
 
