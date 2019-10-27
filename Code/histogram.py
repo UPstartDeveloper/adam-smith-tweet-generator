@@ -296,7 +296,7 @@ if __name__ == "__main__":
     most_least_frequent = most_least_frequent(histogram)
     unique_words = unique_words(histogram)
     print("Analysis for THE WEALTH OF NATIONS (1776), by Adam Smith:")
-    print(f"Most frequent word: {most_least_frequent[0]}")
+    print(f"Most frequent word: {most_least_frequent(histogram)[0]}")
     print(f"Least frequent word: {most_least_frequent[1]}")
     print(f"Number of words used: {unique_words}.")
     print(f"Mean word frequency: {calculate_mean(histogram)}.")
