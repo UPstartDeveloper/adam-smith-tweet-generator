@@ -28,21 +28,31 @@ def split_message(message, lines):
     return sublines
 
 
+def form_message(sublines, message_divider):
+    """Form the message portion of speech bubble.
+       Param: sublines(list): a list of the chars to go on each line in message
+       Return: bubble(str): formaatted to fit inside of a bubble
+    """
+    bubble = ""
+    bubble += message_divider
+    bubble += "".join(sublines)
+    bubble += message_divider
+    return bubble
+
+
 def draw_speech(message):
     """Given a message, draws a speech bubble for the cow to use.
        Param: message(str)
        Return: speech_bubble(str)
     """
     bubble = ""
-    bubble_top = " ----------------------- \n"
-    bubble_bottom = " ----------------------- \n"
-    limit_line_length = len(bubble_top)
+    message_divider = " ----------------------- \n"
+    limit_line_length = len(message_divider)
     # calculate number of lines the speech bubble will need length-wise
     lines = (len(message) // limit_line_length) + 1
     # form message section of speech bubble
-    bubble += bubble_top
-    bubble += "".join(split_message(message, lines))
-    bubble += bubble_bottom
+    bubble = form_message(split_message(message, lines), message_divider)
+    # form stem section of speech bubble
     return bubble
 
 
