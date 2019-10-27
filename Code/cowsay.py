@@ -12,7 +12,20 @@ def split_message(message, lines):
               lines(int)
        Return: sublines(list):
     """
-    pass
+    sublines = list()
+    for i in range(lines):
+        speech_line = ""
+        speech_line += "< "
+        index = 0
+        for i in range(21):
+            if not len(message) == 0:
+                speech_line += message[0]
+                message = message[1:]
+            else:
+                speech_line += " "
+        speech_line += " >\n"
+        sublines.append(speech_line)
+    return sublines
 
 
 def draw_speech(message):
@@ -21,19 +34,15 @@ def draw_speech(message):
        Return: speech_bubble(str)
     """
     bubble = ""
-    bubble_top_and_bottom = "-------------------------"
-    limit_line_length = len(bubble_top_and_bottom)
-    # calculate number of lines the speech bubble will length-wise
-    lines = len(message) // limit_line_length
-
-    # only 1 line needed to display method
-    if lines == 0:
-        bubble += bubble_top_and_bottom + "\n"
-        bubble += f"< {message} >\n"
-        bubble += bubble_top_and_bottom + "\n"
-    else:
-        # split message into substring to go on each line
-        sublines = split_message(message, lines)
+    bubble_top = " ----------------------- \n"
+    bubble_bottom = " ----------------------- \n"
+    limit_line_length = len(bubble_top)
+    # calculate number of lines the speech bubble will need length-wise
+    lines = (len(message) // limit_line_length) + 1
+    # form message section of speech bubble
+    bubble += bubble_top
+    bubble += "".join(split_message(message, lines))
+    bubble += bubble_bottom
     return bubble
 
 
