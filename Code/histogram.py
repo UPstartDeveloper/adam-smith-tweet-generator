@@ -296,9 +296,20 @@ if __name__ == "__main__":
     most_least_frequent = most_least_frequent(histogram)
     unique_words = unique_words(histogram)
     print("Analysis for THE WEALTH OF NATIONS (1776), by Adam Smith:")
-    print(f"Most frequent word: {most_least_frequent(histogram)[0]}")
-    print(f"Least frequent word: {most_least_frequent[1]}")
-    print(f"Number of words used: {unique_words}.")
-    print(f"Mean word frequency: {calculate_mean(histogram)}.")
-    print(f"Median word frequency: {calculate_median(histogram)}.")
-    print(f"Mode word frequency: {calculate_mode(histogram)}.")
+
+    # get stats on the source text
+    (most, least) = most_least_frequent(histogram)[1]
+    print(f"Most frequent word: {most}")
+    print(f"Least frequent word: {least}")
+
+    word_amt = unique_words(histogram)
+    print(f"Number of words used: {word_amt}.")
+
+    mean = calculate_mean(histogram)
+    print(f"Mean word frequency: {mean}.")
+
+    median = calculate_median(histogram)
+    print(f"Median word frequency: {median}.")
+
+    mode = calculate_mode(histogram)
+    print(f"Mode word frequency: {mode}.")
