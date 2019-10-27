@@ -9,7 +9,11 @@ def draw_speech(message):
        Param: message(str)
        Return: speech_bubble(str)
     """
-    pass
+    bubble = ""
+    bubble_top_and_bottom = "-------------------------"
+    bubble += bubble_top_and_bottom
+    return bubble
+
 
 
 def draw_cow(speech_bubble):
