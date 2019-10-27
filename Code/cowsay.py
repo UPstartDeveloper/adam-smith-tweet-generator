@@ -1,7 +1,11 @@
+import sys
+
+"""
 def get_input():
-    """Prompt user to inout message to display."""
+    '''Prompt user to input message to display.'''
     message = input("What would you like the cow to say?")
     return message
+"""
 
 
 def split_message(message, lines):
@@ -13,7 +17,7 @@ def split_message(message, lines):
        Return: sublines(list):
     """
     sublines = list()
-    for i in range(lines):
+    for i in range(lines + 1):
         speech_line = ""
         speech_line += "< "
         index = 0
@@ -67,13 +71,18 @@ def draw_cow(speech_bubble):
     return cow_image
 
 
-def cowsay():
-    """Implements the cowsay program"""
+def cowsay(message):
+    """Implements the cowsay program
+       Param: message(str): command line input
+       Return: None
+    """
     # message = get_input()
-    message = "Hello, World!"
+    # message = "Hello, World!"
+    message = " ".join(message)
     speech_bubble = draw_speech(message)
     print(draw_cow(speech_bubble))
 
 
 if __name__ == "__main__":
-    cowsay()
+    message = sys.argv[1:]
+    cowsay(message)
