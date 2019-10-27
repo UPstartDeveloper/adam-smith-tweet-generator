@@ -117,7 +117,7 @@ def create_histogram_inverted(words_list):
     # count up appearances for each Word
     for word in unique_words_as_obj:
         for word_from_text in words_list:
-            if word.word == word_from_text:
+            if word.word == word_from_text.lower():
                 word.appearances += 1
     # make a histogram by grouping Word objects with equal appearances together
     histogram = list()
@@ -129,23 +129,9 @@ def create_histogram_inverted(words_list):
             word_count = (count_of_appearances, words_having_appearances)
             if word.appearances == count_of_appearances:
                 words_having_appearances.append(word.word)
-        histogram.append(word_count)
+                histogram.append(word_count)
 
     return histogram
-    """
-    histogram = list()
-    unique_words = find_unique_words(words_list)
-    count_of_appearances = 0
-    for word in unique_words:
-        count_of_appearances += 1
-        appearances = 0
-        words_having_appearances = list()
-        for i in range(len(words_list)):
-            if word == word_list[i].lower():
-                appearances += 1
-        if count_of_appearances == appearances:
-            words_having_appearances.append(word)
-    """
 
 
 def histogram(file_name):
@@ -158,9 +144,9 @@ def histogram(file_name):
     words_list = get_clean_words(file_name)
     # make a dict of the data
     # histogram = create_histogram_dict(words_list)
-    histogram = create_histogram_list_of_lists(words_list)
+    # histogram = create_histogram_list_of_lists(words_list)
     # histogram = create_histogram_list_of_tuples(words_list)
-    # histogram = create_histogram_inverted(words_list)
+    histogram = create_histogram_inverted(words_list)
 
     return histogram
 
