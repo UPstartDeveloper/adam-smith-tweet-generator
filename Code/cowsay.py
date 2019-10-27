@@ -1,6 +1,7 @@
 def get_input():
     """Prompt user to inout message to display."""
-    pass
+    message = input("What would you like the cow to say?")
+    return message
 
 
 def draw_speech(message):
@@ -20,7 +21,8 @@ def draw_cow(speech_bubble):
 
 def cowsay():
     """Implements the cowsay program"""
-    message = get_input()
+    # message = get_input()
+    message = "Hello, World!"
     speech_bubble = draw_speech(message)
     print(draw_cow(speech_bubble))
 
