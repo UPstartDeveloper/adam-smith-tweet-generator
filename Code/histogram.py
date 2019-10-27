@@ -238,7 +238,7 @@ def most_least_frequent(histogram):
             if frequency < frequency_to_beat:
                 least_frequent_word = word
                 frequency_to_beat = frequency
-        return (most_frequent_word, least_frequent_word)
+        return tuple(most_frequent_word, least_frequent_word)
 
 
 def total_count(histogram):
@@ -298,7 +298,7 @@ if __name__ == "__main__":
     print("Analysis for THE WEALTH OF NATIONS (1776), by Adam Smith:")
 
     # get stats on the source text
-    (most, least) = most_least_frequent(histogram)[1]
+    (most, least) = most_least_frequent(histogram)
     print(f"Most frequent word: {most}")
     print(f"Least frequent word: {least}")
 
