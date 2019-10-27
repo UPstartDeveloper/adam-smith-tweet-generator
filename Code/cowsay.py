@@ -52,15 +52,19 @@ def draw_speech(message):
     lines = (len(message) // limit_line_length) + 1
     # form message section of speech bubble
     bubble = form_message(split_message(message, lines), message_divider)
-    # form stem section of speech bubble
     return bubble
 
 
 def draw_cow(speech_bubble):
     """Draws the ASCII cow to speak the message.
        Param: speech_bubble(str)
-       Return: cow(str)"""
-    return speech_bubble
+       Return: cow_image(str)"""
+    cow_image = ""
+    # add characters line by line to imitate ASCII art of a cow
+    cow_image += speech_bubble
+    cow_image += "\t\\    ^    ^\n"
+    cow_image += "\t\\     _ _ \n"
+    return cow_image
 
 
 def cowsay():
