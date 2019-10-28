@@ -18,7 +18,7 @@ def split_message(message, lines):
     """
     sublines = list()
     message_words = message.split()
-    for i in range(lines + 1):
+    for i in range(lines):
         index = 0
         speech_line = "< "
         word_to_add = message_words[int(index)] + " "
@@ -27,8 +27,9 @@ def split_message(message, lines):
                 speech_line += message[index]
                 index += 1
             else:
-                message += " "
-        speech_line += ">"
+                speech_line += " "
+                word_to_add = " "
+        speech_line += " >\n"
         sublines.append(speech_line)
     return sublines
     """
