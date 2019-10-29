@@ -47,7 +47,7 @@ def calculate_range(histogram, words, index):
               index(int): a way for us to access the value in the histogram
        Return: (float)
     """
-    pass
+    return (histogram[words[index]][1] - histogram[words[index]][0])
 
 
 def choose_bucket(histogram, dart):
