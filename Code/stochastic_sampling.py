@@ -186,11 +186,11 @@ def print_statistical_probabilites(histogram, iterations):
        Param: iterations(int): number of trials to run for stochastic_sample
     """
     for word in list(histogram):
-        # show probability, display as percentage
+        # show probability, display as percentage rounded to 2 decimal places
         probability = (float(histogram[word])/iterations)
         probability = round(probability * 100, 2)
         probability = str(probability) + "%"
-        print(f"{word}: {probability}")
+        print(f"{word} => {probability}")
 
 
 def print_sampling_results(histogram_for_sampling, iterations):
@@ -202,12 +202,13 @@ def print_sampling_results(histogram_for_sampling, iterations):
     unique_words = words_in_text(histogram_for_sampling)
     print_divider()
     print("Results of Stochastic Sampling:")
-    print("(Actual Appearances)")
+    print_divider()
+    print("Actual Appearances")
     for word in unique_words:
         frequency = histogram_for_sampling[word]
         print(f"{word}: {frequency}")
     print_divider()
-    print("(Probabilities of Each Word Being Chosen:)")
+    print("Probabilities of Each Word Being Chosen:")
     print_statistical_probabilites(histogram_for_sampling, iterations)
 
 
