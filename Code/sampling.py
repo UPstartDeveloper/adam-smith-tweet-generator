@@ -33,7 +33,10 @@ def make_range(probability, factor, current_value):
                 2. higher end of the sample space a word comprises
                 3. new value to update probability to
     """
-    pass
+    low_end = probability
+    high_end = probability + (factor * current_value)
+    probability = high_end
+    return tuple(low_end, high_end, probability)
 
 
 def choose_bucket(histogram, dart):
