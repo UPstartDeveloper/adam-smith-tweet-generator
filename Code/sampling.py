@@ -39,6 +39,17 @@ def make_range(probability, factor, current_value):
     return tuple(low_end, high_end, probability)
 
 
+def calculate_range(histogram, words, index):
+    """Return the difference between the high and low ends of a range for a
+       value in the modified histogram.
+       Param: histogram(dict): modified so each value is a tuple
+              words(list): a list of the keys in histogram
+              index(int): a way for us to access the value in the histogram
+       Return: (float)
+    """
+    pass
+
+
 def choose_bucket(histogram, dart):
     """Return the word that the dart lands on.
        Param: histogram(dict): a representation of the word frequency for a
@@ -73,8 +84,8 @@ def choose_bucket(histogram, dart):
             # # compare this word's range of values with the following
             index_after = i + 1
             # make ranges to compare
-            range_of_word_after = calc_range(histogram, words, index_after)
-            range_here = calc_range(histogram, words, i)
+            range_of_word_after = calculate_range(histogram, words, index_after)
+            range_here = calculate_range(histogram, words, i)
             # see which one is greater, or if equal just default to previous
             if range_here > range_of_word_after:
                 return words[i]
