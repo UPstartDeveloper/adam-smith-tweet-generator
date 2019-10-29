@@ -8,7 +8,11 @@ def calculate_length_of_source(histogram):
        Param: histogram(dict)
        Return: int
     """
-    pass
+    sum = 0
+    words = histogram.keys()
+    for word in words:
+        sum += histogram[word]
+    return sum
 
 
 def calculate_factor(length):
