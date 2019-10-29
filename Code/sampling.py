@@ -84,7 +84,8 @@ def choose_bucket(histogram, dart):
             # # compare this word's range of values with the following
             index_after = i + 1
             # make ranges to compare
-            range_of_word_after = calculate_range(histogram, words, index_after)
+            range_of_word_after = calculate_range(histogram,
+                                                  words, index_after)
             range_here = calculate_range(histogram, words, i)
             # see which one is greater, or if equal just default to previous
             if range_here > range_of_word_after:
@@ -99,7 +100,23 @@ def sample(source_text):
        Param: source_text(str): file name for text being sampled from
        Return: (str)
     """
+    # set up needed values
     histogram = histogram(sys.argv[1])
+    length_of_text = calculate_length_of_source(histogram)
+    probability_factor = calculate_factor(length_of_text)
+    probability = 0
+    # reassing values in histogram to tuples
+    words = histogram.keys()
+    for word in types:
+        histogram[word] = make_range(probability,
+                                     probability_factor,
+                                     probability)[0:1]
+        probability = make_range(probability,
+                                 probability_factor,
+                                 probability)[2]
+    # generate a word, influence outcome using each word's sample space
+    dart = random.random()
+    return choose_bucket(histogram, dart)
 
 
 if __name__ == "__main__":
