@@ -40,13 +40,46 @@ def make_range(probability, factor, current_value):
 
 
 def choose_bucket(histogram, dart):
-    """Return the word that the dart is most likely to land on.
+    """Return the word that the dart lands on.
        Param: histogram(dict): a representation of the word frequency for a
               source text
               dart(float): a random number between 0 and 1
         Return: word(str): a type of word from the text
     """
-    pass
+    words = histogram.keys()
+    # decide which word the dart lands in, and choose between two if necessary
+    for i in range(len(words)):
+        if dart == 1.0:
+            # return the last word
+            return histogram[words[len(words) - 1]]
+        elif dart == 0.0:
+            # return the first word
+            return histogram[words[0]]
+        elif dart > histogram[words[i]][0] or dart < histogram[words[i]][1]:
+            # dart clearly falls within the range of one word
+            return words[i]
+        elif dart == histogram[words[i]][0]:
+            # compare this word's range of values with the previous
+            index_before = i - 1
+            # make ranges to compare
+            range_of_prev = calc_range(histogram, words, index_before)
+            range_here = calc_range(histogram, words, i)
+            # see which one is greater, or if equal just default to previous
+            if range_here > range_of_prev:
+                return words[i]
+            else:
+                return words[index_before]
+        elif dart == histogram[words[i]][1]:
+            # # compare this word's range of values with the following
+            index_after = i + 1
+            # make ranges to compare
+            range_of_word_after = calc_range(histogram, words, index_after)
+            range_here = calc_range(histogram, words, i)
+            # see which one is greater, or if equal just default to previous
+            if range_here > range_of_word_after:
+                return words[i]
+            else:
+                return words[index_after]
 
 
 def sample(source_text):
