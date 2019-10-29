@@ -95,6 +95,21 @@ def choose_bucket(histogram, dart):
                 return words[index_after]
 
 
+def restore_frequencies(histogram, factor):
+    """Reassigns all values in the histogram dictionary back to their original
+       counts.
+       Param: histogram(dict): all values are now tuples
+              factor(float): equal to 1/number of distinct types of words
+       Return: histogram(dict): all values are back to int
+    """
+    for word in histogram.keys():
+        high_end_of_range = histogram[word][1]
+        low_end_of_range = histogram[word][0]
+        difference = high_end_of_range - low_end_of_range
+        histogram[word] = (difference / factor)
+    return histogram
+
+
 def stochastic_sample(histo):
     """Return a random word from a source text,
        weighted by frequency of the word.
@@ -116,7 +131,10 @@ def stochastic_sample(histo):
                                  probability)[2]
     # generate a word, influence outcome using each word's sample space
     dart = random.random()
-    return choose_bucket(histo, dart)
+    word = choose_bucket(histo, dart)
+    # reassign values in histo to original value
+    histo = restore_frequencies(histo, probability_factor)
+    return word
 
 
 # test functions start here
