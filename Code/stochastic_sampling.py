@@ -125,7 +125,7 @@ def stochastic_sample(histo):
     for word in words:
         histo[word] = make_range(probability,
                                  probability_factor,
-                                 probability)[0:1]
+                                 probability)[0:2]
         probability = make_range(probability,
                                  probability_factor,
                                  probability)[2]
