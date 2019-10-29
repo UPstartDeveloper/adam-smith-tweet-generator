@@ -95,14 +95,13 @@ def choose_bucket(histogram, dart):
                 return words[index_after]
 
 
-def stochastic_sample(source_text):
+def stochastic_sample(histo):
     """Return a random word from a source text,
        weighted by frequency of the word.
-       Param: source_text(str): file name for text being sampled from
+       Param: histo(dict): repredsents word frequency in the source_text
        Return: (str)
     """
     # set up needed values
-    histo = histogram.histogram(source_text)
     length_of_text = calculate_length_of_source(histo)
     probability_factor = calculate_factor(length_of_text)
     probability = 0
@@ -138,20 +137,20 @@ def make_sampling_histogram(unique_words):
     """
     histogram_empty = dict()
     for word in unique_words:
-        hsitogram_empty[word] = 0
+        histogram_empty[word] = 0
     return histogram_empty
 
 
-def run_iterations(histogram_for_random_words, text):
+def run_iterations(histogram_for_random_words, histogram_for_text):
     """Store the results of running the stochastic_sample function for 10,000
        iterations in a histogram.
        Param: histogram_for_random_words(dict): all values sum to a total of 0
-              text(str): name of file containing source text
+              histogram_for_text(dict): all values represent frequency in text
        Return: histogram_for_random_words(dict): sum of all values = 10,000
     """
     unique_words = words_in_text(histogram_for_random_words)
     for i in range(10000):
-        word = stochastic_sample(text)
+        word = stochastic_sample(histogram_for_text)
         for key_word in unique_words:
             if word == key_word:
                 histogram_for_random_words[word] += 1
@@ -161,6 +160,7 @@ def run_iterations(histogram_for_random_words, text):
 def print_sampling_results(histogram_for_sampling):
     """Print all key value pairs in histogram_for_sampling.
        Param: histogram_for_sampling(dict)
+       Return: None
     """
     unique_words = words_in_text(histogram_for_sampling)
     print("Results of Stochastic Sampling:")
@@ -169,19 +169,19 @@ def print_sampling_results(histogram_for_sampling):
         print(f"{word}: {frequency}")
 
 
-def test_stochastic_sample(histogram_for_text, text):
+def test_stochastic_sample(histogram_for_text):
     """Construct a histogram to represent the frequency of words being
        chosen by stochastic_sample. TEST function for stochastic_sample
        Param: histogram_for_text(dict)
-              text(str): name of file containing source text
-       Return: histogram_for_sampling(dict)
+       Return: None
     """
     histogram_for_sampling = dict()
     unique_words = words_in_text(histogram_for_text)
     # new histogram represents frequencies of words chosen by stochastic_sample
     histogram_for_sampling = make_sampling_histogram(unique_words)
     # run stochastic_sample 10K times, keep track of chosen words
-    histogram_for_sampling = run_iterations(histogram_for_sampling, text)
+    histogram_for_sampling = run_iterations(histogram_for_sampling,
+                                            histogram_for_text)
     # print results
     print_sampling_results(histogram_for_sampling)
 
@@ -190,9 +190,12 @@ if __name__ == "__main__":
     # test samling with UNIFORM DISTRIBUTION
     text = sys.argv[1]
     hist = histogram.histogram(text)
-    word_no_weighting = random_word(hist)
-    print(f"Equally distributed: {word_no_weighting}")
+    # word_no_weighting = random_word(hist)
+    # print(f"Equally distributed: {word_no_weighting}")
 
     # random word sampled using frequency weighting
-    word_weighted = stochastic_sample(text)
-    print(f"Stochastically sampled: {word_weighted}")
+    # word_weighted = stochastic_sample(text)
+    # print(f"Stochastically sampled: {word_weighted}")
+
+    # show results of stochastic_sample
+    test_stochastic_sample(hist)
