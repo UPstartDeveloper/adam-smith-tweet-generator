@@ -122,14 +122,14 @@ def create_histogram_inverted(words_list):
     # make a histogram by grouping Word objects with equal appearances together
     histogram = list()
     count_of_appearances = 0
-    while len(histogram) < len(unique_words_as_obj):
-        for word in unique_words_as_obj:
-            count_of_appearances += 1
-            words_having_appearances = list()
-            word_count = (count_of_appearances, words_having_appearances)
-            if word.appearances == count_of_appearances:
-                words_having_appearances.append(word.word)
-                histogram.append(word_count)
+    # while len(histogram) < len(unique_words_as_obj):
+    for word in unique_words_as_obj:
+        count_of_appearances += 1
+        words_having_appearances = list()
+        word_count = (count_of_appearances, words_having_appearances)
+        if word.appearances == count_of_appearances:
+            words_having_appearances.append(word.word)
+            histogram.append(word_count)
 
     return histogram
 
