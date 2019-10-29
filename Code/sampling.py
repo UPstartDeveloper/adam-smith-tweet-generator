@@ -20,7 +20,7 @@ def calculate_factor(length):
        Param: length(int): the total number of words in the text
        Return: (float) the inverse of the length
     """
-    pass
+    return (float(1)/length)
 
 
 def make_range(probability, factor, current_value):
