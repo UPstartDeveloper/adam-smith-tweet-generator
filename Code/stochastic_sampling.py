@@ -121,6 +121,15 @@ def stochastic_sample(source_text):
 
 
 # test functions start here
+def words_in_text(histogram):
+    """Return all unique_words in a source text,
+       using the keys in the histogram.
+       Param: histogrma(dict)
+       Return: list
+    """
+    return histogram.keys()
+
+
 def make_sampling_histogram(unique_words):
     """Given a list of words, return a dictionary representing a histogram.
        All values begin at zero.
@@ -140,7 +149,7 @@ def run_iterations(histogram_for_random_words, text):
               text(str): name of file containing source text
        Return: histogram_for_random_words(dict): sum of all values = 10,000
     """
-    unique_words = histogram_for_random_words.keys()
+    unique_words = words_in_text(histogram_for_random_words)
     for i in range(10000):
         word = stochastic_sample(text)
         for key_word in unique_words:
@@ -149,7 +158,18 @@ def run_iterations(histogram_for_random_words, text):
     return histogram_for_random_words
 
 
-def test_stochastic_sample(histogram_for_text, source_text):
+def print_sampling_results(histogram_for_sampling):
+    """Print all key value pairs in histogram_for_sampling.
+       Param: histogram_for_sampling(dict)
+    """
+    unique_words = words_in_text(histogram_for_sampling)
+    print("Results of Stochastic Sampling:")
+    for word in unique_words:
+        frequency = histogram_for_sampling[word]
+        print(f"{word}: {frequency}")
+
+
+def test_stochastic_sample(histogram_for_text, text):
     """Construct a histogram to represent the frequency of words being
        chosen by stochastic_sample. TEST function for stochastic_sample
        Param: histogram_for_text(dict)
@@ -157,12 +177,13 @@ def test_stochastic_sample(histogram_for_text, source_text):
        Return: histogram_for_sampling(dict)
     """
     histogram_for_sampling = dict()
-    unique_words = histogram_for_text.keys()
+    unique_words = words_in_text(histogram_for_text)
     # new histogram represents frequencies of words chosen by stochastic_sample
     histogram_for_sampling = make_sampling_histogram(unique_words)
     # run stochastic_sample 10K times, keep track of chosen words
-    histogram_for_sampling = run_iterations(histogram_for_sampling, source_text)
+    histogram_for_sampling = run_iterations(histogram_for_sampling, text)
     # print results
+    print_sampling_results(histogram_for_sampling)
 
 
 if __name__ == "__main__":
