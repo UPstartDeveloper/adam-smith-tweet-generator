@@ -2,6 +2,7 @@ import histogram
 import sys
 import random
 from sampling import random_word
+import math
 
 
 def calculate_length_of_source(histogram):
@@ -155,15 +156,18 @@ def make_sampling_histogram(unique_words):
     return histogram_empty
 
 
-def run_iterations(histogram_for_random_words, histogram_for_text):
+def run_iterations(histogram_for_random_words,
+                   histogram_for_text,
+                   iterations):
     """Store the results of running the stochastic_sample function for 10,000
        iterations in a histogram.
        Param: histogram_for_random_words(dict): all values sum to a total of 0
               histogram_for_text(dict): all values represent frequency in text
+              iterations(int): number of trials to run for stochastic_sample
        Return: histogram_for_random_words(dict): sum of all values = 10,000
     """
     unique_words = words_in_text(histogram_for_random_words)
-    for i in range(10000):
+    for i in range(iterations):
         word = stochastic_sample(histogram_for_text)
         for key_word in unique_words:
             if word == key_word:
@@ -171,38 +175,66 @@ def run_iterations(histogram_for_random_words, histogram_for_text):
     return histogram_for_random_words
 
 
-def print_sampling_results(histogram_for_sampling):
+def print_divider():
+    """Print a dashed line to break up output."""
+    print("---------------------------------------------")
+
+
+def print_statistical_probabilites(histogram, iterations):
+    """Based on the number of times each word was sampled,
+       print the theoretical likelihood of it being chosen.
+       Param: iterations(int): number of trials to run for stochastic_sample
+    """
+    for word in list(histogram):
+        # show probability, display as percentage
+        probability = (float(histogram[word])/iterations)
+        probability = round(probability * 100, 2)
+        probability = str(probability) + "%"
+        print(f"{word}: {probability}")
+
+
+def print_sampling_results(histogram_for_sampling, iterations):
     """Print all key value pairs in histogram_for_sampling.
        Param: histogram_for_sampling(dict)
+              iterations(int): number of trials to run for stochastic_sample
        Return: None
     """
     unique_words = words_in_text(histogram_for_sampling)
+    print_divider()
     print("Results of Stochastic Sampling:")
+    print("(Actual Appearances)")
     for word in unique_words:
         frequency = histogram_for_sampling[word]
         print(f"{word}: {frequency}")
+    print_divider()
+    print("(Probabilities of Each Word Being Chosen:)")
+    print_statistical_probabilites(histogram_for_sampling, iterations)
 
 
-def test_stochastic_sample(histogram_for_text):
+def test_stochastic_sample(histogram_for_text, iterations):
     """Construct a histogram to represent the frequency of words being
        chosen by stochastic_sample. TEST function for stochastic_sample
        Param: histogram_for_text(dict)
+              iterations(int): number of trials to run for stochastic_sample
        Return: None
     """
+    iterations = int(iterations)
     histogram_for_sampling = dict()
     unique_words = words_in_text(histogram_for_text)
     # new histogram represents frequencies of words chosen by stochastic_sample
     histogram_for_sampling = make_sampling_histogram(unique_words)
     # run stochastic_sample 10K times, keep track of chosen words
     histogram_for_sampling = run_iterations(histogram_for_sampling,
-                                            histogram_for_text)
+                                            histogram_for_text,
+                                            iterations)
     # print results
-    print_sampling_results(histogram_for_sampling)
+    print_sampling_results(histogram_for_sampling, iterations)
 
 
 if __name__ == "__main__":
     # test samling with UNIFORM DISTRIBUTION
     text = sys.argv[1]
+    iterations = sys.argv[2]
     hist = histogram.histogram(text)
     # word_no_weighting = random_word(hist)
     # print(f"Equally distributed: {word_no_weighting}")
@@ -212,4 +244,4 @@ if __name__ == "__main__":
     # print(f"Stochastically sampled: {word_weighted}")
 
     # show results of stochastic_sample
-    test_stochastic_sample(hist)
+    test_stochastic_sample(hist, iterations)
