@@ -10,8 +10,7 @@ def calculate_length_of_source(histogram):
        Return: int
     """
     sum = 0
-    words = histogram.keys()
-    for word in words:
+    for word in list(histogram):
         sum += histogram[word]
     return sum
 
@@ -21,7 +20,7 @@ def calculate_factor(length):
        Param: length(int): the total number of words in the text
        Return: (float) the inverse of the length
     """
-    return (float(1)/length)
+    return (1.0/float(length))
 
 
 def make_range(probability, factor, current_value):
@@ -121,11 +120,11 @@ def stochastic_sample(histo):
     probability_factor = calculate_factor(length_of_text)
     probability = 0
     # reassing values in histogram to tuples
-    words = histo.keys()
+    words = list(histo)
     for word in words:
         histo[word] = make_range(probability,
                                  probability_factor,
-                                 probability)[0:2]
+                                 histo[word])[0:2]
         probability = make_range(probability,
                                  probability_factor,
                                  probability)[2]
@@ -144,7 +143,7 @@ def words_in_text(histogram):
        Param: histogrma(dict)
        Return: list
     """
-    return histogram.keys()
+    return list(histogram)
 
 
 def make_sampling_histogram(unique_words):
