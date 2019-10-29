@@ -1,4 +1,4 @@
-from histogram import create_histogram_dict, histogram, get_clean_words
+import histogram
 import sys
 import random
 
@@ -36,7 +36,7 @@ def make_range(probability, factor, current_value):
     low_end = probability
     high_end = probability + (factor * current_value)
     probability = high_end
-    return tuple(low_end, high_end, probability)
+    return tuple((low_end, high_end, probability))
 
 
 def calculate_range(histogram, words, index):
@@ -57,7 +57,7 @@ def choose_bucket(histogram, dart):
               dart(float): a random number between 0 and 1
         Return: word(str): a type of word from the text
     """
-    words = histogram.keys()
+    words = list(histogram.keys())
     # decide which word the dart lands in, and choose between two if necessary
     for i in range(len(words)):
         if dart == 1.0:
@@ -101,22 +101,22 @@ def sample(source_text):
        Return: (str)
     """
     # set up needed values
-    histogram = histogram(sys.argv[1])
-    length_of_text = calculate_length_of_source(histogram)
+    histo = histogram.histogram(source_text)
+    length_of_text = calculate_length_of_source(histo)
     probability_factor = calculate_factor(length_of_text)
     probability = 0
     # reassing values in histogram to tuples
-    words = histogram.keys()
-    for word in types:
-        histogram[word] = make_range(probability,
-                                     probability_factor,
-                                     probability)[0:1]
+    words = histo.keys()
+    for word in words:
+        histo[word] = make_range(probability,
+                                 probability_factor,
+                                 probability)[0:1]
         probability = make_range(probability,
                                  probability_factor,
                                  probability)[2]
     # generate a word, influence outcome using each word's sample space
     dart = random.random()
-    return choose_bucket(histogram, dart)
+    return choose_bucket(histo, dart)
 
 
 if __name__ == "__main__":

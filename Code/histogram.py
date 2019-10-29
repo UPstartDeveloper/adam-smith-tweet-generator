@@ -143,10 +143,10 @@ def histogram(file_name):
     """
     words_list = get_clean_words(file_name)
     # make a dict of the data
-    # histogram = create_histogram_dict(words_list)
+    histogram = create_histogram_dict(words_list)
     # histogram = create_histogram_list_of_lists(words_list)
     # histogram = create_histogram_list_of_tuples(words_list)
-    histogram = create_histogram_inverted(words_list)
+    # histogram = create_histogram_inverted(words_list)
 
     return histogram
 
