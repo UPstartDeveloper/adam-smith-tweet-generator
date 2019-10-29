@@ -110,14 +110,30 @@ def stochastic_sample(source_text):
     words = histo.keys()
     for word in words:
         histo[word] = make_range(probability,
-                                  probability_factor,
-                                  probability)[0:1]
+                                 probability_factor,
+                                 probability)[0:1]
         probability = make_range(probability,
                                  probability_factor,
                                  probability)[2]
     # generate a word, influence outcome using each word's sample space
     dart = random.random()
     return choose_bucket(histo, dart)
+
+
+# test functions start here
+def test_stochastic_sample(histogram_for_text):
+    """Construct a histogram to represent the frequency of words being
+       chosen by stochastic_sample. TEST function for stochastic_sample
+       Param: histogram_for_text(dict)
+       Return: histogram_for_sampling(dict)
+    """
+    histogram_for_sampling = dict()
+    unique_words = histogram_for_text.keys()
+    # new histogram represents frequencies of words chosen by stochastic_sample
+
+    # run stochastic_sample 10K times, keep track of chosen words
+
+    # print results
 
 
 if __name__ == "__main__":
