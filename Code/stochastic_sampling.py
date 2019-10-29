@@ -34,9 +34,8 @@ def make_range(probability, factor, current_value):
                 3. new value to update probability to
     """
     low_end = probability
-    high_end = probability + (factor * current_value)
-    probability = high_end
-    return tuple((low_end, high_end, probability))
+    high_end = low_end + (factor * current_value)
+    return tuple((low_end, high_end))
 
 
 def calculate_range(histogram, words, index):
@@ -55,9 +54,9 @@ def choose_bucket(histogram, dart):
        Param: histogram(dict): a representation of the word frequency for a
               source text
               dart(float): a random number between 0 and 1
-        Return: word(str): a type of word from the text
+       Return: word(str): a type of word from the text
     """
-    words = list(histogram.keys())
+    words = list(histogram)
     # decide which word the dart lands in, and choose between two if necessary
     for i in range(len(words)):
         if dart == 1.0:
@@ -66,15 +65,15 @@ def choose_bucket(histogram, dart):
         elif dart == 0.0:
             # return the first word
             return histogram[words[0]]
-        elif dart > histogram[words[i]][0] or dart < histogram[words[i]][1]:
+        elif dart > histogram[words[i]][0] and dart < histogram[words[i]][1]:
             # dart clearly falls within the range of one word
             return words[i]
         elif dart == histogram[words[i]][0]:
             # compare this word's range of values with the previous
             index_before = i - 1
             # make ranges to compare
-            range_of_prev = calc_range(histogram, words, index_before)
-            range_here = calc_range(histogram, words, i)
+            range_of_prev = calculate_range(histogram, words, index_before)
+            range_here = calculate_range(histogram, words, i)
             # see which one is greater, or if equal just default to previous
             if range_here > range_of_prev:
                 return words[i]
@@ -105,7 +104,7 @@ def restore_frequencies(histogram, factor):
         high_end_of_range = histogram[word][1]
         low_end_of_range = histogram[word][0]
         difference = high_end_of_range - low_end_of_range
-        histogram[word] = (difference / factor)
+        histogram[word] = int((difference / factor))
     return histogram
 
 
@@ -124,10 +123,8 @@ def stochastic_sample(histo):
     for word in words:
         histo[word] = make_range(probability,
                                  probability_factor,
-                                 histo[word])[0:2]
-        probability = make_range(probability,
-                                 probability_factor,
-                                 probability)[2]
+                                 histo[word])
+        probability = histo[word][1]
     # generate a word, influence outcome using each word's sample space
     dart = random.random()
     word = choose_bucket(histo, dart)
