@@ -12,8 +12,10 @@ app = Flask(__name__)
 @app.route("/")
 def index():
     """Display a single generated word on each reload."""
-    word = stochastic_sample(histo)
-    return render_template("index.html", word=word)
+    words = list()
+    for i in range(10):
+        words.append(stochastic_sample(histo))
+    return render_template("index.html", words=words)
 
 
 if __name__ == "__main__":

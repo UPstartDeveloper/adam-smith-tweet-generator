@@ -4,11 +4,16 @@
 
 {% block content %}
 
-<h1>The Words of Adam Smith</h1>
+    <h1>The Words of Adam Smith</h1>
 
-<h2>Don't Like Capitalism? I don't blame you! </h2>
+    <h2>Don't Like Capitalism? I don't blame you! </h2>
 
-<h3>What did Adam Smith, or "The Father of Capitalism", actually write about the system? </h3>
-<p>Here are a few words: "{{ word }}"</p>
+    <h3>What did Adam Smith, or "The Father of Capitalism", actually write about the system? </h3>
+
+    <p>Here are a few words: "
+        {% for word in words %}
+            {{ word }}
+        {% endfor %}."
+    </p>
 
 {% endblock %}
