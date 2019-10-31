@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, url_for
 from histogram import histogram
 from stochastic_sampling import stochastic_sample
 
@@ -30,6 +30,12 @@ def index():
         words.append(stochastic_sample(histo))
     words = capitalize_first_word(words)
     return render_template("index.html", words=words)
+
+
+@app.route("/reload")
+def reload():
+    """Redirect user to a new load of the home page."""
+    return redirect(url_for("index"))
 
 
 if __name__ == "__main__":
