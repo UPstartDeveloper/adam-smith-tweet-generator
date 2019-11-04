@@ -1,0 +1,14 @@
+<h1>Here Are Your Anagrams!</h1>
+    {{ anagrams }}
+    {#<ol>
+        {% for char in anagrams %}
+            {% if char != "[" and char != "," and char != "'" and char != "]" %}
+                <li>{{ char }}</li>
+            {% endif %}
+        {% endfor %}
+    </ol>#}
+
+    <!-- Link Back to Home -->
+    <form action="/">
+        <input type="submit" value="Back to Home">
+    </form>
