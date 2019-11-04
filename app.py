@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for, request
 from histogram import histogram
 from stochastic_sampling import stochastic_sample
 
@@ -22,9 +22,20 @@ def capitalize_first_word(words):
     return words
 
 
+@app.route('/')
+def index():
+    '''Display a form to see a sentence.'''
+    return render_template("index.html")
+
+
+
+
+
+"""
 @app.route("/")
 def index():
-    """Display a single generated word on each reload."""
+    '''Display a sentence on each reload.'''
+    # generate 10 words on default for first load of page
     words = list()
     for i in range(10):
         words.append(stochastic_sample(histo))
@@ -34,9 +45,9 @@ def index():
 
 @app.route("/reload")
 def reload():
-    """Redirect user to a new load of the home page."""
+    '''Redirect user to a new load of the home page.'''
     return redirect(url_for("index"))
-
+"""
 
 if __name__ == "__main__":
     app.run(debug=True)
