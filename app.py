@@ -28,7 +28,21 @@ def index():
     return render_template("index.html")
 
 
+@app.route('/<num>', methods=['GET'])
+def get_words(num):
+    '''Generate user-inputted number of words.'''
+    num = int(num)
+    words = list()
+    for i in range(num):
+        words.append(stochastic_sample(histo))
+    words = capitalize_first_word(words)
+    return redirect(url_for('show_sentence'), words=words)
 
+
+@app.route('/sentence')
+def show_sentence():
+    '''Display random sentece.'''
+    pass
 
 
 """
