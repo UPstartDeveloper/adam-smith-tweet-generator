@@ -24,7 +24,7 @@ def capitalize_first_word(words):
 
 @app.route('/')
 def index():
-    '''Display a form to see a sentence.'''
+    """Display a form to see a sentence."""
     return render_template("index.html")
 
 
