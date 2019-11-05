@@ -51,7 +51,7 @@ def calculate_range(histogram, words, index):
 
 
 def choose_bucket(histogram, dart):
-    """Return the word that the dart lands on.
+    """Return the word whose range contains dart, the random generated number.
        Param: histogram(dict): a representation of the word frequency for a
               source text
               dart(float): a random number between 0 and 1
@@ -127,7 +127,7 @@ def stochastic_sample(histo):
                                  histo[word])
         probability = histo[word][1]
     # generate a word, influence outcome using each word's sample space
-    dart = random.random()
+    dart = random.uniform(0, 1)
     word = choose_bucket(histo, dart)
     # reassign values in histo to original value
     histo = restore_frequencies(histo, probability_factor)
@@ -137,7 +137,8 @@ def stochastic_sample(histo):
 # TEST FUNCTION BELOW
 # Helper functions for the test function are implemented first.
 def words_in_text(histogram):
-    """Return all unique_words in a source text,
+    """Helper function for test_stochastic_sample (below).
+       Returns all unique_words in a source text,
        using the keys in the histogram.
        Param: histogrma(dict)
        Return: list
@@ -146,7 +147,8 @@ def words_in_text(histogram):
 
 
 def make_sampling_histogram(unique_words):
-    """Given a list of words, return a dictionary representing a histogram.
+    """Helper function for test_stochastic_sample (below).
+       Given a list of words, return a dictionary representing a histogram.
        All values begin at zero.
        Param: unique_words(list): every distinct type of word, will be a key
        Return: histogram_empty(dict)
@@ -160,7 +162,8 @@ def make_sampling_histogram(unique_words):
 def run_iterations(histogram_for_random_words,
                    histogram_for_text,
                    iterations):
-    """Store the results of running the stochastic_sample function for 10,000
+    """Helper function for test_stochastic_sample (below).
+       Store the results of running the stochastic_sample function for 10,000
        iterations in a histogram.
        Param: histogram_for_random_words(dict): all values sum to a total of 0
               histogram_for_text(dict): all values represent frequency in text
@@ -177,12 +180,14 @@ def run_iterations(histogram_for_random_words,
 
 
 def print_divider():
-    """Print a dashed line to break up output."""
+    """Helper function for test_stochastic_sample (below).
+       Print a dashed line to break up output."""
     print("---------------------------------------------")
 
 
 def print_statistical_probabilites(histogram, iterations):
-    """Based on the number of times each word was sampled,
+    """Helper function for test_stochastic_sample (below).
+       Based on the number of times each word was sampled,
        print the theoretical likelihood of it being chosen.
        Param: iterations(int): number of trials to run for stochastic_sample
     """
@@ -195,7 +200,8 @@ def print_statistical_probabilites(histogram, iterations):
 
 
 def print_sampling_results(histogram_for_sampling, iterations):
-    """Print all key value pairs in histogram_for_sampling.
+    """Helper function for test_stochastic_sample (below).
+       Print all key value pairs in histogram_for_sampling.
        Param: histogram_for_sampling(dict)
               iterations(int): number of trials to run for stochastic_sample
        Return: None
@@ -215,7 +221,7 @@ def print_sampling_results(histogram_for_sampling, iterations):
 
 def test_stochastic_sample(histogram_for_text, iterations):
     """Construct a histogram to represent the frequency of words being
-       chosen by stochastic_sample. TEST function for stochastic_sample
+       chosen by stochastic_sample function.
        Param: histogram_for_text(dict)
               iterations(int): number of trials to run for stochastic_sample
        Return: None
