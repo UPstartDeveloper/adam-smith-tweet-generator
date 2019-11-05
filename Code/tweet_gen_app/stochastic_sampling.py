@@ -5,6 +5,19 @@ from sampling import random_word
 import math
 
 
+def random_word(histogram):
+    """Returns a random word from a histogram, which represents word frequency
+       for a source text. Uses UNIFORM DISTRIBUTION, not stochastic.
+       Param: histogram(dict)
+       Return: word(str)
+    """
+    word = ""
+    words = list(histogram.keys())
+    random_index = random.randint(0, len(words) - 1)
+    word = words[random_index]
+    return word
+
+
 def calculate_length_of_source(histogram):
     """Return the total count of words in the source text.
        Param: histogram(dict)
