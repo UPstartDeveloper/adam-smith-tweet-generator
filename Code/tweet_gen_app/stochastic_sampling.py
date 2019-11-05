@@ -134,7 +134,8 @@ def stochastic_sample(histo):
     return word
 
 
-# test functions start here
+# TEST FUNCTION BELOW
+# Helper functions for the test function are implemented first.
 def words_in_text(histogram):
     """Return all unique_words in a source text,
        using the keys in the histogram.
