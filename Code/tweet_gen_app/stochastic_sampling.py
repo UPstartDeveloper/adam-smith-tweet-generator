@@ -256,9 +256,8 @@ def test_stochastic_sample(histogram_for_text, iterations):
 
 
 if __name__ == "__main__":
-    text = sys.argv[1]
-    iterations = sys.argv[2]
-    hist = histogram.histogram(text)
+    iterations = sys.argv[1]
+    hist = histogram.histogram()
     # word_no_weighting = random_word(hist)
     # print(f"Equally distributed: {word_no_weighting}")
 
