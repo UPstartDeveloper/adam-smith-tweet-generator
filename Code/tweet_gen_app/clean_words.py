@@ -36,4 +36,4 @@ def get_clean_words(file_name="adam_smith.txt"):
 
 if __name__ == "__main__":
     file = "adam_smith.txt"
-    print(get_clean_words())
+    get_clean_words()
