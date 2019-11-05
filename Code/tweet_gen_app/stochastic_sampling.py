@@ -50,7 +50,26 @@ def calculate_range(histogram, words, index):
     return (histogram[words[index]][1] - histogram[words[index]][0])
 
 
-def choose_bucket(histogram, dart):
+def choose_between_words(index_of_one_word, index_of_other_word, histogram):
+    """Helper function for choose_word, will decide which word to return when
+       the dart falls between two words exactly.
+       Param: index_of_one_word(int)
+              index_of_other_word(int): index posi
+       Return: (str) the word whose range is greater, or if the words have
+                ranges of the equal size, the previous word is returned
+    """
+    words = list(histogram)
+    # make ranges to compare
+    range_of_prev = calculate_range(histogram, words, index_of_one_word)
+    range_of_after = calculate_range(histogram, words, index_of_other_word)
+    # see which one is greater, or if equal just default to previous
+    if range_of_after > range_of_prev:
+        return words[index_of_other_word]
+    else:
+        return words[index_of_one_word]
+
+
+def choose_word(histogram, dart):
     """Return the word whose range contains dart, the random generated number.
        Param: histogram(dict): a representation of the word frequency for a
               source text
@@ -72,26 +91,11 @@ def choose_bucket(histogram, dart):
         elif dart == histogram[words[i]][0]:
             # compare this word's range of values with the previous
             index_before = i - 1
-            # make ranges to compare
-            range_of_prev = calculate_range(histogram, words, index_before)
-            range_here = calculate_range(histogram, words, i)
-            # see which one is greater, or if equal just default to previous
-            if range_here > range_of_prev:
-                return words[i]
-            else:
-                return words[index_before]
+            return choose_between_words(index_before, i, histogram)
         elif dart == histogram[words[i]][1]:
-            # # compare this word's range of values with the following
+            # # compare this word's range of values with the next word's range
             index_after = i + 1
-            # make ranges to compare
-            range_of_word_after = calculate_range(histogram,
-                                                  words, index_after)
-            range_here = calculate_range(histogram, words, i)
-            # see which one is greater, or if equal just default to previous
-            if range_here > range_of_word_after:
-                return words[i]
-            else:
-                return words[index_after]
+            return choose_between_words(i, index_after, histogram)
 
 
 def restore_frequencies(histogram, factor):
@@ -128,7 +132,7 @@ def stochastic_sample(histo):
         probability = histo[word][1]
     # generate a word, influence outcome using each word's sample space
     dart = random.uniform(0, 1)
-    word = choose_bucket(histo, dart)
+    word = choose_word(histo, dart)
     # reassign values in histo to original value
     histo = restore_frequencies(histo, probability_factor)
     return word
