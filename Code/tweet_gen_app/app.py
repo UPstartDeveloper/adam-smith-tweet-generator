@@ -22,9 +22,10 @@ def capitalize_first_word(words):
     return words
 
 
+"""
 @app.route('/')
 def index():
-    """Display a form to see a sentence."""
+    '''Display a form to see a sentence.'''
     return render_template("index.html")
 
 
@@ -61,7 +62,7 @@ def index():
 def reload():
     '''Redirect user to a new load of the home page.'''
     return redirect(url_for("index"))
-"""
+
 
 if __name__ == "__main__":
     app.run(debug=True)
