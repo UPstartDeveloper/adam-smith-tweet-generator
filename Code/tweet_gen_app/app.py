@@ -21,31 +21,7 @@ def capitalize_first_word(words):
     words[0] = reassigned_word
     return words
 
-"""
-@app.route('/')
-def index():
-    '''Display a form to see a sentence.'''
-    return render_template("index.html")
 
-
-@app.route('/<num>', methods=['GET'])
-def get_words(num):
-    '''Generate user-inputted number of words.'''
-    num = int(num)
-    words = list()
-    for i in range(num):
-        words.append(stochastic_sample(histo))
-    words = capitalize_first_word(words)
-    return redirect(url_for('show_sentence'), words=words)
-
-
-@app.route('/sentence')
-def show_sentence():
-    '''Display random sentece.'''
-    pass
-
-
-"""
 @app.route("/")
 def index():
     '''Display a sentence on each reload.'''
@@ -61,6 +37,7 @@ def index():
 def reload():
     '''Redirect user to a new load of the home page.'''
     return redirect(url_for("index"))
+
 
 if __name__ == "__main__":
     app.run(debug=True)

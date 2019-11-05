@@ -5,7 +5,7 @@ import re
 def get_clean_words(file_name):
     """Get a list of single-word strings from source text.
         Param: file_name(str)
-        Return: words(list)
+        Return: clean_words_as_str(list)
     """
     words = []
     with open(file_name, "r") as file:
@@ -279,6 +279,7 @@ if __name__ == "__main__":
     # print(unique_words(histogram(sys.argv[1])))
     # print(frequency('newsletter', histogram(sys.argv[1])))
     histogram = histogram(sys.argv[1])
+    '''
     most_least_frequent = most_least_frequent(histogram)
     unique_words = unique_words(histogram)
     print("Analysis for THE WEALTH OF NATIONS (1776), by Adam Smith:")
@@ -299,3 +300,4 @@ if __name__ == "__main__":
 
     mode = calculate_mode(histogram)
     print(f"Mode word frequency: {mode}.")
+    '''

@@ -256,7 +256,6 @@ def test_stochastic_sample(histogram_for_text, iterations):
 
 
 if __name__ == "__main__":
-    # test samling with UNIFORM DISTRIBUTION
     text = sys.argv[1]
     iterations = sys.argv[2]
     hist = histogram.histogram(text)
