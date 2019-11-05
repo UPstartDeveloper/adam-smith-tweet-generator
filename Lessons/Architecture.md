@@ -1,18 +1,19 @@
-## Class 5: Application Architecture
+# Application Architecture
 
-### Activities
+## Activities
 - Review code with partners and use [code review rubric] to assess quality
 - Compare code quality of functions based on length and responsibility
 - Discuss issues with ripple effects caused by tight [coupling] and ways to avoid it
 - Discuss advantages of classes and object-oriented programming (OOP)
+- Lecture and discussion on [how OOP actually works] under the hood
 
-### Objectives
+## Objectives
 After completing this class session and the associated tutorial challenges, students will be able to ...
 - Assess aspects of code quality including organization and modularity
 - Refactor functions that use structures as class instance methods
 - Plan application architecture to prepare for future expansion
 
-### Challenges
+## Challenges
 These challenges are the baseline required to complete the project and course.
 Be sure to complete these before next class session and before starting on the stretch challenges below.
 - [Page 6: Application Architecture]
@@ -34,7 +35,7 @@ Be sure to complete these before next class session and before starting on the s
         - Run `pytest listogram_test.py` to run the [listogram unit tests] and fix any failures
     - Restructure code files and functions to be more modular and flexible
 
-### Stretch Challenges
+## Stretch Challenges
 These challenges are more difficult and help you push your skills and understanding to the next level.
 - [Page 6: Application Architecture]
     - Organize other app functions and classes based on your answers to app architecture questions
@@ -52,11 +53,12 @@ These challenges are more difficult and help you push your skills and understand
 
 
 [code review rubric]: http://make.sc/code-review-rubric
+[how OOP actually works]: https://docs.google.com/presentation/d/1n_BKzZ3Dhn3NoKpv05TlS2M-P0zNJRE2jJvnTxiD5bA/preview
 [Page 6: Application Architecture]: https://www.makeschool.com/academy/tutorial/tweet-generator-data-structures-probability-with-python/application-architecture
 [coupling]: https://en.wikipedia.org/wiki/Coupling_(computer_programming)
 [iterable container]: https://docs.python.org/3/library/stdtypes.html#typeiter
 
-[dictogram starter code]: ../Code/dictogram.py
-[dictogram unit tests]: ../Code/dictogram_test.py
-[listogram starter code]: ../Code/listogram.py
-[listogram unit tests]: ../Code/listogram_test.py
+[dictogram starter code]: https://github.com/Make-School-Courses/CS-1.2-Intro-Data-Structures/blob/master/Code/dictogram.py
+[dictogram unit tests]: https://github.com/Make-School-Courses/CS-1.2-Intro-Data-Structures/blob/master/Code/dictogram_test.py
+[listogram starter code]: https://github.com/Make-School-Courses/CS-1.2-Intro-Data-Structures/blob/master/Code/listogram.py
+[listogram unit tests]: https://github.com/Make-School-Courses/CS-1.2-Intro-Data-Structures/blob/master/Code/listogram_test.py
