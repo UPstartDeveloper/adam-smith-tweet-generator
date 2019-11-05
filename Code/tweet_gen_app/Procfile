@@ -1,1 +1,1 @@
-web: gunicorn --chdir Code app:app
+web: gunicorn --chdir Code/tweet_gen_app app:app
