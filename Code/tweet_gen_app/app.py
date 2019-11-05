@@ -1,9 +1,11 @@
 from flask import Flask, render_template, redirect, url_for, request
-from histogram import histogram
+from dictogram import Dictogram
 from stochastic_sampling import stochastic_sample
+from clean_words import get_clean_words
 
 # creating a histogram
-histo = histogram()
+words_list = get_clean_words("adam_smith.txt")
+histo = Dictogram(words_list)
 # Flask app for tweet generator
 app = Flask(__name__)
 
