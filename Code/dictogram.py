@@ -15,21 +15,25 @@ class Dictogram(dict):
         # Count words in given list, if any
         if word_list is not None:
             for word in word_list:
-                if word.lower() not in self.keys():
-                    self.types += 1
+                if word not in self.keys():
                     self[word] = 0
-                self.tokens += 1
+                    self.types += 1
                 self.add_count(word.lower())
 
     def add_count(self, word, count=1):
         """Increase frequency count of given word by given count amount."""
-        # TODO: Increase word frequency by count
+        if word not in self.keys():
+            self[word] = 0
+            self.types += 1
+        self.tokens += count
         self[word] += count
 
     def frequency(self, word):
         """Return frequency count of given word, or 0 if word is not found."""
-        # TODO: Retrieve word frequency count
-        return self[word]
+        if word in self.keys():
+            return self[word]
+        else:
+            return 0
 
 
 def print_histogram(word_list):
