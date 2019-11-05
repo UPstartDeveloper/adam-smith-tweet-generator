@@ -1,7 +1,6 @@
 import histogram
 import sys
 import random
-from sampling import random_word
 import math
 
 
