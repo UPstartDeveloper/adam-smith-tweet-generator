@@ -19,7 +19,6 @@ def get_words():
     words = list()
     for i in range(10):
         words.append(stochastic_sample(histo))
-    words = capitalize_first_word(words)
     # capitalize first letter of starting word
     first_word = words[0]
     first_letter = first_word[0].upper()
