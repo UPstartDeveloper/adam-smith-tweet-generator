@@ -63,7 +63,7 @@ class Listogram(list):
     def sample(self):
         """Return a word from this histogram, randomly sampled by weighting
         each word's probability of being chosen by its observed frequency."""
-        # TODO: Randomly choose a word based on its frequency in this histogram
+        reurn sampling_listogram.weighted_sample(self)
 
 
 def print_histogram(word_list):
