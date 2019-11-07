@@ -2,6 +2,7 @@
 
 from __future__ import division, print_function  # Python 2 and 3 compatibility
 import random
+import stochastic_sampling
 
 
 class Dictogram(dict):
@@ -19,7 +20,7 @@ class Dictogram(dict):
                 if word not in self.keys():
                     self[word] = 0
                     self.types += 1
-                self.add_count(word.lower())
+                self.add_count(word)
 
     def add_count(self, word, count=1):
         """Increase frequency count of given word by given count amount."""
@@ -40,6 +41,7 @@ class Dictogram(dict):
         """Return a word from this histogram, randomly sampled by weighting
         each word's probability of being chosen by its observed frequency."""
         # TODO: Randomly choose a word based on its frequency in this histogram
+        return stochastic_sampling.stochastic_sample(self)
 
 
 def print_histogram(word_list):
@@ -76,8 +78,12 @@ def print_histogram_samples(histogram):
     red = '\033[31m'
     reset = '\033[m'
     # Check each word in original histogram
-    for word, count in histogram.items():
+    items = histogram.items()
+    # print(f"Items in Histogram: {items}")
+    # for word, count in histogram.items():
+    for word in histogram.keys():
         # Calculate word's observed frequency
+        count = histogram[word]
         observed_freq = count / histogram.tokens
         # Calculate word's sampled frequency
         samples = samples_hist.frequency(word)

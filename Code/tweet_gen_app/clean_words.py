@@ -14,7 +14,7 @@ def get_clean_words(file_name="adam_smith.txt"):
     # remove all occurences of non-alpha chars from data
     clean_words = []
     for word in words:
-        clean_word = ([char for char in word if not (
+        clean_word = ([char for char in word.lower() if not (
             char == "." or
             char == "?" or
             char == "!" or

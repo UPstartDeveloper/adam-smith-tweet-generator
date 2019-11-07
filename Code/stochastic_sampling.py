@@ -143,7 +143,7 @@ def stochastic_sample(histo):
                                  histo[word])
         probability = histo[word][1]
     # generate a word, influence outcome using each word's sample space
-    dart = random.uniform(0, 1)
+    dart = random.random()
     word = choose_word(histo, dart)
     # reassign values in histo to original value
     histo = restore_frequencies(histo, probability_factor)
