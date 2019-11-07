@@ -111,6 +111,21 @@ def choose_word(listogram, dart):
                 return word
 
 
+def restore_frequencies(listogram, factor):
+    """Reassigns all values in the histogram dictionary back to their original
+       counts.
+       Param: listogram(Listogram): all values are now tuples
+              factor(float): equal to 1/number of word tokens
+       Return:listogram
+    """
+    for list in listogram:
+        high_end_of_range = list[1][1]
+        low_end_of_range = list[1][0]
+        difference = high_end_of_range - low_end_of_range
+        list[1] = round(difference / factor)
+    return listogram
+
+
 def weighted_sample(listogram):
     """Chooses a random word from the histogram of word frequency.
        Words that have higher frequnecy counts in the histogram will
@@ -133,4 +148,5 @@ def weighted_sample(listogram):
     dart = random.uniform(0, 1)
     word = choose_word(listogram, dart)
     # restore frequency counts in the listogram here, then return the word
+    listogram = restore_frequencies(listogram, probability_factor)
     return word
