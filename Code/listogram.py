@@ -108,7 +108,6 @@ def print_histogram_samples(histogram):
         sampled_freq = samples / samples_hist.tokens
         # Calculate error between word's sampled and observed frequency
         error = (sampled_freq - observed_freq) / observed_freq
-        # pick color of output text
         color = ''
         if abs(error) < 0.05:
             color = green
