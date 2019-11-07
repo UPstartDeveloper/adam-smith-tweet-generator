@@ -69,17 +69,16 @@ def compare_ranges(listogram, index, other_index):
        Return: word(str)
     """
     range_sizes = list()  # stores the difference between the low and high ends
-    # store the range size of one word
-    low_end = listogram[index][1][0]
-    high_end = listogram[index][1][1]
-    size_of_range_of_word = find_size_of_range(low_end, high_end)
-    range_sizes.append(size_of_range_of_word)
-    # store the range size of the other word
-    low_end = listogram[other_index][1][0]
-    high_end = listogram[other_index][1][1]
-    size_of_range_of_word = find_size_of_range(low_end, high_end)
-    range_sizes.append(size_of_range_of_word)
+    # store the range sizes of both of the words
+    range_sizes = store_range_size(listogram, index, range_sizes)
+    range_sizes = store_range_size(listogram, other_index, range_sizes)
     # make the choice, find the word which belongs with the choice
+    word = listogram[index][0]
+    other_word = listogram[other_index][0]
+    if range_sizes[0] < range_sizes[1]:
+        return other_word
+    else:
+        return word
 
 
 def choose_word(listogram, dart):
@@ -108,6 +107,8 @@ def choose_word(listogram, dart):
             else:
                 # compare ranges of the two words dart falls between
                 index_of_other_word = does_fit
+                word = compare_ranges(listogram, index, index_of_other_word)
+                return word
 
 
 def weighted_sample(listogram):
@@ -131,3 +132,5 @@ def weighted_sample(listogram):
     # generate word, influence outcome using weighted probability
     dart = random.uniform(0, 1)
     word = choose_word(listogram, dart)
+    # restore frequency counts in the listogram here, then return the word
+    return word
