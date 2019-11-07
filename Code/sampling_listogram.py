@@ -1,4 +1,4 @@
-from tweet_gen_app.stochastic_sampling import *
+import tweet_gen_app.stochastic_sampling as sampler_helper
 
 
 def weighted_sample(histogram):
@@ -8,4 +8,4 @@ def weighted_sample(histogram):
        Param: histogram(list of lists)
        Return: word(str)
     """
-    
+    pass
