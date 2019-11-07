@@ -1,4 +1,5 @@
 import tweet_gen_app.stochastic_sampling as sampler_helper
+import random
 
 
 def weighted_sample(histogram):
