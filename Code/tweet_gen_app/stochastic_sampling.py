@@ -38,7 +38,7 @@ def calculate_factor(length):
 
 def make_range(probability, factor, current_value):
     """Return a tuple to be the new value in the histogram dictionary.
-       Param: probability (float): num in the sample spacee currently
+       Param: probability (float): num in the sample space currently
               factor (float): the fraction of the source text for a token
               current_value(int): appearances of a type of word in text
        Return: (tuple) of 3 elements:
@@ -143,7 +143,7 @@ def stochastic_sample(histo):
                                  histo[word])
         probability = histo[word][1]
     # generate a word, influence outcome using each word's sample space
-    dart = random.uniform(0,1)
+    dart = random.uniform(0, 1)
     word = choose_word(histo, dart)
     # reassign values in histo to original value
     histo = restore_frequencies(histo, probability_factor)
