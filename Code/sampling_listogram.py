@@ -8,3 +8,4 @@ def weighted_sample(histogram):
        Param: histogram(list of lists)
        Return: word(str)
     """
+    
