@@ -2,7 +2,6 @@
 
 from __future__ import division, print_function  # Python 2 and 3 compatibility
 import random
-import sampling_listogram
 
 
 class Listogram(list):
@@ -63,7 +62,20 @@ class Listogram(list):
     def sample(self):
         """Return a word from this histogram, randomly sampled by weighting
         each word's probability of being chosen by its observed frequency."""
-        reurn sampling_listogram.weighted_sample(self)
+        # generate a number at random
+        dart = random.uniform(0, 1)
+        # calculate the probability of any token being chosen from source text
+        factor = (1/float(self.tokens))
+        # determine if the dart value lies between zero, and the percentage of
+        # tokens that a type of word comprises in the source text
+        possibility = 0
+        for list in self:
+            count = list[1]
+            range_of_possibility = possibility + (count * factor)
+            if dart <= range_of_possibility:
+                return list[0]
+            else:
+                possibility += range_of_possibility
 
 
 def print_histogram(word_list):
