@@ -63,6 +63,7 @@ def print_histogram_samples(histogram):
     print('Histogram samples:')
     # Sample the histogram 10,000 times and count frequency of results
     samples_list = [histogram.sample() for _ in range(10000)]
+    print(f"Histogram after being sampled: {histogram}")
     samples_hist = Dictogram(samples_list)
     print('samples: {}'.format(samples_hist))
     print()
@@ -78,12 +79,12 @@ def print_histogram_samples(histogram):
     red = '\033[31m'
     reset = '\033[m'
     # Check each word in original histogram
-    items = histogram.items()
+    # items = histogram.items()
     # print(f"Items in Histogram: {items}")
-    # for word, count in histogram.items():
-    for word in histogram.keys():
+    for word, count in histogram.items():
+        # for word in histogram.keys():
         # Calculate word's observed frequency
-        count = histogram[word]
+        # count = histogram[word]
         observed_freq = count / histogram.tokens
         # Calculate word's sampled frequency
         samples = samples_hist.frequency(word)

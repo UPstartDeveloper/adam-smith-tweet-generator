@@ -1,4 +1,4 @@
-# import histogram
+import histogram
 import sys
 import random
 import math
@@ -121,7 +121,7 @@ def restore_frequencies(histogram, factor):
         high_end_of_range = histogram[word][1]
         low_end_of_range = histogram[word][0]
         difference = high_end_of_range - low_end_of_range
-        histogram[word] = int((difference / factor))
+        histogram[word] = round(difference / factor)
     return histogram
 
 
@@ -258,6 +258,10 @@ def test_stochastic_sample(histogram_for_text, iterations):
 if __name__ == "__main__":
     iterations = sys.argv[1]
     hist = histogram.histogram()
+    # print(f"Histo before Sampling: {hist}")
+    # word = stochastic_sample(hist)
+    # print(f"Word Sampled: {word}")
+    # print(f"Histo After Sampling: {hist}")
     # word_no_weighting = random_word(hist)
     # print(f"Equally distributed: {word_no_weighting}")
 
