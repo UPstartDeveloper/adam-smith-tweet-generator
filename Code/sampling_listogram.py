@@ -5,7 +5,7 @@ import random
 def calculate_length_of_source(listogram):
     """Return the total number of tokens in the histogram."""
     tokens = 0
-    for list in histogram:
+    for list in listogram:
         tokens += list[1]
     return tokens
 
@@ -24,20 +24,20 @@ def fit_in_range(listogram, index, dart):
     range = listogram[index][1]
     low_end = range[0]
     high_end = range[1]
-    if dart < high_end and dart > low_end:
+    if dart > low_end and dart < high_end:
         return True
     else:
         # check if the dart is between the range here and the range before
-        index_before = index - 1
-        range_before = listogram[index][1]
-        if dart == range_before[1]:
+        if dart == listogram[index][1][0]:
+            index_before = index - 1
             return index_before
         else:
             # check if the dart is between the range here and the range after
-            index_after = index + 1
-            range_after = listogram[index][1]
-            if dart == range_before[0]:
+            if dart == listogram[index][1][1]:
+                index_after = index + 1
                 return index_after
+            else:
+                return False
 
 
 def find_size_of_range(low_end, high_end):
@@ -104,6 +104,8 @@ def choose_word(listogram, dart):
             does_fit = fit_in_range(listogram, index, dart)
             if does_fit is True:
                 return word
+            elif does_fit is False:
+                break
             else:
                 # compare ranges of the two words dart falls between
                 index_of_other_word = does_fit
@@ -140,10 +142,11 @@ def weighted_sample(listogram):
     # reassign word counts in listogram to ranges of values that dart can equal
     for list in listogram:
         current_value = list[1]
-        current_value = sampler_helper.make_range(probability,
-                                                  probability_factor,
-                                                  current_value)
-        probability = current_value[1]
+        list[1] = sampler_helper.make_range(probability,
+                                            probability_factor,
+                                            current_value)
+        high_end = list[1][1]
+        probability = high_end
     # generate word, influence outcome using weighted probability
     dart = random.uniform(0, 1)
     word = choose_word(listogram, dart)

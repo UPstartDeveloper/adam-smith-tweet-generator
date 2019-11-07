@@ -1,7 +1,7 @@
 #!python
-
 from __future__ import division, print_function  # Python 2 and 3 compatibility
 import random
+import sampling_listogram
 
 
 class Listogram(list):
@@ -60,8 +60,12 @@ class Listogram(list):
         return None
 
     def sample(self):
-        """Return a word from this histogram, randomly sampled by weighting
-        each word's probability of being chosen by its observed frequency."""
+        """
+        Return a word from this histogram, randomly sampled by weighting
+        each word's probability of being chosen by its observed frequency.
+        """
+
+        '''
         # generate a number at random
         dart = random.uniform(0, 1)
         # calculate the probability of any token being chosen from source text
@@ -76,6 +80,8 @@ class Listogram(list):
                 return list[0]
             else:
                 possibility += range_of_possibility
+        '''
+        return sampling_listogram.weighted_sample(self)
 
 
 def print_histogram(word_list):
