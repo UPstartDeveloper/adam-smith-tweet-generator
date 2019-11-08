@@ -109,7 +109,9 @@ def choose_word(listogram, dart):
                 else:
                     # compare ranges of the two words dart falls between
                     index_of_other_word = does_fit
-                    word = compare_ranges(listogram, index, index_of_other_word)
+                    word = compare_ranges(listogram,
+                                          index,
+                                          index_of_other_word)
                     return word
 
 
