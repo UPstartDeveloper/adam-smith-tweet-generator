@@ -5,6 +5,9 @@ from clean_words import get_clean_words
 
 # Flask app for tweet generator
 app = Flask(__name__)
+# creating a histogram
+words_list = get_clean_words("adam_smith.txt")
+histo = Dictogram(words_list)
 
 
 def get_words():
@@ -12,9 +15,6 @@ def get_words():
        Param: none
        Return: words(list): str where first str is capitalized, 10 for sentence
     """
-    # creating a histogram
-    words_list = get_clean_words("adam_smith.txt")
-    histo = Dictogram(words_list)
     # making a list to store words
     words = list()
     for i in range(10):
