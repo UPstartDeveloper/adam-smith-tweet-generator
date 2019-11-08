@@ -37,6 +37,7 @@ def fit_in_range(listogram, index, dart):
                 index_after = index + 1
                 return index_after
             else:
+                # if the dart is nowhere near this range
                 return False
 
 
@@ -102,15 +103,14 @@ def choose_word(listogram, dart):
             # decide if the word at this index has the range containing dart
             word = listogram[index][0]
             does_fit = fit_in_range(listogram, index, dart)
-            if does_fit is True:
-                return word
-            elif does_fit is False:
-                break
-            else:
-                # compare ranges of the two words dart falls between
-                index_of_other_word = does_fit
-                word = compare_ranges(listogram, index, index_of_other_word)
-                return word
+            if does_fit is not False:
+                if does_fit is True:
+                    return word
+                else:
+                    # compare ranges of the two words dart falls between
+                    index_of_other_word = does_fit
+                    word = compare_ranges(listogram, index, index_of_other_word)
+                    return word
 
 
 def restore_frequencies(listogram, factor):
