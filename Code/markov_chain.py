@@ -25,7 +25,7 @@ class MarkovChain:
                 word = self.words_list[index]
                 word_before = self.words_list[index - 1]
                 if not index == 0 and word_before == type:
-                    tokens_that_follow.append(word_before)
+                    tokens_that_follow.append(word)
             self.states[type] = Dictogram(tokens_that_follow)
 
     def random_walk(self, length=10):
@@ -36,16 +36,17 @@ class MarkovChain:
         # pick a word randomly to start the sentence
         state_types = self.states.keys()
         sentence = ''
-        first_word = random.sample(state_types, 1)
-        sentence += first_word
+        first_word = random.sample(state_types, 1)[0]
+        sentence += first_word + " "
         # start the random walk
         next_word = first_word
         for i in range(length - 1):
             next_word = self.states[next_word].sample()
-            sentence += next_word
+            sentence += next_word + " "
         return sentence
 
 
 if __name__ == "__main__":
     fish_list = ["one", "fish", "two", "fish", "red", "fish", "blue", "fish"]
     mark = MarkovChain(fish_list)
+    print(mark.random_walk())
