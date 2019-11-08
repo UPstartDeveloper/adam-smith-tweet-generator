@@ -1,5 +1,5 @@
 import tweet_gen_app.clean_words as cw
-import tweet_gen_app.dictogram as dictogram
+from tweet_gen_app.dictogram import Dictogram
 
 
 class MarkovChain:
@@ -14,5 +14,11 @@ class MarkovChain:
             [word for word in self.words_list if word not in self.types]
         )
         self.states = dict()
-        for word in self.types:
-            self.states[word] = 0
+        for type in self.types:  # keys in the self.states dict
+            tokens_that_follow = list()
+            for index in range(len(self.words_list)):
+                word = self.words_list[index]
+                word_before = self.words_list[index - 1]
+                if not index == 0 and word_before == type:
+                    tokens_that_follow.append(word_before)
+            self.states[type] = Dictogram(tokens_that_follow)
