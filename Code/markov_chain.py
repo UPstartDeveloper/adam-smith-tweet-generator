@@ -1,5 +1,6 @@
 import tweet_gen_app.clean_words as cw
 from tweet_gen_app.dictogram import Dictogram
+import random
 
 
 class MarkovChain:
@@ -9,7 +10,10 @@ class MarkovChain:
         self.words_list = list()
         if words_list is None:
             self.words_list = cw.get_clean_words  # use adam smith corpus
+        else:
+            self.words_list = words_list
         # keys in the self.states dict
+        self.types = list()
         self.types = (
             [word for word in self.words_list if word not in self.types]
         )
@@ -29,4 +33,19 @@ class MarkovChain:
            Param: length(int) the number of words that should be generated
            Return: sentence(str)
         """
-        pass
+        # pick a word randomly to start the sentence
+        state_types = self.states.keys()
+        sentence = ''
+        first_word = random.sample(state_types, 1)
+        sentence += first_word
+        # start the random walk
+        next_word = first_word
+        for i in range(length - 1):
+            next_word = self.states[next_word].sample()
+            sentence += next_word
+        return sentence
+
+
+if __name__ == "__main__":
+    fish_list = ["one", "fish", "two", "fish", "red", "fish", "blue", "fish"]
+    mark = MarkovChain(fish_list)
