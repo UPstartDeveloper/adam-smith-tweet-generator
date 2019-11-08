@@ -2,7 +2,7 @@
 
 from __future__ import division, print_function  # Python 2 and 3 compatibility
 import random
-from . import stochastic_sampling
+import stochastic_sampling
 
 
 class Dictogram(dict):

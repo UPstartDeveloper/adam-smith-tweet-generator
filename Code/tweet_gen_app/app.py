@@ -2,29 +2,24 @@ from flask import Flask, render_template, redirect, url_for, request
 from dictogram import Dictogram
 from stochastic_sampling import stochastic_sample
 from clean_words import get_clean_words
+from markov_chain import MarkovChain
 
 # Flask app for tweet generator
 app = Flask(__name__)
 # creating a histogram
-words_list = get_clean_words("adam_smith.txt")
-histo = Dictogram(words_list)
+mark = MarkovChain()
 
 
-def get_words():
+def get_words(num_words=10):
     """Capitalize the word letter of a string.
-       Param: none
+       Param: num_words (int): amount of words to put in sentence
        Return: words(list): str where first str is capitalized, 10 for sentence
     """
-    # making a list to store words
-    words = list()
-    for i in range(10):
-        words.append(stochastic_sample(histo))
+    # sentence tp be displayed
+    words = mark.random_walk(num_words)
     # capitalize first letter of starting word
-    first_word = words[0]
-    first_letter = first_word[0].upper()
-    rest_of_word = first_word[1:]
-    reassigned_word = first_letter + rest_of_word
-    words[0] = reassigned_word
+    first_letter = words[0].upper()
+    words = first_letter + words[1:]
     return words
 
 
