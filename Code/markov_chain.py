@@ -9,12 +9,13 @@ class MarkovChain:
         self.words_list = list()
         if words_list is None:
             self.words_list = cw.get_clean_words  # use adam smith corpus
-        # create a dict to store all types and their state histograms
+        # keys in the self.states dict
         self.types = (
             [word for word in self.words_list if word not in self.types]
         )
+        # create a dict to store all types and their state histograms
         self.states = dict()
-        for type in self.types:  # keys in the self.states dict
+        for type in self.types:
             tokens_that_follow = list()
             for index in range(len(self.words_list)):
                 word = self.words_list[index]
@@ -22,3 +23,10 @@ class MarkovChain:
                 if not index == 0 and word_before == type:
                     tokens_that_follow.append(word_before)
             self.states[type] = Dictogram(tokens_that_follow)
+
+    def random_walk(self, length=10):
+        """Generate a sentence by randomly transitioning between states.
+           Param: length(int) the number of words that should be generated
+           Return: sentence(str)
+        """
+        pass
