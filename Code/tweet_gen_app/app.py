@@ -2,10 +2,13 @@ from flask import Flask, render_template, redirect, url_for, request
 from dictogram import Dictogram
 from stochastic_sampling import stochastic_sample
 from clean_words import get_clean_words
-from markov_chain import MarkovChain, mark
+from markov_chain import MarkovChain
 
 # Flask app for tweet generator
 app = Flask(__name__)
+# create a markov chain
+fish_list = ["one", "fish", "two", "fish", "red", "fish", "blue", "fish"]
+mark = MarkovChain(fish_list)
 
 
 def get_words(num_words=10):
