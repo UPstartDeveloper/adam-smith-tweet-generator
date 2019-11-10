@@ -7,7 +7,6 @@ from markov_chain import MarkovChain
 # Flask app for tweet generator
 app = Flask(__name__)
 # create a markov chain
-# fish_list = ["one", "fish", "two", "fish", "red", "fish", "blue", "fish"]
 mark = MarkovChain()
 
 
@@ -26,16 +25,19 @@ def get_words(num_words=10):
 
 @app.route("/")
 def index():
-    '''Display a sentence on each reload.'''
-    # generate 10 words on default for first load of page
+    '''Display a sentence on the first load.'''
+    # Generates 10 words on default for first load of page
     words = get_words()
     return render_template("index.html", words=words)
 
 
-@app.route("/reload")
-def reload():
-    '''Redirect user to a new load of the home page.'''
-    return redirect(url_for("index"))
+@app.route("/<num>", methods=['GET'])
+def reload(num):
+    '''Display a sentence on each reload.'''
+    num = request.form.get('num')
+    num_words = int(num)
+    words_list = get_words(num)
+    return render_template("index.html", words=words_list)
 
 
 if __name__ == "__main__":
