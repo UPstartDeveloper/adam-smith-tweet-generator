@@ -40,14 +40,14 @@ class MarkovChain:
         else:
             # use the passed in list of words
             self.words_list = words_list
-        # keys in the self.states dict
+        # keys in the self.chain dict
         self.types_of_words = list()
         self.types_of_words = (
             [word for word in self.words_list if word not
              in self.types_of_words]
         )
         # create a dict to store all types and their state histograms
-        self.states = dict()
+        self.chain = dict()
         for type in self.types_of_words:
             tokens_that_follow = list()
             for index in range(len(self.words_list)):
@@ -55,7 +55,7 @@ class MarkovChain:
                 word_before = self.words_list[index - 1]
                 if not index == 0 and word_before == type:
                     tokens_that_follow.append(word)
-            self.states[type] = Dictogram(tokens_that_follow)
+            self.chain[type] = Dictogram(tokens_that_follow)
         '''
     def random_walk(self, length=10):
         """Generate a sentence by randomly transitioning between states.
@@ -63,7 +63,7 @@ class MarkovChain:
            Return: sentence(str)
         """
         # pick a word randomly to start the sentence
-        state_types = self.states.keys()
+        state_types = self.chain.keys()
         sentence = ''
         first_word = random.sample(state_types, 1)[0]
         sentence += first_word + " "
@@ -71,8 +71,8 @@ class MarkovChain:
         next_word = first_word
         for i in range(length - 1):
             # make sure the word has tokens that come after, find the next word
-            if self.states[next_word] is not None:
-                next_word = self.states[next_word].sample()
+            if self.chain[next_word] is not None:
+                next_word = self.chain[next_word].sample()
             else:
                 next_word = random.sample(state_types, 1)[0]
             sentence += next_word + " "
