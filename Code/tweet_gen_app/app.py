@@ -7,8 +7,8 @@ from markov_chain import MarkovChain
 # Flask app for tweet generator
 app = Flask(__name__)
 # create a markov chain
-fish_list = ["one", "fish", "two", "fish", "red", "fish", "blue", "fish"]
-mark = MarkovChain(fish_list)
+# fish_list = ["one", "fish", "two", "fish", "red", "fish", "blue", "fish"]
+mark = MarkovChain()
 
 
 def get_words(num_words=10):

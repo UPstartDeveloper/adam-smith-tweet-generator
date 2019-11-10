@@ -14,15 +14,17 @@ class MarkovChain:
             # using adam smith corpus
             self.words_list = clean_words.get_clean_words()
         else:
+            # use the passed in list of words
             self.words_list = words_list
         # keys in the self.states dict
-        self.types = list()
-        self.types = (
-            [word for word in self.words_list if word not in self.types]
+        self.types_of_words = list()
+        self.types_of_words = (
+            [word for word in self.words_list if word not
+             in self.types_of_words]
         )
         # create a dict to store all types and their state histograms
         self.states = dict()
-        for type in self.types:
+        for type in self.types_of_words:
             tokens_that_follow = list()
             for index in range(len(self.words_list)):
                 word = self.words_list[index]
