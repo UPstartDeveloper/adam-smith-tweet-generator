@@ -5,7 +5,9 @@ import random
 
 class MarkovChain:
     def __init__(self, words_list=None):
-        """Construct a Markov Chain model."""
+        """Construct a Markov Chain model.
+           Param: words_list(list of str)
+        """
         # create a list of words from the corpus
         self.words_list = list()
         if words_list is None:
