@@ -10,7 +10,7 @@ app = Flask(__name__)
 mark = MarkovChain()
 
 
-def get_words(num_words=10):
+def get_words(num_words):
     """Capitalize the word letter of a string.
        Param: num_words (int): amount of words to put in sentence
        Return: words(list): str where first str is capitalized, 10 for sentence
@@ -23,21 +23,19 @@ def get_words(num_words=10):
     return words
 
 
-@app.route("/")
+@app.route("/", methods=['GET', 'POST'])
 def index():
-    '''Display a sentence on the first load.'''
-    # Generates 10 words on default for first load of page
-    words = get_words()
-    return render_template("index.html", words=words)
-
-
-@app.route("/<num>", methods=['GET'])
-def reload(num):
-    '''Display a sentence on each reload.'''
+    '''Display a sentence.'''
+    # show 10 words on the first load
     num = request.form.get('num')
-    num_words = int(num)
-    words_list = get_words(num)
-    return render_template("index.html", words=words_list)
+    if num == '':
+        num = 10
+    words = get_words(int(num))
+    return render_template("index.html", words=words)
+    # user has inputted a number of words to generate
+    if request.method == 'POST':
+        # int_num_words = request.form.get('num')
+        return redirect(url_for('index'))
 
 
 if __name__ == "__main__":
