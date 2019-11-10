@@ -28,7 +28,7 @@ def index():
     '''Display a sentence.'''
     # show 10 words on the first load
     num = request.form.get('num')
-    if num == '':
+    if num == '' or num is None:
         num = 10
     words = get_words(int(num))
     return render_template("index.html", words=words)

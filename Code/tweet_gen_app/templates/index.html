@@ -17,7 +17,7 @@
     </p>
 
     <!-- Reload the page for the user -->
-    <form action="{{ num }}" method="GET">
+    <form action="{{ url_for('index') }}" method="POST">
         Enter a number of words to see in the next Tweet:
         <input name="num" type="text">
         <br>
