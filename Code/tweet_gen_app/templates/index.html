@@ -4,29 +4,37 @@
 
 {% block content %}
 
-    <h1>The Words of Adam Smith</h1>
+    <div class="container">
 
-    <h2>Don't Like Capitalism? I don't blame you! </h2>
+        <div class="row">
+            <h1>The Words of Adam Smith</h1>
+        </div>
 
-    <h3>But what did Adam Smith, or "The Father of Capitalism," actually write about the system? </h3>
+        <div class="row">
+            <h2>Don't Like Capitalism? I don't blame you!</h2>
+        </div>
 
-    <p>Here are a few words. These are randomly selected one-by-one from <i>The Wealth of Nations</i> (1776), often cited as the <i>magnum opus</i> of the Scottish philosopher: <br><br>
-        <strong>"
-            {{ words }}
-        ."</strong>
-    </p>
+        <div class="row">
+            <h3>But what did Adam Smith, or "The Father of Capitalism," actually write about the system? </h3>
+        </div>
 
-    <!-- Reload the page for the user -->
-    <form action="{{ url_for('index') }}" method="POST">
-        Enter a number of words to see in the next Tweet:
-        <input name="num" type="text">
-        <br>
-        <input type="submit" value="Show Another (Computer-Generated) Sentence">
-    </form>
-    <br>
+        <div class="row">
+            <p>Here are a few words. These are randomly selected one-by-one from <i>The Wealth of Nations</i> (1776), often cited as the <i>magnum opus</i> of the Scottish philosopher: <br><br>
+                <strong>"
+                    {{ words }}
+                ."</strong>
+            </p>
+        </div>
+        <div class="row">
+            <!-- Reload the page for the user -->
+            <form action="{{ url_for('index') }}" method="POST">
+                Enter a number of words to see in the next Tweet:
+                <input name="num" type="text">
+                <br>
+                <input type="submit" value="Show Another (Computer-Generated) Sentence">
+            </form>
+            <br>
+        </div>
 
-    <!-- Picture of Adam Smith -->
-    <img src="https://cdn.static-economist.com/sites/default/files/images/print-edition/20180728_BKP005_0.jpg" alt="Adam Smith Portrait"><br>
-    <a href="https://www.economist.com/books-and-arts/2018/07/26/rescuing-adam-smith-from-myth-and-misrepresentation">Link to Image Source</a>
-
+    </div>
 {% endblock %}
