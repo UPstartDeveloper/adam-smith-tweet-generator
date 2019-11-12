@@ -64,6 +64,13 @@ class LinkedList(object):
             node = node.next
         return count
 
+    def start_with_first_node(self, new_node):
+        """Add the first node to the LinkedList.
+           Param: new_node(Node): the node to be added
+        """
+        self.head = self.tail = new_node
+        self.head.next = self.tail
+
     def append(self, item):
         """Insert the given item at the tail of this linked list.
            Running time: O(1) because either we have to make a new node to
@@ -71,18 +78,25 @@ class LinkedList(object):
            No matter the case, we know exactly where in the list we have to go.
         """
         new_node = Node(item)
-        if self.head is None:  # no previous nodes
-            self.head = self.tail = new_node
-            self.head.next = self.tail
+        if self.is_empty() is True:
+            self.start_with_first_node(new_node)
         else:
             self.tail.next = new_node
             self.tail = new_node
 
     def prepend(self, item):
         """Insert the given item at the head of this linked list.
-        TODO: Running time: O(???) Why and under what conditions?"""
-        # TODO: Create new node to hold given item
-        # TODO: Prepend node before head, if it exists
+           Running time: O(1) because we always have to locate the head
+           or we initialize it, which is one operation because head is always
+           at the start of the list.
+        """
+        new_head = Node(item)
+        if self.is_empty() is not True:
+            old_head = self.head
+            self.head = new_head
+            self.head.next = old_head
+        else:
+            self.start_with_first_node(new_head)
 
     def find(self, quality):
         """Return an item from this linked list satisfying the given quality.
