@@ -135,13 +135,13 @@ class LinkedList(object):
                 if node == self.head == self.tail:
                     pass
                 # the node is the head only
-                elif:
-                    pass
-                # the node is neither the head or tail
-                elif:
+                elif node == self.head:
                     pass
                 # the node is the tail only
-                elif:
+                elif node == self.tail:
+                    pass
+                # the node is neither the head or tail (it's in between them)
+                else:
                     pass
             # if the node doesn't match, move on to the next
             else:
