@@ -110,7 +110,7 @@ class LinkedList(object):
         list = [Node(item) for item in self.items()]
         if list is not None:
             for item in list:
-                if item.data == quality or quality(item.data) is True:
+                if item.data == quality:
                     return item
             else:  # the item is not in the list
                 return None
@@ -128,9 +128,14 @@ class LinkedList(object):
         # Hint: raise ValueError('Item not found: {}'.format(item))
         node = self.head
         node_before = None
+        # discover if the data we are looking for exists in the list
         data_to_match = self.find(item)
+        if data_to_match is not None:  # avoiding AttributeError
+            data_to_match = data_to_match.data
+        # item does not exist
         if data_to_match is None:
             raise ValueError(f'Item not found: {item}.')
+        # item does exist in the list
         else:
             # find the node with the data to delete
             while not node.data == data_to_match:
