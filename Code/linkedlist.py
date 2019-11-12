@@ -107,15 +107,27 @@ class LinkedList(object):
            given quality, then we will have to check every node in the list
            before completing this method.
         """
+        node = self.head
+        while quality(node.data) is not True:
+            node = node.next
+        if quality(node.data) is True:
+            pass
+        else:
+            pass
+            return None
+        '''
         list = [Node(item) for item in self.items()]
         if list is not None:
             for item in list:
                 if item.data == quality:
                     return item
+                elif quality(item.data) is True:
+                    return item
             else:  # the item is not in the list
                 return None
         else:  # the list has no items
             return None
+        '''
 
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError.
