@@ -100,10 +100,22 @@ class LinkedList(object):
 
     def find(self, quality):
         """Return an item from this linked list satisfying the given quality.
-        TODO: Best case running time: O(???) Why and under what conditions?
-        TODO: Worst case running time: O(???) Why and under what conditions?"""
-        # TODO: Loop through all nodes to find item where quality(item) is True
-        # TODO: Check if node's data satisfies given quality function
+           Best case running time: O(1) because if we find the node that
+           satisfies the quality at self.head, then we exit after just
+           one operation.
+           Worst case running time: O(n) because if no node matches with the
+           given quality, then we will have to check every node in the list
+           before completing this method.
+        """
+        list = self.items()
+        if list is not None:
+            for node in list:
+                if node.data == quality:
+                    return node
+            else:  # the item is not in the list
+                return None
+        else:  # the list has no items
+            return None
 
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError.
