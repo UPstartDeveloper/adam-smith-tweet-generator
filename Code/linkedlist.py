@@ -136,8 +136,11 @@ class LinkedList(object):
             while not node.data == data_to_match:
                 node_before = node
                 node = node.next
+            # only one node left in the list
+            if self.head.next is None:
+                self.head = self.tail = None
             # item to delete is the head of the list
-            if self.head.data == data_to_match:
+            elif self.head.data == data_to_match:
                 self.head = self.head.next
             # the node being deleted is the tail
             elif self.tail.data == data_to_match:
