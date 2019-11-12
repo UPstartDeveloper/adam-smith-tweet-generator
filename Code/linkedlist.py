@@ -122,10 +122,18 @@ class LinkedList(object):
            TODO: Best case running time: O(???) Why and under what conditions?
            TODO: Worst case running time: O(???) Why and under what conditions?
         """
-           # TODO: Loop through all nodes to find one whose data matches given item
-           # TODO: Update previous node to skip around node with matching data
-           # TODO: Otherwise raise error to tell user that delete has failed
-           # Hint: raise ValueError('Item not found: {}'.format(item))
+        # TODO: Loop through all nodes to find one whose data matches given item
+        # TODO: Update previous node to skip around node with matching data
+        # TODO: Otherwise raise error to tell user that delete has failed
+        # Hint: raise ValueError('Item not found: {}'.format(item))
+        head = self.head
+        node_before = None
+        data_match = self.find(item)
+        if data_match is None:
+            raise ValueError(f'Item not found: {item}.')
+        else:
+            pass
+        '''
         previous_nodes = list()
         node = self.head
         i = 0
@@ -136,18 +144,18 @@ class LinkedList(object):
                 if node == self.head and node == self.tail:
                     node = None
                 # the node is the head only
-                elif node == self.head:
+                elif node.data == self.head.data:
                     self.head = node.next
                 else:
                     node_before = previous_nodes[i - 1]
                     # the node is the tail only
-                    if node == self.tail:
+                    if node.data == self.tail.data:
                         self.tail = node_before
                         self.tail.next = None
                     # the node is neither the head or tail (it's in between)
                     else:
                         node_after = node.next
-                        node_before.next = node.after
+                        node_before.next = node_after
             # if the node doesn't match, move on to the next
             else:
                 previous_nodes.append(node)
@@ -156,6 +164,7 @@ class LinkedList(object):
         # if the item could not be found in the entire list
         else:
             raise ValueError(f'Item not found: {item}.')
+        '''
         '''
         try:
             # create a list of Node objects all stored in a list
