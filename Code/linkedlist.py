@@ -102,15 +102,15 @@ class LinkedList(object):
         """Return an item from this linked list satisfying the given quality.
            Best case running time: O(1) because if we find the node that
            satisfies the quality at self.head, then we exit after just
-           one operation.
+           one iteration.
            Worst case running time: O(n) because if no node matches with the
            given quality, then we will have to check every node in the list
            before completing this method.
         """
-        list = self.items()
+        list = [Node(item) for item in self.items()]
         if list is not None:
             for item in list:
-                if item == quality:
+                if item.data == quality or quality(item.data) is True:
                     return item
             else:  # the item is not in the list
                 return None
