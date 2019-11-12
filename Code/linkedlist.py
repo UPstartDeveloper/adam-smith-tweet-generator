@@ -133,19 +133,25 @@ class LinkedList(object):
             # look for the node matching the item
             for i in range(len(nodes)):
                 node = nodes[i]
-                node_before = nodes[i - 1]
                 # check if this is the node, and if it is the tail
-                if node.data == item and node == self.tail:
-                    # remove the tail
-                    self.tail = None
-                    node_before.next = None
-                elif len(nodes) == 1:
+                if node.data == item:
+                    if node == self.tail:
+                        # move the tail back one
+                        node_before = nodes[i - 1]
+                        self.tail = node_before
+                        node_before.next = None
                     # remove both head and tail because there is only one node
-                    self.head = self.tail = None
-                # matching node is in between the head and tail
-                elif node.data == item and not node == self.tail:
-                    node_after = nodes[i + 1]
-                    node_before.next = node_after
+                    elif len(nodes) == 1:
+                        self.head = self.tail = None
+                    # if the matching node is the head
+                    elif node == self.head:
+                        node_after = nodes[i + 1]
+                        self.head = node_after
+                    # if the matching node is between head and tail
+                    else:
+                        node_after = nodes[i + 1]
+                        node_before = nodes[i - 1]
+                        node_before.next = node_after
         except ValueError:
             raise ValueError(f'Item not found: {item}.')
 
