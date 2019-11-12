@@ -126,10 +126,14 @@ class LinkedList(object):
         # TODO: Otherwise raise error to tell user that delete has failed
         # Hint: raise ValueError('Item not found: {}'.format(item))
         try:
-            nodes = self.items()
+            # create a list of Node objects all stored in a list
+            nodes = [Node(item) for item in self.items()]
+            for i in range(len(nodes) - 1):
+                nodes[i].next = nodes[i + 1]
+            # look for the node matching the item
             for i in range(len(nodes)):
-                node = Node(nodes[i])
-                node_before = Node(nodes[i - 1])
+                node = nodes[i]
+                node_before = nodes[i - 1]
                 # check if this is the node, and if it is the tail
                 if node.data == item and node == self.tail:
                     # remove the tail
@@ -140,7 +144,7 @@ class LinkedList(object):
                     self.head = self.tail = None
                 # matching node is in between the head and tail
                 elif node.data == item and not node == self.tail:
-                    node_after = Node(nodes[i + 1])
+                    node_after = nodes[i + 1]
                     node_before.next = node_after
         except ValueError:
             raise ValueError(f'Item not found: {item}.')
