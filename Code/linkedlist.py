@@ -109,9 +109,9 @@ class LinkedList(object):
         """
         list = self.items()
         if list is not None:
-            for node in list:
-                if node.data == quality:
-                    return node
+            for item in list:
+                if item == quality:
+                    return item
             else:  # the item is not in the list
                 return None
         else:  # the list has no items
@@ -126,13 +126,19 @@ class LinkedList(object):
         # TODO: Update previous node to skip around node with matching data
         # TODO: Otherwise raise error to tell user that delete has failed
         # Hint: raise ValueError('Item not found: {}'.format(item))
-        head = self.head
+        node = self.head
         node_before = None
         data_match = self.find(item)
         if data_match is None:
             raise ValueError(f'Item not found: {item}.')
         else:
-            pass
+            # find the node with the data to delete
+            while not node.data == data_match:
+                node_before = node
+                node = node.next
+            # shift the nodes left so the list no longer includes the deleted
+            while node:
+                node_before.next = node.next
         '''
         previous_nodes = list()
         node = self.head
