@@ -128,19 +128,24 @@ class LinkedList(object):
         # Hint: raise ValueError('Item not found: {}'.format(item))
         node = self.head
         node_before = None
-        data_match = self.find(item)
-        if data_match is None:
+        data_to_match = self.find(item)
+        if data_to_match is None:
             raise ValueError(f'Item not found: {item}.')
         else:
             # find the node with the data to delete
-            while not node.data == data_match:
+            while not node.data == data_to_match:
                 node_before = node
                 node = node.next
-            else:  # item to delete is the head of the list
-                self.head = node.next
-            # shift the nodes left so the list no longer includes the deleted
-            while not node == self.tail:
-                break
+            # item to delete is the head of the list
+            if self.head.data == data_to_match:
+                self.head = self.head.next
+            # the node being deleted is the tail
+            elif self.tail.data == data_to_match:
+                node_before.next = None
+                self.tail = node_before
+            # shift the nodes left so they no longer include the deleted node
+            elif node_before is not None:
+                node_before.next = node.next
         '''
         previous_nodes = list()
         node = self.head
