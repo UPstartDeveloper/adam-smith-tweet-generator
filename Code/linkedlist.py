@@ -136,9 +136,11 @@ class LinkedList(object):
             while not node.data == data_match:
                 node_before = node
                 node = node.next
+            else:  # item to delete is the head of the list
+                self.head = node.next
             # shift the nodes left so the list no longer includes the deleted
-            while node:
-                node_before.next = node.next
+            while not node == self.tail:
+                break
         '''
         previous_nodes = list()
         node = self.head
