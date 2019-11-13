@@ -118,29 +118,12 @@ class LinkedList(object):
         # no matches in the list
         else:
             return None
-        '''
-        list = [Node(item) for item in self.items()]
-        if list is not None:
-            for item in list:
-                if item.data == quality:
-                    return item
-                elif quality(item.data) is True:
-                    return item
-            else:  # the item is not in the list
-                return None
-        else:  # the list has no items
-            return None
-        '''
 
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError.
            TODO: Best case running time: O(???) Why and under what conditions?
            TODO: Worst case running time: O(???) Why and under what conditions?
         """
-        # TODO: Loop through all nodes to find one whose data matches given item
-        # TODO: Update previous node to skip around node with matching data
-        # TODO: Otherwise raise error to tell user that delete has failed
-        # Hint: raise ValueError('Item not found: {}'.format(item))
         node = self.head
         node_before = None
         # discover if the data we are looking for exists in the list
@@ -169,100 +152,6 @@ class LinkedList(object):
             # shift the nodes left so they no longer include the deleted node
             else:
                 node_before.next = node.next
-
-        '''
-        node = self.head
-        node_before = None
-        # discover if the data we are looking for exists in the list
-        data_to_match = self.find(lambda data: data == item)
-        if data_to_match is not None:  # avoiding AttributeError
-            data_to_match = data_to_match
-        # item does not exist
-        if data_to_match is None:
-            raise ValueError(f'Item not found: {item}.')
-        # item does exist in the list
-        else:
-            # find the node with the data to delete
-            while not node.data == data_to_match:
-                node_before = node
-                node = node.next
-            # only one node left in the list
-            if self.head.next is None:
-                self.head = self.tail = None
-            # item to delete is the head of the list
-            elif self.head.data == data_to_match:
-                self.head = self.head.next
-            # the node being deleted is the tail
-            elif self.tail.data == data_to_match:
-                node_before.next = None
-                self.tail = node_before
-            # shift the nodes left so they no longer include the deleted node
-            elif node_before is not None:
-                node_before.next = node.next
-        '''
-        '''
-        previous_nodes = list()
-        node = self.head
-        i = 0
-        while node is not None:
-            # if the node matches, and choosing the scenario it matches with
-            if item == node.data:
-                # there is only one node in the list
-                if node == self.head and node == self.tail:
-                    node = None
-                # the node is the head only
-                elif node.data == self.head.data:
-                    self.head = node.next
-                else:
-                    node_before = previous_nodes[i - 1]
-                    # the node is the tail only
-                    if node.data == self.tail.data:
-                        self.tail = node_before
-                        self.tail.next = None
-                    # the node is neither the head or tail (it's in between)
-                    else:
-                        node_after = node.next
-                        node_before.next = node_after
-            # if the node doesn't match, move on to the next
-            else:
-                previous_nodes.append(node)
-                i += 1
-                node = node.next
-        # if the item could not be found in the entire list
-        else:
-            raise ValueError(f'Item not found: {item}.')
-        '''
-        '''
-        try:
-            # create a list of Node objects all stored in a list
-            nodes = [Node(item) for item in self.items()]
-            for i in range(len(nodes) - 1):
-                nodes[i].next = nodes[i + 1]
-            # look for the node matching the item
-            for i in range(len(nodes)):
-                node = nodes[i]
-                # check if this is the node, and if it is the tail
-                if node.data == item:
-                    if node == self.tail:
-                        # move the tail back one
-                        node_before = nodes[i - 1]
-                        self.tail = node_before
-                        node_before.next = None
-                    # remove both head and tail because there is only one node
-                    elif len(nodes) == 1:
-                        self.head = self.tail = None
-                    # if the matching node is the head
-                    elif node == self.head:
-                        node_after = nodes[i + 1]
-                        self.head = node_after
-                    # if the matching node is between head and tail
-                    else:
-                        node_after = nodes[i + 1]
-                        node_before = nodes[i - 1]
-                        node_before.next = node_after
-        except ValueError:
-            raise ValueError(f'Item not found: {item}.')
-            '''
 
 
 def test_linked_list():
