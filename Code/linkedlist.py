@@ -159,6 +159,13 @@ class LinkedList(object):
             else:
                 node_before.next = node.next
 
+    def replace(self, current_data, data_to_replace):
+        """Find a Node object with a data reference equal to current_data, and
+           then set that reference to data_to_replace instead.
+           Raises ValueError otherwise.
+        """
+        pass
+
 
 def test_linked_list():
     ll = LinkedList()
