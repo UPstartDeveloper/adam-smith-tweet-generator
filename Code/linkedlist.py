@@ -120,6 +120,12 @@ class LinkedList(object):
         else:
             return None
 
+    def data_is_inside(self, item):
+        """Returns True if there is a Node in the list whose data reference
+           id the given item.
+        """
+        return self.find(lambda data: data == item) == item
+
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError.
            Best case running time: O(1) because if we are deleting the head,
@@ -133,7 +139,7 @@ class LinkedList(object):
         node = self.head
         node_before = None
         # discover if the data we are looking for exists in the list
-        is_inside = self.find(lambda data: data == item) == item
+        is_inside = self.data_is_inside(item)
         # item does not exist
         if is_inside is False:
             raise ValueError(f'Item not found: {item}')
@@ -164,7 +170,10 @@ class LinkedList(object):
            then set that reference to data_to_replace instead.
            Raises ValueError otherwise.
         """
-        pass
+        if self.data_is_inside(current_data) is True:
+            pass
+        else:
+            pass
 
 
 def test_linked_list():
