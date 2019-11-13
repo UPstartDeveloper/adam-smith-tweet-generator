@@ -108,12 +108,15 @@ class LinkedList(object):
            before completing this method.
         """
         node = self.head
-        while quality(node.data) is not True:
-            node = node.next
-        if quality(node.data) is True:
-            pass
+        while node is not None:
+            # this node matches
+            if quality(node.data) is True:
+                return node.data
+            # this node does not match, move on to the next
+            else:
+                node = node.next
+        # no matches in the list
         else:
-            pass
             return None
         '''
         list = [Node(item) for item in self.items()]
