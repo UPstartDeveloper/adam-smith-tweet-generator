@@ -101,8 +101,9 @@ class LinkedList(object):
     def find(self, quality):
         """Return an item from this linked list satisfying the given quality.
            Best case running time: O(1) because if we find the node that
-           satisfies the quality at self.head, then we exit after just
+           satisfies quality at self.head, then we exit after just
            one iteration.
+
            Worst case running time: O(n) because if no node matches with the
            given quality, then we will have to check every node in the list
            before completing this method.
@@ -121,8 +122,13 @@ class LinkedList(object):
 
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError.
-           TODO: Best case running time: O(???) Why and under what conditions?
-           TODO: Worst case running time: O(???) Why and under what conditions?
+           Best case running time: O(1) because if we are deleting the head,
+           then we do not go through any iterations in the while loop, because
+           the node we examine starts out initialized to self.head.
+
+           Worst case running time: O(n) because if the node is the tail, and
+           the head and tail are separate, then we have to check every
+           node in the list before we conclude that the tail contains item.
         """
         node = self.head
         node_before = None
