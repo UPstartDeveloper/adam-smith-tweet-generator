@@ -69,7 +69,7 @@ class LinkedList(object):
            Param: new_node(Node): the node to be added
         """
         self.head = self.tail = new_node
-        self.head.next = self.tail
+        self.head.next = self.tail.next = None
 
     def append(self, item):
         """Insert the given item at the tail of this linked list.
@@ -144,9 +144,39 @@ class LinkedList(object):
         node = self.head
         node_before = None
         # discover if the data we are looking for exists in the list
-        data_to_match = self.find(item)
+        is_inside = self.find(lambda data: data == item) == item
+        # item does not exist
+        if is_inside is False:
+            raise ValueError(f'Item not found: {item}')
+        # item does exist in the list
+        else:
+            # find the node with the data to delete
+            while not node.data == item:
+                node_before = node
+                node = node.next
+            # only one node left in the list
+            if self.head.next is None:
+                self.head = self.tail = None
+            # item to delete is the head of the list
+            elif (self.head.data == node.data and
+                  self.head.next == node.next):
+                self.head = self.head.next
+            # the node being deleted is the tail
+            elif (self.tail.data == node.data and
+                  self.tail.next == node.next):
+                node_before.next = None
+                self.tail = node_before
+            # shift the nodes left so they no longer include the deleted node
+            else:
+                node_before.next = node.next
+
+        '''
+        node = self.head
+        node_before = None
+        # discover if the data we are looking for exists in the list
+        data_to_match = self.find(lambda data: data == item)
         if data_to_match is not None:  # avoiding AttributeError
-            data_to_match = data_to_match.data
+            data_to_match = data_to_match
         # item does not exist
         if data_to_match is None:
             raise ValueError(f'Item not found: {item}.')
@@ -169,6 +199,7 @@ class LinkedList(object):
             # shift the nodes left so they no longer include the deleted node
             elif node_before is not None:
                 node_before.next = node.next
+        '''
         '''
         previous_nodes = list()
         node = self.head
