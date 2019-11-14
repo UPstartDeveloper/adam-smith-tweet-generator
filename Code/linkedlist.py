@@ -232,6 +232,43 @@ class DoublyLinkedList(LinkedList):
             self.start_with_first_node(new_head)
         self.num_nodes += 1
 
+    def delete(self, item):
+        """Delete the given item from this doubly linked list,
+           or raise ValueError.
+           Best and worst case running time same as the delete() method in the
+           LinkedList class.
+        """
+        # discover if the data we are looking for exists in the list
+        is_inside = self.data_is_inside(item)
+        # item does not exist
+        if is_inside is False:
+            self.value_error(item)
+        # item does exist in the list
+        else:
+            self.num_nodes -= 1  # decrement the number of nodes
+            # find the node with the data to delete
+            node = self.find_matching_node(item)[0]
+            node_before = self.find_matching_node(item)[1]
+            # only one node left in the list
+            if self.head.next is None:
+                self.head = self.tail = None
+            # item to delete is the head of the list
+            elif (self.head.data == node.data and
+                  self.head.next == node.next):
+                new_head = self.head.next
+                new_head.previous = None
+            # the node being deleted is the tail
+            elif (self.tail.data == node.data and
+                  self.tail.next == node.next):
+                new_tail = self.tail.previous
+                new_tail.next = None
+            # shift the nodes left so they no longer include the deleted node
+            else:
+                node_before = node.previous
+                node_after = node.next
+                node_before.next = node_after
+                node_after.previous = node_before
+
 
 def test_linked_list():
     ll = LinkedList()
