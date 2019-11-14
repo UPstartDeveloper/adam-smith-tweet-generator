@@ -3,11 +3,17 @@ from dictogram import Dictogram
 from stochastic_sampling import stochastic_sample
 from clean_words import get_clean_words
 from markov_chain import MarkovChain
+from pymongo import MongoClient
 
 # Flask app for tweet generator
 app = Flask(__name__)
 # create a markov chain
 mark = MarkovChain()
+
+# add Mongo database
+client = MongoClient()
+db = client.Tweets
+favorites = db.favorites
 
 
 def get_words(num_words):
@@ -41,7 +47,7 @@ def index():
 @app.route("/favorites")
 def show_favorites():
     """List all Tweets marked as favorites by the users."""
-    pass
+    return render_template("favorites.html", favorites=favorites.find())
 
 
 if __name__ == "__main__":
