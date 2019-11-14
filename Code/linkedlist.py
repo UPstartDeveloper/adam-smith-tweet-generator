@@ -73,12 +73,12 @@ class LinkedList(object):
            No matter the case, we know exactly where in the list we have to go.
         """
         new_node = Node(item)
+        self.num_nodes += 1
         if self.is_empty() is True:
             self.start_with_first_node(new_node)
         else:
             self.tail.next = new_node
             self.tail = new_node
-        self.num_nodes += 1
 
     def prepend(self, item):
         """Insert the given item at the head of this linked list.
@@ -195,7 +195,13 @@ class LinkedList(object):
 
 
 class DoublyLinkedList(LinkedList):
-    pass
+    def append(self, item):
+        super().append(item)
+        if self.num_nodes == 1:
+            self.head.next = self.tail
+            self.tail.previous = self.head
+        else:
+            pass
 
 
 def test_linked_list():
