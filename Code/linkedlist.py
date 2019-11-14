@@ -155,11 +155,11 @@ class LinkedList(object):
         previous_node.next = None
         self.tail = previous_node
 
-    def remove_deleted_node(self, previous_node, node_after):
+    def remove_deleted_node(self, previous_node, node_being_deleted):
         """Helper for shifting the nodes so as to no longer point to the
            deleted node.
         """
-        previous_node.next = node_after.next
+        previous_node.next = node_being_deleted.next
 
     def remove_last(self):
         """Remove the head and tail from the list in one operation."""
@@ -184,7 +184,7 @@ class LinkedList(object):
             node_before = self.find_matching_node(item)[1]
             # only one node left in the list
             if self.head.next is None:
-                self.head = self.tail = None
+                self.remove_last()
             # item to delete is the head of the list
             elif (self.head.data == node.data and
                   self.head.next == node.next):
@@ -254,6 +254,28 @@ class DoublyLinkedList(LinkedList):
             self.start_with_first_node(new_head)
         self.num_nodes += 1
 
+    def remove_the_node(self, node_to_delete, node_before):
+        """Remove the node to be deleted, accounting for different scenarios
+           of where the node is in the list.
+        """
+        # only one node left in the list
+        if self.head.next is None:
+            self.remove_last()
+        # item to delete is the head of the list
+        elif (self.head.data == node.data and
+              self.head.next == node.next):
+            self.head = self.head.next
+            self.head.previous = None
+        # the node being deleted is the tail
+        elif (self.tail.data == node.data and
+              self.tail.next == node.next):
+            self.remove_tail(node_before)
+        # shift the nodes left so they no longer include the deleted node
+        else:
+            self.remove_deleted_node(node_before, node)
+            node_after = node.next
+            node_after.previous = node_before
+
     def delete(self, item):
         """Delete the given item from this doubly linked list,
            or raise ValueError.
@@ -267,25 +289,8 @@ class DoublyLinkedList(LinkedList):
             # find the node with the data to delete
             node = self.find_matching_node(item)[0]
             node_before = self.find_matching_node(item)[1]
-            # only one node left in the list
-            if self.head.next is None:
-                self.head = self.tail = None
-            # item to delete is the head of the list
-            elif (self.head.data == node.data and
-                  self.head.next == node.next):
-                new_head = self.head.next
-                new_head.previous = None
-            # the node being deleted is the tail
-            elif (self.tail.data == node.data and
-                  self.tail.next == node.next):
-                new_tail = self.tail.previous
-                self.tail = new_tail
-                new_tail.next = None
-            # shift the nodes left so they no longer include the deleted node
-            else:
-                node_before.next = node.next
-                node_after = node.next
-                node_after.previous = node_before
+            self.remove_the_node(node, node_before)
+
 
 
 def test_linked_list():
