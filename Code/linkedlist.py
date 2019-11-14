@@ -196,12 +196,22 @@ class LinkedList(object):
 
 class DoublyLinkedList(LinkedList):
     def append(self, item):
-        super().append(item)
-        if self.num_nodes == 1:
+        """Insert the given item at the tail of this linked list.
+           Initialize .previous attribute of Nodes as needed.
+           Running time: O(1), for same reason as above in the
+           append() in the LinkedList class.
+        """
+        new_node = Node(item)
+        self.num_nodes += 1
+        if self.is_empty() is True:
+            self.start_with_first_node(new_node)
+        elif self.num_nodes == 1:
             self.head.next = self.tail
             self.tail.previous = self.head
         else:
-            pass
+            self.tail.next = new_node
+            new_node.previous = self.tail
+            self.tail = new_node
 
 
 def test_linked_list():
