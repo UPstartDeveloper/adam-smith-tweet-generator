@@ -150,6 +150,10 @@ class LinkedList(object):
         else:
             return is_inside
 
+    def remove_last_node(self):
+        """Remove both the head and tail node, when they are the same Node."""
+        self.head = self.tail = None
+
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError.
            Best case running time: O(1) because if we are deleting the head,
@@ -169,7 +173,7 @@ class LinkedList(object):
             node_before = self.find_matching_node(item)[1]
             # only one node left in the list
             if self.head.next is None:
-                self.head = self.tail = None
+                self.remove_last_node()
             # item to delete is the head of the list
             elif (self.head.data == node.data and
                   self.head.next == node.next):
