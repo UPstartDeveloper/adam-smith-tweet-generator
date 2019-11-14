@@ -139,7 +139,7 @@ class LinkedList(object):
         while not node.data == item:
             node_before = node
             node = node.next
-        return tuple(node, node_before)
+        return tuple((node, node_before))
 
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError.
@@ -188,6 +188,13 @@ class LinkedList(object):
         else:
             self.value_error(current_data)
 
+    def __iter__(self):
+        """
+            Return an iterable list of the data referenced by the Nodes
+            in this LinkedList.
+        """
+        return iter(self.items())
+
 
 def test_linked_list():
     ll = LinkedList()
@@ -218,4 +225,9 @@ def test_linked_list():
 
 
 if __name__ == '__main__':
-    test_linked_list()
+    # test_linked_list()
+    ll = LinkedList(['A', 'B', 'C'])
+    print(f'list: {ll}')
+    print("Data in this LinkedList:")
+    for item in ll:
+        print(item)
