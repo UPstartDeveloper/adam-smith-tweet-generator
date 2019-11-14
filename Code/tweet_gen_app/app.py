@@ -46,6 +46,12 @@ def index():
         return redirect(url_for('index'))
 
 
+@app.route("/new_favorite", methods=['POST'])
+def add_to_favorites(sentence):
+    """Add the sentence into the favorites database."""
+    pass
+
+
 @app.route("/favorites")
 def show_favorites():
     """List all Tweets marked as favorites by the users."""
