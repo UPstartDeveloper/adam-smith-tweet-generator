@@ -65,7 +65,6 @@ class LinkedList(object):
            Param: new_node(Node): the node to be added
         """
         self.head = self.tail = new_node
-        self.head.next = self.tail.next = None
 
     def append(self, item):
         """Insert the given item at the tail of this linked list.
@@ -196,13 +195,7 @@ class LinkedList(object):
 
 
 class DoublyLinkedList(LinkedList):
-    def start_with_first_node(self):
-        """Add the first node to the list.
-           Both the previous and next properties
-           are initialized to None.
-        """
-        super().start_with_first_node()
-        self.head.previous = self.tail.previous = None
+    pass
 
 
 def test_linked_list():
@@ -234,10 +227,10 @@ def test_linked_list():
 
 
 if __name__ == '__main__':
-    # test_linked_list()
-    ll = LinkedList(['A', 'B', 1, 5, 6.7777, ['Zain']])
-    number_of_nodes = ll.length()
-    print(f'Number of Nodes: {number_of_nodes}')
+    test_linked_list()
+    # ll = LinkedList(['A', 'B', 1, 5, 6.7777, ['Zain']])
+    # number_of_nodes = ll.length()
+    # print(f'Number of Nodes: {number_of_nodes}')
     # print(f'list: {ll}')
     # print("Data in this LinkedList:")
     # for item in ll:
