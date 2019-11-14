@@ -196,7 +196,13 @@ class LinkedList(object):
 
 
 class DoublyLinkedList(LinkedList):
-    pass
+    def start_with_first_node(self):
+        """Add the first node to the list.
+           Both the previous and next properties
+           are initialized to None.
+        """
+        super().start_with_first_node()
+        self.head.previous = self.tail.previous = None
 
 
 def test_linked_list():
