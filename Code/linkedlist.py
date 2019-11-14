@@ -195,11 +195,15 @@ class LinkedList(object):
 
 
 class DoublyLinkedList(LinkedList):
+    def __repr__(self):
+        """Return a string representation of this doubly linked list."""
+        return 'DoublyLinkedList({!r})'.format(self.items())
+
     def append(self, item):
         """Insert the given item at the tail of this linked list.
            Initialize .previous attribute of Nodes as needed.
            Running time: O(1), for same reason as above in the
-           append() in the LinkedList class.
+           append method in the LinkedList class.
         """
         new_node = Node(item)
         self.num_nodes += 1
@@ -213,9 +217,20 @@ class DoublyLinkedList(LinkedList):
             new_node.previous = self.tail
             self.tail = new_node
 
-    def __repr__(self):
-        """Return a string representation of this doubly linked list."""
-        return 'DoublyLinkedList({!r})'.format(self.items())
+    def prepend(self, item):
+        """Insert the given item at the head of this doubly linked list.
+          Running time: O(1), for same reason as above in the
+          prepend method in the LinkedList class.
+        """
+        new_head = Node(item)
+        if self.is_empty() is not True:
+            old_head = self.head
+            new_head.next = old_head
+            old_head.previous = new_head
+            self.head = new_head
+        else:
+            self.start_with_first_node(new_head)
+        self.num_nodes += 1
 
 
 def test_linked_list():
