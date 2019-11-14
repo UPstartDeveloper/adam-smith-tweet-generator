@@ -4,6 +4,7 @@ from stochastic_sampling import stochastic_sample
 from clean_words import get_clean_words
 from markov_chain import MarkovChain
 from pymongo import MongoClient
+import os
 
 # Flask app for tweet generator
 app = Flask(__name__)
@@ -11,8 +12,9 @@ app = Flask(__name__)
 mark = MarkovChain()
 
 # add Mongo database
-client = MongoClient()
-db = client.Tweets
+host = os.environ.get('MONGODB_URI', 'mongodb://localhost:27017/Tweets')
+client = MongoClient(host=f'{host}?retryWrites=false')
+db = client.get_default_database()
 favorites = db.favorites
 
 
@@ -51,4 +53,4 @@ def show_favorites():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0', port=os.environ.get('PORT', 5000))
