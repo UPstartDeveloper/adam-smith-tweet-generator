@@ -38,5 +38,11 @@ def index():
         return redirect(url_for('index'))
 
 
+@app.route("/favorites")
+def show_favorites():
+    """List all Tweets marked as favorites by the users."""
+    pass
+
+
 if __name__ == "__main__":
     app.run(debug=True)
