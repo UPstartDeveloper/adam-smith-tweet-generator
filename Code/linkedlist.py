@@ -119,7 +119,7 @@ class LinkedList(object):
 
     def data_is_inside(self, item):
         """Returns True if there is a Node in the list whose data reference
-           id the given item.
+           is the given item.
         """
         return self.find(lambda data: data == item) == item
 
@@ -138,6 +138,18 @@ class LinkedList(object):
             node = node.next
         return tuple((node, node_before))
 
+    def discover_item(self, item):
+        '''Returns True if the item to be deleted is referenced by a Node,
+           or raises ValueError.
+        '''
+        # discover if the data we are looking for exists in the list
+        is_inside = self.data_is_inside(item)
+        # item does not exist
+        if is_inside is False:
+            self.value_error(item)
+        else:
+            return is_inside
+
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError.
            Best case running time: O(1) because if we are deleting the head,
@@ -149,12 +161,8 @@ class LinkedList(object):
            node in the list before we conclude that the tail contains item.
         """
         # discover if the data we are looking for exists in the list
-        is_inside = self.data_is_inside(item)
-        # item does not exist
-        if is_inside is False:
-            self.value_error(item)
-        # item does exist in the list
-        else:
+        if self.discover_item(item) is True:
+            # item does exist in the list
             self.num_nodes -= 1  # decrement the number of nodes
             # find the node with the data to delete
             node = self.find_matching_node(item)[0]
@@ -239,12 +247,8 @@ class DoublyLinkedList(LinkedList):
            LinkedList class.
         """
         # discover if the data we are looking for exists in the list
-        is_inside = self.data_is_inside(item)
-        # item does not exist
-        if is_inside is False:
-            self.value_error(item)
-        # item does exist in the list
-        else:
+        if self.discover_item(item) is True:
+            # item does exist in the list
             self.num_nodes -= 1  # decrement the number of nodes
             # find the node with the data to delete
             node = self.find_matching_node(item)[0]
