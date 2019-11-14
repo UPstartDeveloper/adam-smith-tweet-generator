@@ -7,6 +7,7 @@ class Node(object):
         """Initialize this node with the given data."""
         self.data = data
         self.next = None
+        self.previous = None
 
     def __repr__(self):
         """Return a string representation of this node."""
@@ -55,7 +56,7 @@ class LinkedList(object):
 
     def length(self):
         """Return the length of this linked list by traversing its nodes.
-           Running time: O(1) because all number of operations is constant.
+           Running time: O(1) because the number of operations is constant.
         """
         return self.num_nodes
 
@@ -192,6 +193,10 @@ class LinkedList(object):
             in this LinkedList.
         """
         return iter(self.items())
+
+
+class DoublyLinkedList(LinkedList):
+    pass
 
 
 def test_linked_list():
