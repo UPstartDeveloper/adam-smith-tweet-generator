@@ -150,9 +150,10 @@ class LinkedList(object):
         else:
             return is_inside
 
-    def remove_last_node(self):
-        """Remove both the head and tail node, when they are the same Node."""
-        self.head = self.tail = None
+    def remove_tail(self, previous_node):
+        """Helper for removing the last Node in the list."""
+        previous_node.next = None
+        self.tail = previous_node
 
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError.
@@ -173,7 +174,7 @@ class LinkedList(object):
             node_before = self.find_matching_node(item)[1]
             # only one node left in the list
             if self.head.next is None:
-                self.remove_last_node()
+                self.head = self.tail = None
             # item to delete is the head of the list
             elif (self.head.data == node.data and
                   self.head.next == node.next):
@@ -181,8 +182,7 @@ class LinkedList(object):
             # the node being deleted is the tail
             elif (self.tail.data == node.data and
                   self.tail.next == node.next):
-                node_before.next = None
-                self.tail = node_before
+                self.remove_tail(node_before)
             # shift the nodes left so they no longer include the deleted node
             else:
                 node_before.next = node.next
@@ -273,7 +273,6 @@ class DoublyLinkedList(LinkedList):
                 new_tail.next = None
             # shift the nodes left so they no longer include the deleted node
             else:
-                node_before = node.previous
                 node_after = node.next
                 node_before.next = node_after
                 node_after.previous = node_before
