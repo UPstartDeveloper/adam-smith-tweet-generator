@@ -130,6 +130,17 @@ class LinkedList(object):
         """Print the ValueError message."""
         raise ValueError(f'Item not found: {item}')
 
+    def find_matching_node(self, item):
+        """Returns a tuple, containing the node whose data reference matches
+           the item. Also returns the node before it as well.
+        """
+        node = self.head
+        node_before = None
+        while not node.data == item:
+            node_before = node
+            node = node.next
+        return tuple(node, node_before)
+
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError.
            Best case running time: O(1) because if we are deleting the head,
@@ -140,8 +151,6 @@ class LinkedList(object):
            the head and tail are separate, then we have to check every
            node in the list before we conclude that the tail contains item.
         """
-        node = self.head
-        node_before = None
         # discover if the data we are looking for exists in the list
         is_inside = self.data_is_inside(item)
         # item does not exist
@@ -150,9 +159,8 @@ class LinkedList(object):
         # item does exist in the list
         else:
             # find the node with the data to delete
-            while not node.data == item:
-                node_before = node
-                node = node.next
+            node = self.find_matching_node(item)[0]
+            node_before = self.find_matching_node(item)[1]
             # only one node left in the list
             if self.head.next is None:
                 self.head = self.tail = None
@@ -175,7 +183,7 @@ class LinkedList(object):
            Raises ValueError otherwise.
         """
         if self.data_is_inside(current_data) is True:
-            pass
+            node = self.find_matching_node(current_data)[0]
         else:
             self.value_error(current_data)
 
