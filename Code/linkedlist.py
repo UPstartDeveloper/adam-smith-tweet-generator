@@ -265,6 +265,7 @@ class DoublyLinkedList(LinkedList):
             elif (self.tail.data == node.data and
                   self.tail.next == node.next):
                 new_tail = self.tail.previous
+                self.tail = new_tail
                 new_tail.next = None
             # shift the nodes left so they no longer include the deleted node
             else:
