@@ -1,0 +1,15 @@
+<!-- templates/favorites.html -->
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<ul>
+    {% for favorite in favorites %}
+        <li>
+            {{ favoritee }}
+        </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
