@@ -126,6 +126,10 @@ class LinkedList(object):
         """
         return self.find(lambda data: data == item) == item
 
+    def value_error(self, item):
+        """Print the ValueError message."""
+        raise ValueError(f'Item not found: {item}')
+
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError.
            Best case running time: O(1) because if we are deleting the head,
@@ -142,7 +146,7 @@ class LinkedList(object):
         is_inside = self.data_is_inside(item)
         # item does not exist
         if is_inside is False:
-            raise ValueError(f'Item not found: {item}')
+            self.value_error(item)
         # item does exist in the list
         else:
             # find the node with the data to delete
@@ -173,7 +177,7 @@ class LinkedList(object):
         if self.data_is_inside(current_data) is True:
             pass
         else:
-            pass
+            self.value_error(current_data)
 
 
 def test_linked_list():
