@@ -19,6 +19,7 @@ class LinkedList(object):
         """Initialize this linked list and append the given items, if any."""
         self.head = None  # First node
         self.tail = None  # Last node
+        self.num_nodes = 0  # number of Node objects in the list
         # Append given items
         if items is not None:
             for item in items:
@@ -54,24 +55,9 @@ class LinkedList(object):
 
     def length(self):
         """Return the length of this linked list by traversing its nodes.
-           Running time: O(n) because we have to go through and count all the
-           nodes in the list, until we reach the last node
+           Running time: O(1) because all number of operations is constant.
         """
-        count = 0
-        node = self.head
-        while node is not None:
-            count += 1
-            node = node.next
-        return count
-
-        '''
-        if self.is_empty() is True:
-            return 0
-        elif self.head == self.tail:
-            return 1
-        else:
-            pass
-        '''
+        return self.num_nodes
 
     def start_with_first_node(self, new_node):
         """Add the first node to the LinkedList.
@@ -92,6 +78,7 @@ class LinkedList(object):
         else:
             self.tail.next = new_node
             self.tail = new_node
+        self.num_nodes += 1
 
     def prepend(self, item):
         """Insert the given item at the head of this linked list.
@@ -106,6 +93,7 @@ class LinkedList(object):
             self.head.next = old_head
         else:
             self.start_with_first_node(new_head)
+        self.num_nodes += 1
 
     def find(self, quality):
         """Return an item from this linked list satisfying the given quality.
@@ -167,6 +155,7 @@ class LinkedList(object):
             self.value_error(item)
         # item does exist in the list
         else:
+            self.num_nodes -= 1  # decrement the number of nodes
             # find the node with the data to delete
             node = self.find_matching_node(item)[0]
             node_before = self.find_matching_node(item)[1]
@@ -236,6 +225,8 @@ def test_linked_list():
 if __name__ == '__main__':
     # test_linked_list()
     ll = LinkedList(['A', 'B', 1, 5, 6.7777, ['Zain']])
+    number_of_nodes = ll.length()
+    print(f'Number of Nodes: {number_of_nodes}')
     # print(f'list: {ll}')
     # print("Data in this LinkedList:")
     # for item in ll:
