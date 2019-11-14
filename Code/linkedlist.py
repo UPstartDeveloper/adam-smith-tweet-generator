@@ -64,6 +64,15 @@ class LinkedList(object):
             node = node.next
         return count
 
+        '''
+        if self.is_empty() is True:
+            return 0
+        elif self.head == self.tail:
+            return 1
+        else:
+            pass
+        '''
+
     def start_with_first_node(self, new_node):
         """Add the first node to the LinkedList.
            Param: new_node(Node): the node to be added
@@ -226,8 +235,8 @@ def test_linked_list():
 
 if __name__ == '__main__':
     # test_linked_list()
-    ll = LinkedList(['A', 'B', 'C'])
-    print(f'list: {ll}')
-    print("Data in this LinkedList:")
-    for item in ll:
-        print(item)
+    ll = LinkedList(['A', 'B', 1, 5, 6.7777, ['Zain']])
+    # print(f'list: {ll}')
+    # print("Data in this LinkedList:")
+    # for item in ll:
+    #    print(item)
