@@ -155,6 +155,16 @@ class LinkedList(object):
         previous_node.next = None
         self.tail = previous_node
 
+    def remove_deleted_node(self, previous_node, node_after):
+        """Helper for shifting the nodes so as to no longer point to the
+           deleted node.
+        """
+        previous_node.next = node_after.next
+
+    def remove_last(self):
+        """Remove the head and tail from the list in one operation."""
+        self.head = self.tail = None
+
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError.
            Best case running time: O(1) because if we are deleting the head,
@@ -185,7 +195,7 @@ class LinkedList(object):
                 self.remove_tail(node_before)
             # shift the nodes left so they no longer include the deleted node
             else:
-                node_before.next = node.next
+                self.remove_deleted_node(node_before, node)
 
     def replace(self, current_data, data_to_replace):
         """Find a Node object with a data reference equal to current_data, and
@@ -273,8 +283,8 @@ class DoublyLinkedList(LinkedList):
                 new_tail.next = None
             # shift the nodes left so they no longer include the deleted node
             else:
+                node_before.next = node.next
                 node_after = node.next
-                node_before.next = node_after
                 node_after.previous = node_before
 
 
