@@ -184,6 +184,7 @@ class LinkedList(object):
         """
         if self.data_is_inside(current_data) is True:
             node = self.find_matching_node(current_data)[0]
+            node.data = data_to_replace
         else:
             self.value_error(current_data)
 
