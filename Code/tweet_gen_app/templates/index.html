@@ -15,22 +15,26 @@
                     </div>
                     <div class="row justify-content-center">
                         <p>Here are a few words. These are randomly selected one-by-one from <i>The Wealth of Nations</i> (1776), often cited as the <i> magnum opus</i> of the Scottish philosopher: <br></p>
-                        <strong><p id="words">"{{ words }}."</p></strong>
+                        <!--<strong><p id="words">"{{ words }}."</p></strong>-->
                     </div>
                     <div class="row justify-content-center">
-                        <div class="d-inline p-2">
+                        <!--<div class="d-inline p-2">-->
                             <!-- Show Sentence, and Display Option to Add to Favorites -->
                             <form action="/new_favorite" method="POST">
+                                <textarea name="words" cols="70" rows="5" readonly>"{{ words }}."</textarea>
+                                <br><br>
                                 <input class="btn btn-danger" type="submit" value="Add to Favorites!">
                             </form>
-                        </div>
+                        <!--</div>-->
+                    </div>
+                        <div class="row justify-content-center">
                         <!-- See Favorites -->
                         <div class="d-inline p-2">
                             <form action="/favorites" method="GET">
                                 <button class="btn btn-info" type="submit">See Favorites</button>
                             </form>
                         </div>
-                    </div>
+                        </div>
                 </div>
             </div>
             <div class="card-footer">
@@ -46,4 +50,8 @@
         </div>
     <div class="bg"></div>
 
+    <!-- FOOTER -->
+        <div class="bg-secondary p-5 text-white">
+            <p class="text-white">Image Source Link: https://www.economist.com/books-and-arts/2018/07/26/rescuing-adam-smith-from-myth-and-misrepresentation</p>
+        </div>
 {% endblock %}
