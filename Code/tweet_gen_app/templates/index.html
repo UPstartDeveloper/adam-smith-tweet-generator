@@ -15,7 +15,7 @@
                     </div>
                     <div class="row justify-content-center">
                         <p>Here are a few words. These are randomly selected one-by-one from <i>The Wealth of Nations</i> (1776), often cited as the <i>magnum opus</i> of the Scottish philosopher: <br><br>
-                            <strong>"
+                            <strong id="words">"
                                 {{ words }}
                             ."</strong>
                         </p>
@@ -32,45 +32,14 @@
                         <input type="submit" value="Show Another (Computer-Generated) Sentence" class="btn btn-primary">
                     </form>
                     <br>
+                    <!-- Add Sentence to Favorites -->
+                    <form action="/new_favorite" method="POST">
+                        <input type="submit" value="Add to Favorites">
+                    </form>
+                    <br>
                 </div>
             </div>
         </div>
     <div class="bg"></div>
-    <!--
-    <div class="bg">
-    <div class="container text-white main-content">
-
-        <div class="row justify-content-center">
-            <h1>The Words of Adam Smith</h1>
-        </div>
-
-        <div class="row justify-content-center">
-            <h2>Don't Like Capitalism? I don't blame you!</h2>
-        </div>
-
-        <div class="row justify-content-center">
-            <h3>But what did Adam Smith, or "The Father of Capitalism," actually write about the system? </h3>
-        </div>
-
-        <div class="row justify-content-center">
-            <p>Here are a few words. These are randomly selected one-by-one from <i>The Wealth of Nations</i> (1776), often cited as the <i>magnum opus</i> of the Scottish philosopher: <br><br>
-                <strong>"
-                    {{ words }}
-                ."</strong>
-            </p>
-        </div>
-        <div class="row justify-content-center">
-            <!-- Reload the page for the user
-            <form action="{{ url_for('index') }}" method="POST">
-                Enter a number of words to see in the next Tweet:
-                <input name="num" type="text">
-                <br>
-                <button type="button" value="submit" class="btn btn-primary">Show Another (Computer-Generated) Sentence</button>
-            </form>
-            <br>
-        </div>
-
-    </div>
-    </div>
-    -->
+    
 {% endblock %}
