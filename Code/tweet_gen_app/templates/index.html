@@ -14,32 +14,36 @@
                         <h3>But what did Adam Smith, or "The Father of Capitalism," actually write about the system? </h3>
                     </div>
                     <div class="row justify-content-center">
-                        <p>Here are a few words. These are randomly selected one-by-one from <i>The Wealth of Nations</i> (1776), often cited as the <i>magnum opus</i> of the Scottish philosopher: <br><br>
-                            <strong id="words">"
-                                {{ words }}
-                            ."</strong>
-                        </p>
+                        <p>Here are a few words. These are randomly selected one-by-one from <i>The Wealth of Nations</i> (1776), often cited as the <i> magnum opus</i> of the Scottish philosopher: <br></p>
+                        <strong><p id="words">"{{ words }}."</p></strong>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="d-inline p-2">
+                            <!-- Show Sentence, and Display Option to Add to Favorites -->
+                            <form action="/new_favorite" method="POST">
+                                <input class="btn btn-danger" type="submit" value="Add to Favorites!">
+                            </form>
+                        </div>
+                        <!-- See Favorites -->
+                        <div class="d-inline p-2">
+                            <form action="/favorites" method="GET">
+                                <button class="btn btn-info" type="submit">See Favorites</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="card-footer">
                 <div class="row justify-content-center">
                     <!-- Get a new sentence -->
-                    <form action="{{ url_for('index') }}" method="POST">
-                        Enter a number of words to see in the next Tweet:
-                        <input name="num" type="text">
+                    <form class="form-group" action="{{ url_for('index') }}" method="POST">
+                        <input class="form-control" name="num" type="text" placeholder="How Many Words Shall I Generate?">
                         <br>
                         <input type="submit" value="Show Another (Computer-Generated) Sentence" class="btn btn-primary">
                     </form>
-                    <br>
-                    <!-- Add Sentence to Favorites -->
-                    <form action="/new_favorite" method="POST">
-                        <input type="submit" value="Add to Favorites">
-                    </form>
-                    <br>
                 </div>
             </div>
         </div>
     <div class="bg"></div>
-    
+
 {% endblock %}
