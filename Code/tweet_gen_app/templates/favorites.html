@@ -4,12 +4,22 @@
 
 {% block content %}
 
-<ul>
-    {% for favorite in favorites %}
-        <li>
-            {{ favorite.tweet_phrase }}
-        </li>
-    {% endfor %}
-</ul>
+<!-- FAVORITES -->
+<div class="container">
+    <h1>Favorites</h1>
+    <h4>This list was made possible thanks to users like you!</h4>
+    <ul>
+        {% for favorite in favorites %}
+            <li>
+                {{ favorite.tweet_phrase }}
+            </li>
+        {% endfor %}
+    </ul>
+    <!--Back to Index (Where User Generates Sentences) Page -->
+    <form action="/" class="form-group">
+        <input type="submit" value="Back to Home" class="btn btn-primary">
+    </form>
+
+</div>
 
 {% endblock %}

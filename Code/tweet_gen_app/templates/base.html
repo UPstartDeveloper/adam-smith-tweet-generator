@@ -14,9 +14,21 @@
     <link rel="stylesheet" href="../static/css/style.css" type="text/css">
 </head>
 <body>
+    <!-- NABAR -->
+        <nav class="navbar navbar-light bg-light">
+            <a class ="navbar-brand mr-auto" href="{{ url_for('index') }}">Adam Smith Tweets</a>
+            <a class="nav-item nav-link active" href="{{ url_for('index') }}">Tweet Generator</a>
+            <a class="nav-item nav-link active" href="/favorites">Favorites</a>
+        </nav>
+
     {% block content %}
         BLOCK CONTENT HERE
     {% endblock %}
+
+    <!-- FOOTER -->
+        <div class="bg-secondary p-5 text-white">
+            <p class="text-white">Image Source Link: https://www.economist.com/books-and-arts/2018/07/26/rescuing-adam-smith-from-myth-and-misrepresentation</p>
+        </div>
 
 </body>
 </html>
