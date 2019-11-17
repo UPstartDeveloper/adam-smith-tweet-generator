@@ -20,9 +20,9 @@
                     <div class="row justify-content-center">
                         <!--<div class="d-inline p-2">-->
                             <!-- Show Sentence, and Display Option to Add to Favorites -->
-                            <form id="favorites-form" action="/new_favorite" method="POST">
+                            <form action="/new_favorite" method="POST">
+                                <input type="hidden" name="words" value="{{ words }}.">
                                 <p><strong>"{{ words }}."</strong></p>
-
                                 <input class="btn btn-danger" type="submit" value="Add to Favorites!">
                             </form>
                         <!--</div>-->
@@ -41,8 +41,7 @@
                 <div class="row justify-content-center">
                     <!-- Get a new sentence -->
                     <form class="form-group" action="{{ url_for('index') }}" method="POST">
-                        <input class="form-control" name="num" type="text" placeholder="How Many Words Shall I Generate?">
-                        <br>
+                        <input class="form-control mb-2" name="num" type="text" placeholder="How Many Words Shall I Generate?">
                         <input type="submit" value="Show Another (Computer-Generated) Sentence" class="btn btn-primary">
                     </form>
                 </div>
@@ -53,7 +52,6 @@
     <!-- FOOTER -->
         <div class="bg-secondary p-5 text-white">
             <p class="text-white">Image Source Link: https://www.economist.com/books-and-arts/2018/07/26/rescuing-adam-smith-from-myth-and-misrepresentation</p>
-            <input type="hidden" name="words" form="favorites-form" value="{{ words }}.">
         </div>
 
 {% endblock %}
