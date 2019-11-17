@@ -49,7 +49,7 @@ def index():
 @app.route("/new_favorite", methods=['POST'])
 def add_to_favorites():
     """Add the sentence into the favorites database."""
-    words = request.form['words']
+    words = request.form.get('words')
     sentence = {
         'tweet_phrase': words
     }
