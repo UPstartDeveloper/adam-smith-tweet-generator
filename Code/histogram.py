@@ -3,9 +3,14 @@ from clean_words import get_clean_words
 
 def create_histogram_dict(words_list):
     """Return a dictionary representing a histogram of words in a list.
-       Param: words_list(list): list of strings representing words
-       Return: histogram(dict): each key a unique word, values are number of
-               word appearances
+
+       Parameters:
+       words_list(list): list of strings representing words
+
+       Returns:
+       histogram(dict): each key a unique word, values are number of
+       word appearances
+
     """
     histogram = dict()
     words = histogram.keys()
@@ -18,7 +23,7 @@ def create_histogram_dict(words_list):
 
 
 def find_unique_words(words_list):
-    """Record all unique words in a list of strings."""
+    '''Record all unique words in a list of strings.'''
     # record all unique words
     unique_words = list()
     for word in words_list:
@@ -28,9 +33,7 @@ def find_unique_words(words_list):
 
 
 def make_word_appearance_pairs(words_list):
-    """Return a list of word and the number of appearances
-       they make in a list.
-    """
+    '''Return a list of word and the number of appearances they make in a list.'''
     histogram = list()
     unique_words = find_unique_words(words_list)
     # count up appearances of each unique word, then make tuple in histogram
@@ -49,16 +52,19 @@ def create_histogram_list_of_lists(words_list):
        List contains a list for each unique word in the text.
        First element in the nested list is the word; and the second element is
        the number of appearances that word makes in the text.
-       Param: words_list(list): list of strings representing the text
-       Return: histogram(list)
+
+       Parameters:
+       words_list(list): list of strings representing the text
+
+       Returns:
+       histogram(list)
+
     """
     return make_word_appearance_pairs(words_list)
 
 
 def create_histogram_list_of_tuples(words_list):
-    """Return the equivalent of the previous function, using tuples (instead of
-       lists) nested inside a list.
-    """
+    '''Return a histogram stuctured as a list of nested tuples.'''
     histogram = make_word_appearance_pairs(words_list)
     # make each nested list a tuple
     histogram = [tuple(list) for list in histogram]
@@ -76,8 +82,13 @@ def create_histogram_inverted(words_list):
        Each tuple's first element is a number representing the
        appearances of a word.
        Each value is a list of words which appear that number of times.
-       Param: words_list(list)
-       Return: histogram(list): contains nested tuples with nested lists
+
+       Parameters:
+       words_list(list)
+
+       Returns:
+       histogram(list): contains nested tuples with nested lists
+
     """
     unique_words = find_unique_words(words_list)
     unique_words_as_obj = [Word(word) for word in unique_words]
@@ -103,10 +114,14 @@ def create_histogram_inverted(words_list):
 
 def histogram():
     """Return a histogram of the appearances of words from a .txt file.
-       Param: None
-       Return: histogram(dict): every key a unique word,
-               and value is appearances
-               of the word in the text
+
+       Parameters:
+       None
+
+       Returns:
+       histogram(dict): every key a unique word, and value is appearances
+                        of the word in the text
+
     """
     words_list = get_clean_words()
     # make a dict of the data
@@ -120,8 +135,13 @@ def histogram():
 
 def determine_hist_type(histogram):
     """Return the data type of the histogram.
-       Param: histogram: dict, list of lists, or list of tuples
-       Return: str
+
+       Parameters:
+       histogram(dict or list): dict, list of lists, or list of tuples
+
+       Returns:
+       str: declares what the object type of the histogram is
+
     """
     if isinstance(histogram, dict) is True:
         # determine if keys in dict are word strings or numbers
@@ -136,8 +156,14 @@ def determine_hist_type(histogram):
 
 def unique_words(histogram):
     """Return total count of unique words in a source text.
-       Param: histogram(dict, list of lists, or list of tuples)
-       Return: int
+
+       Parameters:
+       histogram(dict, list of lists, or list of tuples): an object
+       used to observe word frequency from a source text
+
+       Returns:
+       int: number of word types in the histogram
+
     """
     if determine_hist_type(histogram) == "dict":
         return len(list(histogram.keys()))
@@ -151,11 +177,16 @@ def unique_words(histogram):
 
 
 def frequency(word, histogram):
-    '''Returns the frequency of a word in a text.
-       Param: word(str): word being analyzed
-              histogram(dict, list of lists or tuples): represents source text
-       Returns: int
-    '''
+    """Returns the frequency of a word in a text.
+
+       Parameters:
+       word(str): word being analyzed
+       histogram(dict, list of lists or tuples): represents source text
+
+       Returns:
+       int: number of tokens for the given word type
+
+    """
     if determine_hist_type(histogram) == "dict":
         return histogram[word]
     elif determine_hist_type(histogram) == "list":
@@ -169,9 +200,7 @@ def frequency(word, histogram):
 
 
 def most_least_frequent(histogram):
-    """Return a tuple of the most and least frequent
-        words in a histogram.
-    """
+    '''Return a tuple of the most and least frequent words in a histogram.'''
     # implement for a histogram that uses list of lists
     if determine_hist_type(histogram) == "list":
         # find the most frequent word
@@ -195,7 +224,7 @@ def most_least_frequent(histogram):
 
 
 def total_count(histogram):
-    """Return total number of words in a text given a histogram."""
+    '''Return total number of words in a text given a histogram.'''
     total_count = 0
     for pairing in histogram:
         total_count += pairing[1]
@@ -205,8 +234,13 @@ def total_count(histogram):
 def calculate_mean(histogram):
     """Return the mean number of appearances for word frequency.
        Divide total lword count of text by the number of unique words.
-       Param: histogram(list or dict)
-       Return: float
+
+       Parameters:
+       histogram(list or dict)
+
+       Return:
+       float: mean number of appearances across all word types
+
     """
     if determine_hist_type(histogram) == "list":
         total_count = total_count(histogram)
@@ -215,10 +249,7 @@ def calculate_mean(histogram):
 
 
 def calculate_median(histogram):
-    """Return the median word frequency from a histogram.
-         Param: histogram(list or dict)
-         Return: float
-    """
+    '''Return the median word frequency from a histogram.'''
     if determine_hist_type(histogram) == "list":
         # check whether length of text is even/odd
         total_count = total_count(histogram)
@@ -233,10 +264,7 @@ def calculate_median(histogram):
 
 
 def calculate_mode(histogram):
-    """Return the number of appearances made by the most frequent word.
-       Param: histogram(list or dict)
-       Return: int
-    """
+    '''Return the number of appearances made by the most frequent word.'''
     most_frequent_word = most_least_frequent(histogram)[0]
     return frequency(most_frequent_word, histogram)
 
