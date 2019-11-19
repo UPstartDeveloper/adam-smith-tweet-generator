@@ -62,9 +62,9 @@ class HashTable(object):
            The method itself only requires traversal of the buckets list, but
            because it invokes the LinkedList.items() method, there is also the
            hidden cost of having to traverse through the Nodes in each bucket.
-           Therefore, in all cases as the number of buckets or the number of
+           Therefore in all cases as the number of buckets, or the number of
            Nodes in each bucket increases, the running time of the method
-           would increase in quadratic time.
+           increases in quadratic time.
 
         """
         # Collect all pairs of key-value entries in each bucket
@@ -85,9 +85,32 @@ class HashTable(object):
 
     def contains(self, key):
         """Return True if this hash table contains the given key, or False.
-        TODO: Running time: O(???) Why and under what conditions?"""
-        # TODO: Find bucket where given key belongs
-        # TODO: Check if key-value entry exists in bucket
+           Running time: O(n^2)
+           The method itself requires a traversal of the buckets, and invokes
+           the LinkedList.find() method as a helper n times, where n is the
+           number of buckets in the HashTable object.
+
+           In the best case, the LinkedList.find() methods takes only O(1)
+           time, when the item we are looking for exists at the head node.
+           In this scenario, the HashTable.contains() method would only take
+           O(n) time, because now we only depend on traversing through the
+           buckets until we find the one whose head node contains the key.
+
+           On average, the HashTable.contains() method will still take O(n^2)
+           running time, because in as number of buckets (and the number of
+           Nodes in each bucket) increases, then we will most likely have to
+           search multiple Nodes in a bucket to find if it contains the key.
+
+           In the worst case, the key does not exist and we need O(n^2) running
+           time because we traverse all Nodes in all the buckets of the
+           HashTable instance.
+
+        """
+        for bucket in self.buckets:
+            # Check if key-value entry exists in bucket
+            if bucket.find(lambda data: data[0] == key) == key:
+                return True
+        return False
 
     def get(self, key):
         """Return the value associated with the given key, or raise KeyError.
