@@ -142,10 +142,42 @@ class HashTable(object):
     def set(self, key, value):
         """Insert or update the given key with its associated value.
         TODO: Running time: O(???) Why and under what conditions?"""
-        # TODO: Find bucket where given key belongs
-        # TODO: Check if key-value entry exists in bucket
-        # TODO: If found, update value associated with given key
-        # TODO: Otherwise, insert given key-value entry into bucket
+        kv_pair = (key, value)
+        # Find bucket where given key belongs
+        index = index = self._bucket_index(key)
+        bucket = self.buckets[index]
+        # Check if key-value entry exists in bucket
+        node = bucket.head
+        while node is not None:
+            # If found, update value associated with given key
+            pair_to_update = node.data
+            if key in pair_to_update:
+                node.data = kv_pair
+                break
+            else:
+                node = node.next
+        else:
+            # Otherwise, insert given key-value entry into bucket
+            bucket.append(kv_pair)
+        '''
+        # determine if we need to insert or update
+        if self.contains(key) is True:
+            # perform update
+            pass
+        else:
+            # perform insertion
+            kv_pair = (key, value)
+            # figure out which bucket to put the key-value pair in
+            index = self._bucket_index(key)
+            bucket = self.buckets[index]
+            # figure out which Node in this bucket should encapsulate kv_pair
+            node = bucket.head
+            while node is not None:
+                if node.data is None:
+                    node.data = kv_pair
+                else:
+                    node = node.next
+        '''
 
     def delete(self, key):
         """Delete the given key from this hash table, or raise KeyError.

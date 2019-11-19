@@ -59,6 +59,7 @@ class HashTableTest(unittest.TestCase):
         ht.set('I', 1)
         ht.set('V', 5)
         ht.set('X', 10)
+        print(ht)
         assert ht.contains('I') is True
         assert ht.contains('V') is True
         assert ht.contains('X') is True
