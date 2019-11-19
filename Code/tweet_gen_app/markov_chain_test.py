@@ -16,7 +16,6 @@ class MarkovChainTest(unittest.TestCase):
         assert states_of_mark == states_of_fish_list
 
         # test for the correct number of state transitions
-        tokens = len(fish_list)
         number_of_state_transitions = 0
         states = list(mark.chain.keys())
         for state in states:
@@ -25,11 +24,8 @@ class MarkovChainTest(unittest.TestCase):
             states_after = list(transitions_for_one_state.keys())
             for word_type in states_after:
                 tokens_after_state += transitions_for_one_state[word_type]
-            # print(transitions_for_one_state.values())
-            # number_of_state_transitions += (
-            #    transitions_for_one_state.values())
             number_of_state_transitions += tokens_after_state
-        assert tokens == number_of_state_transitions
+        assert number_of_state_transitions == 7
 
     def test_random_walk(self):
         '''The sentence generated follows the Markov Chain algorithm.'''
