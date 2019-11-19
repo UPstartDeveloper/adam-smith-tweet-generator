@@ -176,7 +176,25 @@ class HashTable(object):
 
     def delete(self, key):
         """Delete the given key from this hash table, or raise KeyError.
-        TODO: Running time: O(???) Why and under what conditions?"""
+           Running time: O(n^2)
+           The methods runs in quadratic time because of using the get method
+           in the beginning to check if the key-value entry already exists in
+           the HashTable.
+
+           The runtime of this step overturns the runtime of all the other
+           operations in this method. That said, there may still  be a notable
+           difference between the best and worst case scenarios.
+
+           In the best case, the key value entry is
+           referenced by the head node of the bucket, in which case deleting
+           the node requires constant time. Alternatively, the key value
+           entry may not even exist.
+
+           In the worst case, the node to delete is at the tail node of the
+           bucket, which then requires O(n) time to delete, where n is the
+           number of nodes in the bucket.
+
+        """
         # Check if key-value entry exists in bucket
         value = self.get(key)
         if value is not KeyError:
