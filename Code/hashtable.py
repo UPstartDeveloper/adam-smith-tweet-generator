@@ -106,9 +106,9 @@ class HashTable(object):
         """
         for bucket in self.buckets:
             # Check if key-value entry exists in bucket
-            for key_in_bucket, value in bucket.items():
-                if key == key_in_bucket is True:
-                    return True
+            item_from_bucket = bucket.find(lambda data: data[0] == key)
+            if item_from_bucket is not None and item_from_bucket[0] == key:
+                return True
         return False
 
     def get(self, key):
@@ -159,25 +159,6 @@ class HashTable(object):
         else:
             # Otherwise, insert given key-value entry into bucket
             bucket.append(kv_pair)
-        '''
-        # determine if we need to insert or update
-        if self.contains(key) is True:
-            # perform update
-            pass
-        else:
-            # perform insertion
-            kv_pair = (key, value)
-            # figure out which bucket to put the key-value pair in
-            index = self._bucket_index(key)
-            bucket = self.buckets[index]
-            # figure out which Node in this bucket should encapsulate kv_pair
-            node = bucket.head
-            while node is not None:
-                if node.data is None:
-                    node.data = kv_pair
-                else:
-                    node = node.next
-        '''
 
     def delete(self, key):
         """Delete the given key from this hash table, or raise KeyError.
