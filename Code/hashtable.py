@@ -26,7 +26,11 @@ class HashTable(object):
 
     def keys(self):
         """Return a list of all keys in this hash table.
-        TODO: Running time: O(???) Why and under what conditions?"""
+           Running time: O(n^2)
+           This is because we require a traversal not only of the list of the
+           buckets, but of the list representing the data of the Nodes in each
+           bucket (a LinkedList object).
+        """
         # Collect all keys in each bucket
         all_keys = []
         for bucket in self.buckets:
@@ -36,9 +40,20 @@ class HashTable(object):
 
     def values(self):
         """Return a list of all values in this hash table.
-        TODO: Running time: O(???) Why and under what conditions?"""
+           Running time: O(n^2)
+           Same reason as for the keys() method.
+           In both of these methods, the best running time is traversing
+           through a HashTable where the buckets contain Nodes pointing to
+           non-primitive data types (not lists, tuples, dictionaries, etc).
+           Otherwise, the running time would become O(n^3).
+        """
         # TODO: Loop through all buckets
         # TODO: Collect all values in each bucket
+        all_values = list()
+        for bucket in self.buckets:
+            for key, value in bucket.items():
+                all_values.append(value)
+        return all_values
 
     def items(self):
         """Return a list of all items (key-value pairs) in this hash table.
