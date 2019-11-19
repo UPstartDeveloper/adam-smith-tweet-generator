@@ -141,7 +141,21 @@ class HashTable(object):
 
     def set(self, key, value):
         """Insert or update the given key with its associated value.
-        TODO: Running time: O(???) Why and under what conditions?"""
+           Running time: O(n)
+           This is because the method's runtime increases asymptotically
+           only with respect to the length of the bucket it has to traverse
+           over. This is because the step before, finding the bucket the key
+           belongs in takes constant time, since it uses the _bucket_index
+           helper method.
+
+           Even in the worst case, when the key is not yet in the bucket,
+           the method will only take O(n) to decide it needs to append
+           a new key value pair to the bucket, where n is the number of
+           nodes in that LinkedList object. This is because at the point where
+           the method has traversed through all current nodes in the
+           LinkedList, it already knows not to check any of the other buckets.
+
+        """
         kv_pair = (key, value)
         # Find bucket where given key belongs
         index = index = self._bucket_index(key)
