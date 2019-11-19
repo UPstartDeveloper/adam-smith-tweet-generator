@@ -86,12 +86,10 @@ class HashTable(object):
     def contains(self, key):
         """Return True if this hash table contains the given key, or False.
            Running time: O(n^2)
-           The method itself requires a traversal of the buckets, and invokes
-           the LinkedList.find() method as a helper n times, where n is the
-           number of buckets in the HashTable object.
+           The method requires a traversal of the buckets, and a traversal of
+           the nodes in each bucket using the LinkedList.items() method.
 
-           In the best case, the LinkedList.find() methods takes only O(1)
-           time, when the item we are looking for exists at the head node.
+           In the best case, the item we are looking for exists at a head node.
            In this scenario, the HashTable.contains() method would only take
            O(n) time, because now we only depend on traversing through the
            buckets until we find the one whose head node contains the key.
@@ -108,18 +106,38 @@ class HashTable(object):
         """
         for bucket in self.buckets:
             # Check if key-value entry exists in bucket
-            if bucket.find(lambda data: data[0] == key) == key:
-                return True
+            for key_in_bucket, value in bucket.items():
+                if key == key_in_bucket is True:
+                    return True
         return False
 
     def get(self, key):
         """Return the value associated with the given key, or raise KeyError.
-        TODO: Running time: O(???) Why and under what conditions?"""
-        # TODO: Find bucket where given key belongs
-        # TODO: Check if key-value entry exists in bucket
-        # TODO: If found, return value associated with given key
-        # TODO: Otherwise, raise error to tell user get failed
-        # Hint: raise KeyError('Key not found: {}'.format(key))
+           Running time: O(n^2)
+           In the best case, the key cannot be retrieved from the HashTable,
+           and this method raises the KeyError. To do this the method itself
+           run in constant, however the hidden cost of using the
+           HashTable.contains() method adds on O(n^2).
+
+           As the number of buckets and the size of each bucket increases, the
+           worst and the average case will both require O(n^2). This is because
+           to find the value associated with an existing key in the list, we
+           first require a quadratic traversal to discover that the key exists,
+           and then another to discover in which Node of which bucket the key
+           value pair are together.
+
+        """
+        # determine if key exists
+        if self.contains(key) is False:
+            raise KeyError(f'Key not found: {key}')
+        else:
+            # Find bucket where given key belongs
+            for bucket in self.buckets:
+                # Check if key-value entry exists in bucket
+                for key_in_bucket, value in bucket.items():
+                    # If found, return value associated with given key
+                    if key == key_in_bucket:
+                        return value
 
     def set(self, key, value):
         """Insert or update the given key with its associated value.
