@@ -161,22 +161,18 @@ class HashTable(object):
            LinkedList, it already knows not to check any of the other buckets.
 
         """
-        kv_pair = (key, value)
+        new_pair = (key, value)
         # Find bucket where given key belongs
         bucket = self.get_bucket_containing_key(key)
-        # Check if key-value entry exists in bucket
-        node = bucket.head
-        while node is not None:
-            # If found, update value associated with given key
-            pair_to_update = node.data
-            if key in pair_to_update:
-                node.data = kv_pair
-                break
-            else:
-                node = node.next
-        else:
-            # Otherwise, insert given key-value entry into bucket
-            bucket.append(kv_pair)
+        # Try to update an exisiting key value pair
+        try:
+            current_value = self.get(key)
+            # update an existing key value pair
+            current_pair = (key, current_value)
+            bucket.replace(current_pair, new_pair)
+        except KeyError:
+            # insert the key value pair
+            bucket.append(new_pair)
 
     def delete(self, key):
         """Delete the given key from this hash table, or raise KeyError.
