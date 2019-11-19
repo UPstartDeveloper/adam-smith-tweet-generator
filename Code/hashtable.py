@@ -6,21 +6,21 @@ from linkedlist import LinkedList
 class HashTable(object):
 
     def __init__(self, init_size=8):
-        """Initialize this hash table with the given initial size."""
+        '''Initialize this hash table with the given initial size.'''
         # Create a new list (used as fixed-size array) of empty linked lists
         self.buckets = [LinkedList() for _ in range(init_size)]
 
     def __str__(self):
-        """Return a formatted string representation of this hash table."""
+        '''Return a formatted string representation of this hash table.'''
         items = ['{!r}: {!r}'.format(key, val) for key, val in self.items()]
         return '{' + ', '.join(items) + '}'
 
     def __repr__(self):
-        """Return a string representation of this hash table."""
+        '''Return a string representation of this hash table.'''
         return 'HashTable({!r})'.format(self.items())
 
     def _bucket_index(self, key):
-        """Return the bucket index where the given key would be stored."""
+        '''Return the bucket index where the given key would be stored.'''
         # Calculate the given key's hash code and transform into bucket index
         return hash(key) % len(self.buckets)
 
@@ -30,6 +30,7 @@ class HashTable(object):
            This is because we require a traversal not only of the list of the
            buckets, but of the list representing the data of the Nodes in each
            bucket (a LinkedList object).
+
         """
         # Collect all keys in each bucket
         all_keys = []
@@ -46,9 +47,9 @@ class HashTable(object):
            through a HashTable where the buckets contain Nodes pointing to
            non-primitive data types (not lists, tuples, dictionaries, etc).
            Otherwise, the running time would become O(n^3).
+
         """
-        # TODO: Loop through all buckets
-        # TODO: Collect all values in each bucket
+        # Collect all values in each bucket
         all_values = list()
         for bucket in self.buckets:
             for key, value in bucket.items():
@@ -57,7 +58,15 @@ class HashTable(object):
 
     def items(self):
         """Return a list of all items (key-value pairs) in this hash table.
-        TODO: Running time: O(???) Why and under what conditions?"""
+           Running time: O(n^2)
+           The method itself only requires traversal of the buckets list, but
+           because it invokes the LinkedList.items() method, there is also the
+           hidden cost of having to traverse through the Nodes in each bucket.
+           Therefore, in all cases as the number of buckets or the number of
+           Nodes in each bucket increases, the running time of the method
+           would increase in quadratic time.
+
+        """
         # Collect all pairs of key-value entries in each bucket
         all_items = []
         for bucket in self.buckets:
@@ -66,9 +75,13 @@ class HashTable(object):
 
     def length(self):
         """Return the number of key-value entries by traversing its buckets.
-        TODO: Running time: O(???) Why and under what conditions?"""
-        # TODO: Loop through all buckets
-        # TODO: Count number of key-value entries in each bucket
+           Running time: O(n^2)
+           This method alone uses a constant operation.
+           However, the hidden cost is using the self.items() method as a
+           helper, which as explained above runs in quadratic time.
+
+        """
+        return len(self.items())
 
     def contains(self, key):
         """Return True if this hash table contains the given key, or False.
