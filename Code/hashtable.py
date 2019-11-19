@@ -139,6 +139,11 @@ class HashTable(object):
                     if key == key_in_bucket:
                         return value
 
+    def get_bucket_containing_key(self, key):
+        '''Return the bucket(LinkedList) whose Nodes reference the key.'''
+        index = index = self._bucket_index(key)
+        return self.buckets[index]
+
     def set(self, key, value):
         """Insert or update the given key with its associated value.
            Running time: O(n)
@@ -158,8 +163,7 @@ class HashTable(object):
         """
         kv_pair = (key, value)
         # Find bucket where given key belongs
-        index = index = self._bucket_index(key)
-        bucket = self.buckets[index]
+        bucket = self.get_bucket_containing_key(key)
         # Check if key-value entry exists in bucket
         node = bucket.head
         while node is not None:
@@ -177,11 +181,16 @@ class HashTable(object):
     def delete(self, key):
         """Delete the given key from this hash table, or raise KeyError.
         TODO: Running time: O(???) Why and under what conditions?"""
-        # TODO: Find bucket where given key belongs
-        # TODO: Check if key-value entry exists in bucket
-        # TODO: If found, delete entry associated with given key
-        # TODO: Otherwise, raise error to tell user delete failed
-        # Hint: raise KeyError('Key not found: {}'.format(key))
+        # Check if key-value entry exists in bucket
+        value = self.get(key)
+        if value is not KeyError:
+            # Find bucket where given key belongs
+            bucket = self.get_bucket_containing_key(key)
+            kv_pair = (key, value)
+            bucket.delete(kv_pair)
+        else:
+            # Otherwise, raise error to tell user delete failed
+            raise KeyError(f'Key not found: {key}')
 
 
 def test_hash_table():
@@ -203,7 +212,7 @@ def test_hash_table():
     print('length: {}'.format(ht.length()))
 
     # Enable this after implementing delete method
-    delete_implemented = False
+    delete_implemented = True
     if delete_implemented:
         print('\nTesting delete:')
         for key in ['I', 'V', 'X']:
