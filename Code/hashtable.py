@@ -75,13 +75,16 @@ class HashTable(object):
 
     def length(self):
         """Return the number of key-value entries by traversing its buckets.
-           Running time: O(n^2)
-           This method alone uses a constant operation.
-           However, the hidden cost is using the self.items() method as a
-           helper, which as explained above runs in quadratic time.
+           Running time: O(n)
+           This method returns an acculmulator variable, num_entries. In order
+           to calculate num_entries, we requires a traversal of all the
+           LinkedLists in self.buckets, which will run in linear time.
 
         """
-        return len(self.items())
+        num_entries = 0
+        for bucket in self.buckets:
+            num_entries += bucket.num_nodes
+        return num_entries
 
     def contains(self, key):
         """Return True if this hash table contains the given key, or False.
