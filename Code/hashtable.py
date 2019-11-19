@@ -209,6 +209,10 @@ class HashTable(object):
             # Otherwise, raise error to tell user delete failed
             raise KeyError(f'Key not found: {key}')
 
+    def __iter__(self):
+        '''Returns HashTable as an iterable.'''
+        return iter(self.items())
+
 
 def test_hash_table():
     ht = HashTable()
@@ -242,4 +246,9 @@ def test_hash_table():
 
 
 if __name__ == '__main__':
-    test_hash_table()
+    # test_hash_table()
+    ht = HashTable()
+    for key, value in [('I', 1), ('V', 5), ('X', 10)]:
+        ht.set(key, value)
+    for key, value in ht:
+        print(key, value)
