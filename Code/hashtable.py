@@ -213,6 +213,41 @@ class HashTable(object):
         '''Returns HashTable as an iterable.'''
         return iter(self.items())
 
+    def __getitem__(self, key):
+        """Return a value encapsulated anywhere in this object.
+           Subscripting syntax enabled.
+
+           Parameters:
+           key(str, tuple, int, or float): the data that gets hashed to
+                be stored in the HashTable
+
+           Returns:
+           (any type of object): the data associated with the key
+
+        """
+        return self.get(key)
+
+    def __setitem__(self, key, value):
+        """Set a key-value pair. Implements subscripting syntax.
+
+           Parameters:
+           key(str, tuple, int, or float): the data that gets hashed to
+                be stored in the HashTable
+
+           Returns:
+           (any type of object): the data associated with the key
+
+        """
+        return self.set(key, value)
+
+    def __iter__(self):
+        '''Return a list of the keys.'''
+        return self.keys()
+
+    def __contains__(self, key):
+        '''Returns True or False based on the key in the HashTable or not.'''
+        return key in self.keys()
+
 
 def test_hash_table():
     ht = HashTable()
