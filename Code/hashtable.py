@@ -248,6 +248,10 @@ class HashTable(object):
         '''Returns True or False based on the key in the HashTable or not.'''
         return key in self.keys()
 
+    def __delitem__(self, key):
+        '''Delete a key value pair from the HashTable given the key.'''
+        self.delete(key)
+
 
 def test_hash_table():
     ht = HashTable()
