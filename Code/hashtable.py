@@ -5,11 +5,17 @@ from linkedlist import LinkedList
 
 class HashTable(object):
 
+    def calculate_average(self):
+        '''Calculates the mean number of key value pairs in one bucket.'''
+        self.average_pairs_in_bucket = (
+            self.num_key_value_pairs / len(self.buckets))
+
     def __init__(self, init_size=8):
         '''Initialize this hash table with the given initial size.'''
         # Create a new list (used as fixed-size array) of empty linked lists
         self.buckets = [LinkedList() for _ in range(init_size)]
         self.num_key_value_pairs = 0
+        self.calculate_average()
 
     def __str__(self):
         '''Return a formatted string representation of this hash table.'''
@@ -174,6 +180,7 @@ class HashTable(object):
             # insert the key value pair
             bucket.append(new_pair)
             self.num_key_value_pairs += 1
+            self.calculate_average()
 
     def delete(self, key):
         """Delete the given key from this hash table, or raise KeyError.
@@ -204,6 +211,7 @@ class HashTable(object):
             kv_pair = (key, value)
             bucket.delete(kv_pair)
             self.num_key_value_pairs -= 1
+            self.calculate_average()
         else:
             # Otherwise, raise error to tell user delete failed
             raise KeyError(f'Key not found: {key}')
