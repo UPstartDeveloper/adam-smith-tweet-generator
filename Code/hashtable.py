@@ -9,6 +9,7 @@ class HashTable(object):
         '''Initialize this hash table with the given initial size.'''
         # Create a new list (used as fixed-size array) of empty linked lists
         self.buckets = [LinkedList() for _ in range(init_size)]
+        self.num_key_value_pairs = 0
 
     def __str__(self):
         '''Return a formatted string representation of this hash table.'''
@@ -75,16 +76,12 @@ class HashTable(object):
 
     def length(self):
         """Return the number of key-value entries by traversing its buckets.
-           Running time: O(n)
-           This method returns an acculmulator variable, num_entries. In order
-           to calculate num_entries, we requires a traversal of all the
-           LinkedLists in self.buckets, which will run in linear time.
+           Running time: O(1)
+           This method has a constant runtime, because it only returns an
+           attribute of the class. Data type is an int.
 
         """
-        num_entries = 0
-        for bucket in self.buckets:
-            num_entries += bucket.num_nodes
-        return num_entries
+        return self.num_key_value_pairs
 
     def contains(self, key):
         """Return True if this hash table contains the given key, or False.
@@ -176,6 +173,7 @@ class HashTable(object):
         except KeyError:
             # insert the key value pair
             bucket.append(new_pair)
+            self.num_key_value_pairs += 1
 
     def delete(self, key):
         """Delete the given key from this hash table, or raise KeyError.
@@ -205,6 +203,7 @@ class HashTable(object):
             bucket = self.get_bucket_containing_key(key)
             kv_pair = (key, value)
             bucket.delete(kv_pair)
+            self.num_key_value_pairs -= 1
         else:
             # Otherwise, raise error to tell user delete failed
             raise KeyError(f'Key not found: {key}')
