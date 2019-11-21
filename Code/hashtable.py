@@ -162,21 +162,40 @@ class HashTable(object):
                     if key == key_in_bucket:
                         return value
 
+    def get_next_possible_bucket(self, index):
+        """When the key value pair has been placed in a bucket with a different
+           index than as per the hash function, this method will help determine
+           which bucket it ended up inside instead.
+
+           Paramters:
+           index(int): value returned by self._bucket_index(key), where key is
+                       possibly a key in the HashTable
+           Returns:
+           LinkedList: the bucket in the next index position in the
+                       self.buckets list, or the first bucket if the index is
+                       the last position in the list.
+        """
+        if not index == len(self.buckets) - 1:
+            index += 1
+        else:
+            index = 0
+        bucket = self.buckets[index]
+        return bucket
+
     def get_bucket_containing_key_on_set(self, key):
         """Return the bucket(LinkedList) whose Nodes reference the key.
            Linear probing is used to resolve any collisions.
 
         """
-        index = index = self._bucket_index(key)
+        index = self._bucket_index(key)
+        # try locating the key in both possible buckets
         bucket = self.buckets[index]
-        # if this bucket already has a lot of entries, find one that doesn't
-        if self.length_of_one_bucket(bucket) > self.average_pairs_in_bucket:
-            if not index == len(self.buckets):
-                index += 1
-            else:
-                index = 0
-        bucket = self.buckets[index]
-        return bucket
+        item_or_none = bucket.find(lambda data: data[0] == key)
+        if item_or_none is not None:
+            return bucket
+        # now try to look in other buckets for the update or insert
+        else:
+            return self.get_next_possible_bucket(index)
 
     def get_bucket_containing_key_on_delete(self, key):
         """Return the bucket(LinkedList) whose Nodes reference the key.
@@ -194,10 +213,7 @@ class HashTable(object):
             return bucket
         else:
             # otherwise, return the next possible bucket the pair could be in
-            if not index == len(self.buckets) - 1:
-                return self.buckets[index + 1]
-            else:
-                return self.buckets[0]
+            return self.get_next_possible_bucket(index)
 
     def set(self, key, value):
         """Insert or update the given key with its associated value.
@@ -296,10 +312,6 @@ class HashTable(object):
         """
         return self.set(key, value)
 
-    def __iter__(self):
-        '''Return a list of the keys.'''
-        return self.keys()
-
     def __contains__(self, key):
         '''Returns True or False based on the key in the HashTable or not.'''
         return key in self.keys()
@@ -341,9 +353,9 @@ def test_hash_table():
 
 
 if __name__ == '__main__':
-    # test_hash_table()
-    ht = HashTable()
-    for key, value in [('I', 1), ('V', 5), ('X', 10)]:
-        ht.set(key, value)
-    for key, value in ht:
-        print(key, value)
+    test_hash_table()
+    # ht = HashTable()
+    # for key, value in [('I', 1), ('V', 5), ('X', 10)]:
+        # ht.set(key, value)
+    # for key, value in ht:
+        # print(key, value)
