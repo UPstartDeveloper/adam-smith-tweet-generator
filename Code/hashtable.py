@@ -5,17 +5,17 @@ from linkedlist import LinkedList
 
 class HashTable(object):
 
-    def calculate_average(self):
-        '''Calculates the mean number of key value pairs in one bucket.'''
-        self.average_pairs_in_bucket = (
-            self.num_key_value_pairs / len(self.buckets))
-
     def __init__(self, init_size=8):
         '''Initialize this hash table with the given initial size.'''
         # Create a new list (used as fixed-size array) of empty linked lists
         self.buckets = [LinkedList() for _ in range(init_size)]
         self.num_key_value_pairs = 0
-        self.calculate_average()
+        self.average_pairs_in_bucket = 0
+
+    def calculate_average(self):
+        '''Calculates the mean number of key value pairs in one bucket.'''
+        self.average_pairs_in_bucket = (
+            self.num_key_value_pairs / len(self.buckets))
 
     def __str__(self):
         '''Return a formatted string representation of this hash table.'''
@@ -63,6 +63,10 @@ class HashTable(object):
                 all_values.append(value)
         return all_values
 
+    def key_error(self, key):
+        '''Display KeyError exception message.'''
+        raise KeyError(f'Key not found: {key}')
+
     def items(self):
         """Return a list of all items (key-value pairs) in this hash table.
            Running time: O(n^2)
@@ -88,6 +92,19 @@ class HashTable(object):
 
         """
         return self.num_key_value_pairs
+
+    def length_of_one_bucket(self, bucket):
+        """Return the number of entries in one bucket.
+           Assumes one pair per Node.
+
+           Parameters:
+           bucket(LinkedList)
+
+           Returns:
+           int: number of Nodes referenced by the LinkedList object.
+
+        """
+        return bucket.length()
 
     def contains(self, key):
         """Return True if this hash table contains the given key, or False.
@@ -135,7 +152,7 @@ class HashTable(object):
         """
         # determine if key exists
         if self.contains(key) is False:
-            raise KeyError(f'Key not found: {key}')
+            self.key_error(key)
         else:
             # Find bucket where given key belongs
             for bucket in self.buckets:
@@ -145,10 +162,42 @@ class HashTable(object):
                     if key == key_in_bucket:
                         return value
 
-    def get_bucket_containing_key(self, key):
-        '''Return the bucket(LinkedList) whose Nodes reference the key.'''
+    def get_bucket_containing_key_on_set(self, key):
+        """Return the bucket(LinkedList) whose Nodes reference the key.
+           Linear probing is used to resolve any collisions.
+
+        """
         index = index = self._bucket_index(key)
-        return self.buckets[index]
+        bucket = self.buckets[index]
+        # if this bucket already has a lot of entries, find one that doesn't
+        if self.length_of_one_bucket(bucket) > self.average_pairs_in_bucket:
+            if not index == len(self.buckets):
+                index += 1
+            else:
+                index = 0
+        bucket = self.buckets[index]
+        return bucket
+
+    def get_bucket_containing_key_on_delete(self, key):
+        """Return the bucket(LinkedList) whose Nodes reference the key.
+           If not found, it will return the bucket after. This is because
+           due to linear probing, it may have moved over one bucket of where it
+           was supposed to be.
+
+        """
+        index = self._bucket_index(key)
+        # determine if the key is really in the bucket decided by hash()
+        bucket = self.buckets[index]
+        item_or_none = bucket.find(lambda data: data[0] == key)
+        # if item is returned, return the current bucket
+        if item_or_none is not None:
+            return bucket
+        else:
+            # otherwise, return the next possible bucket the pair could be in
+            if not index == len(self.buckets) - 1:
+                return self.buckets[index + 1]
+            else:
+                return self.buckets[0]
 
     def set(self, key, value):
         """Insert or update the given key with its associated value.
@@ -169,8 +218,8 @@ class HashTable(object):
         """
         new_pair = (key, value)
         # Find bucket where given key belongs
-        bucket = self.get_bucket_containing_key(key)
-        # Try to update an exisiting key value pair
+        bucket = self.get_bucket_containing_key_on_set(key)
+        # Try to update an existing key value pair
         try:
             current_value = self.get(key)
             # update an existing key value pair
@@ -207,14 +256,14 @@ class HashTable(object):
         value = self.get(key)
         if value is not KeyError:
             # Find bucket where given key belongs
-            bucket = self.get_bucket_containing_key(key)
+            bucket = self.get_bucket_containing_key_on_delete(key)
             kv_pair = (key, value)
             bucket.delete(kv_pair)
             self.num_key_value_pairs -= 1
             self.calculate_average()
         else:
             # Otherwise, raise error to tell user delete failed
-            raise KeyError(f'Key not found: {key}')
+            self.key_error(key)
 
     def __iter__(self):
         '''Returns HashTable as an iterable.'''
