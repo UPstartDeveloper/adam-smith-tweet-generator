@@ -33,10 +33,10 @@ class HashTable(object):
 
     def keys(self):
         """Return a list of all keys in this hash table.
-           Running time: O(n^2)
+           Running time: O(b*l), where b is the number of buckets, and l
+                         is the average number of key value entires per bucket
            This is because we require a traversal not only of the list of the
-           buckets, but of the list representing the data of the Nodes in each
-           bucket (a LinkedList object).
+           buckets, but Nodes in each bucket (a LinkedList object).
 
         """
         # Collect all keys in each bucket
@@ -48,12 +48,13 @@ class HashTable(object):
 
     def values(self):
         """Return a list of all values in this hash table.
-           Running time: O(n^2)
+           Running time: O(b*l)
            Same reason as for the keys() method.
            In both of these methods, the best running time is traversing
            through a HashTable where the buckets contain Nodes pointing to
            non-primitive data types (not lists, tuples, dictionaries, etc).
-           Otherwise, the running time would become O(n^3).
+           Otherwise, the running time would be multiplied by the length of
+           these sequence data types.
 
         """
         # Collect all values in each bucket
@@ -69,13 +70,14 @@ class HashTable(object):
 
     def items(self):
         """Return a list of all items (key-value pairs) in this hash table.
-           Running time: O(n^2)
+           Running time:  O(b*l), where b is the number of buckets, and l
+                         is the average number of key value entires per bucket
            The method itself only requires traversal of the buckets list, but
            because it invokes the LinkedList.items() method, there is also the
            hidden cost of having to traverse through the Nodes in each bucket.
            Therefore in all cases as the number of buckets, or the number of
            Nodes in each bucket increases, the running time of the method
-           increases in quadratic time.
+           increases by two factors.
 
         """
         # Collect all pairs of key-value entries in each bucket
@@ -95,7 +97,8 @@ class HashTable(object):
 
     def length_of_one_bucket(self, bucket):
         """Return the number of entries in one bucket.
-           Assumes one pair per Node.
+           Assumes one pair per Node. Runtime is O(n), where n is the number of
+           Nodes in the list.
 
            Parameters:
            bucket(LinkedList)
@@ -108,23 +111,17 @@ class HashTable(object):
 
     def contains(self, key):
         """Return True if this hash table contains the given key, or False.
-           Running time: O(n^2)
+           Running time: O(n), where n is the number of key value entries.
            The method requires a traversal of the buckets, and a traversal of
            the nodes in each bucket using the LinkedList.items() method.
+           However the number of buckets is constant in this implementation,
+           therefore the runtime complexity is asymptotically altered by the
+           number of key value entries only.
 
            In the best case, the item we are looking for exists at a head node.
            In this scenario, the HashTable.contains() method would only take
-           O(n) time, because now we only depend on traversing through the
+           O(1) time, because now we only depend on traversing through the
            buckets until we find the one whose head node contains the key.
-
-           On average, the HashTable.contains() method will still take O(n^2)
-           running time, because in as number of buckets (and the number of
-           Nodes in each bucket) increases, then we will most likely have to
-           search multiple Nodes in a bucket to find if it contains the key.
-
-           In the worst case, the key does not exist and we need O(n^2) running
-           time because we traverse all Nodes in all the buckets of the
-           HashTable instance.
 
         """
         for bucket in self.buckets:
@@ -136,18 +133,16 @@ class HashTable(object):
 
     def get(self, key):
         """Return the value associated with the given key, or raise KeyError.
-           Running time: O(n^2)
+           Running time: O(l), where l is the load factor, aka the average
+                         number of key value entries per bucket in the table.
            In the best case, the key cannot be retrieved from the HashTable,
            and this method raises the KeyError. To do this the method itself
            run in constant, however the hidden cost of using the
-           HashTable.contains() method adds on O(n^2).
+           HashTable.contains() method adds on O(n).
 
-           As the number of buckets and the size of each bucket increases, the
-           worst and the average case will both require O(n^2). This is because
-           to find the value associated with an existing key in the list, we
-           first require a quadratic traversal to discover that the key exists,
-           and then another to discover in which Node of which bucket the key
-           value pair are together.
+           The number of buckets also alters the runtime, however because the
+           the length of self.buckets is constant we disregard it in
+           describing the runtime complexity.
 
         """
         # determine if key exists
@@ -217,7 +212,8 @@ class HashTable(object):
 
     def set(self, key, value):
         """Insert or update the given key with its associated value.
-           Running time: O(n)
+           Running time:  O(l), where l is the load factor, aka the average
+                         number of key value entries per bucket in the table.
            This is because the method's runtime increases asymptotically
            only with respect to the length of the bucket it has to traverse
            over. This is because the step before, finding the bucket the key
@@ -249,19 +245,17 @@ class HashTable(object):
 
     def delete(self, key):
         """Delete the given key from this hash table, or raise KeyError.
-           Running time: O(n^2)
-           The methods runs in quadratic time because of using the get method
-           in the beginning to check if the key-value entry already exists in
-           the HashTable.
-
-           The runtime of this step overturns the runtime of all the other
-           operations in this method. That said, there may still  be a notable
-           difference between the best and worst case scenarios.
+           Running time: O(l), where l is the load factor, aka the average
+                         number of key value entries per bucket in the table.
+           There is only one possible bucket the key value entry may be in.
+           Therefore the only variable to consider in the runtime complexity is
+           the number of key value entries in the said bucket.
 
            In the best case, the key value entry is
            referenced by the head node of the bucket, in which case deleting
            the node requires constant time. Alternatively, the key value
-           entry may not even exist.
+           entry may not even exist. In this scenario the runtime approaches
+           constant runtime.
 
            In the worst case, the node to delete is at the tail node of the
            bucket, which then requires O(n) time to delete, where n is the
@@ -356,6 +350,6 @@ if __name__ == '__main__':
     test_hash_table()
     # ht = HashTable()
     # for key, value in [('I', 1), ('V', 5), ('X', 10)]:
-        # ht.set(key, value)
+    #   ht.set(key, value)
     # for key, value in ht:
-        # print(key, value)
+    #   print(key, value)
