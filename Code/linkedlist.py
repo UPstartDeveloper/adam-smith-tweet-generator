@@ -210,10 +210,14 @@ class LinkedList(object):
 
     def __iter__(self):
         """
-            Return an iterable list of the data referenced by the Nodes
+            Return a generator of the data referenced by the Nodes
             in this LinkedList.
         """
-        return iter(self.items())
+        node = self.head
+        while node is not None:
+            item = node.data
+            node = node.next
+            yield(item)
 
 
 class DoublyLinkedList(LinkedList):
@@ -292,7 +296,6 @@ class DoublyLinkedList(LinkedList):
             self.remove_the_node(node, node_before)
 
 
-
 def test_linked_list():
     ll = LinkedList()
     print('list: {}'.format(ll))
@@ -322,11 +325,11 @@ def test_linked_list():
 
 
 if __name__ == '__main__':
-    test_linked_list()
-    # ll = LinkedList(['A', 'B', 1, 5, 6.7777, ['Zain']])
+    # test_linked_list()
+    ll = LinkedList(['A', 'B', 1, 5, 6.7777, ['Zain']])
     # number_of_nodes = ll.length()
     # print(f'Number of Nodes: {number_of_nodes}')
     # print(f'list: {ll}')
-    # print("Data in this LinkedList:")
-    # for item in ll:
-    #    print(item)
+    print("Data in this LinkedList:")
+    for item in ll:
+        print(item)
