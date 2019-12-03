@@ -22,12 +22,12 @@ class HigherMarkovChain(MarkovChain):
         """
         pass
 
-    def enqueue(self, item):
+    def enqueue(self, *items):
         """Add the item to the end of the current queue.
            0(1) runtime.
 
         """
-        self.queue.append(item)
+        self.queue.extend(*items)
 
     def dequeue(self):
         """Return the first item in the queue.
@@ -58,6 +58,6 @@ if __name__ == "__main__":
     left_right_list = ['I', 'went', 'left', 'you', 'went', 'right',
                        'I', 'went', 'left', 'I', 'went', 'right']
     mark = HigherMarkovChain(left_right_list)
-    mark.queue = ['a', 'b', 'c']
+    mark.enqueue(('a', 'b', 'c'))
     for item in mark.queue:
         print(item)
