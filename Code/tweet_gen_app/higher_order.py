@@ -162,7 +162,8 @@ class HigherMarkovChain(MarkovChain):
             sentence += str(word) + " "
         # start the random walk
         next_state = first_state
-        for i in range(length - 1):
+        # for i in range(length - 1):
+        while not len(sentence.split()) == length:
             # make sure the word has tokens that come after, find the next word
             next_state = tuple(next_state)  # go from list back to tuple
             if self.chain[next_state] is not None:
@@ -181,4 +182,7 @@ if __name__ == "__main__":
         mark = HigherMarkovChain(left_right_list, order_num)
     else:  # defaults to Second Order Markov Chain
         mark = HigherMarkovChain(left_right_list)
-    print(mark.random_walk())
+    sentence = mark.random_walk()
+    print(sentence)
+    length = len(sentence.split())
+    print(f'Length: {length}')
