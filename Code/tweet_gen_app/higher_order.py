@@ -1,6 +1,7 @@
 from markov_chain import MarkovChain
 import sys
 from dictogram import Dictogram
+import random
 
 
 class HigherMarkovChain(MarkovChain):
@@ -144,15 +145,32 @@ class HigherMarkovChain(MarkovChain):
 
     def random_walk(self, length=10):
         """Generate a sentence by randomly transitioning between states.
-           Implements safeguards to avoid repeating words.
+           Implements safeguards to avoid repeating words, and TypeErrors.
 
            Parameters:
            length(int): number of words to be generated
 
            Returns:
            str: a sequence of word tokens originally from the corpus
+
         """
-        pass
+        # pick a word randomly to start the sentence
+        state_types = self.chain.keys()
+        sentence = ""
+        first_state = random.sample(state_types, 1)[0]
+        for word in first_state:
+            sentence += str(word) + " "
+        # start the random walk
+        next_state = first_state
+        for i in range(length - 1):
+            # make sure the word has tokens that come after, find the next word
+            next_state = tuple(next_state)  # go from list back to tuple
+            if self.chain[next_state] is not None:
+                next_state = self.chain[next_state].sample()
+            else:
+                next_state = random.sample(state_types, 1)
+            sentence += str(next_state[-1]) + " "
+        return sentence
 
 
 if __name__ == "__main__":
