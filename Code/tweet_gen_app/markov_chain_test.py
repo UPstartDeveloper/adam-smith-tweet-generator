@@ -43,7 +43,5 @@ class MarkovChainTest(unittest.TestCase):
             assert word_after in states_that_come_next
 
 
-
-
 if __name__ == "__main__":
     unittest.main()

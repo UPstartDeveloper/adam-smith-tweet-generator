@@ -26,9 +26,15 @@ class HigherMarkovChain(MarkovChain):
         else:
             raise IndexError('There are currently no items in the queue.')
 
+    def __iter__(self):
+        '''Returns an iterable of the items in the queue.'''
+        if not len(self.queue) == 0:
+            return iter(self.queue)
+        else:
+            raise IndexError('There are currently no items in the queue.')
+
 
 if __name__ == "__main__":
     left_right_list = ['I', 'went', 'left', 'you', 'went', 'right',
                        'I', 'went', 'left', 'I', 'went', 'right']
     mark = HigherMarkovChain(left_right_list)
-    print(mark.random_walk())
