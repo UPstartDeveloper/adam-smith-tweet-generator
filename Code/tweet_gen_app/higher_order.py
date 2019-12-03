@@ -19,12 +19,12 @@ class HigherMarkovChain(MarkovChain):
         # initialize self.words_list and self.chain
         super().__init__(words_list)
 
-    def enqueue(self, *items):
+    def enqueue(self, item):
         """Add the item to the end of the current queue.
            0(1) runtime.
 
         """
-        self.queue.extend(*items)
+        self.queue.append(item)
 
     def dequeue(self):
         """Return the first item in the queue.
@@ -93,7 +93,7 @@ class HigherMarkovChain(MarkovChain):
         # add the tokens that begin this state
         next_state.extend(words_in_between)
         # add the last token that defines this state
-        next_state.append(self.dequeue)
+        next_state.append(self.dequeue())
         # return the state
         next_state = tuple(next_state)
         return next_state
@@ -112,6 +112,7 @@ class HigherMarkovChain(MarkovChain):
         # add tokens for the new state to the queue
         for j in range(self.order):
             self.enqueue(self.words_list[index])
+            index += 1
         # define the new state
         state, words_in_between = self.form_first_state()
         # define the next state
@@ -127,15 +128,18 @@ class HigherMarkovChain(MarkovChain):
         """
         chain = dict()
         i = 0
-        while i < len(self.words_list) - 1:  # avoid IndexError at end of list
+        while i < len(self.words_list) - self.order:  # avoid IndexError at end
             state, state_after = self.form_states(i)
             # create a word frequency dict to go along with each state
             if chain.get(state, None) is None:
-                chain[state] = Dictogram([state_after])
+                list_of_states = []
+                list_of_states.append(state_after)
+                chain[state] = Dictogram(list_of_states)
             # if the state already exists, add the token and count
             else:
                 chain[state].add_count(state_after)
-            i += self.order  # move index over to start recording of next state
+            print(chain)
+            i += 1  # move index over to start recording of next state
         return chain
 
 
