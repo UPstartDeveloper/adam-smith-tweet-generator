@@ -12,7 +12,7 @@ class HigherMarkovChain(MarkovChain):
         """
         self.queue = list()
         self.order = order  # the number of word types held in a state
-        super().__init__(words_list)  # use a first order Markov Chain to start
+        super().__init__(words_list)  # initialize self.words_list
 
     def enqueue(self, *items):
         """Add the item to the end of the current queue.
@@ -45,7 +45,36 @@ class HigherMarkovChain(MarkovChain):
         else:
             raise IndexError('There are currently no items in the queue.')
 
-    def form_state(self, index):
+    def form_first_state(self):
+        """Return a tuple of the words stored in the state currently being
+           examined in the Markov self.chain structure.
+
+           Parameters:
+           self: a HigherMarkovChain instance
+
+           Returns:
+           tuple: contains a tuple of the state,
+                  and a list of words to reuse in forming the following state
+
+        """
+        pass
+
+    def form_next_state(self, words_in_between):
+        """
+        Define the state, which the state currently being examined, transitions
+        to in the word corpus.
+
+        Parameters:
+        words_in_between(list): every word after the first token in the
+                                previous state
+
+        Returns:
+        tuple: stores the tokens which belong in this state
+
+        """
+        pass
+
+    def form_states(self, index):
         """Assists in forming states based on the order of the Markov Chain.
 
            Parameters:
@@ -56,6 +85,12 @@ class HigherMarkovChain(MarkovChain):
            tuple: consists of tuples representing adjacent states
 
         """
+        for j in range(self.order):
+            self.enqueue(self.words_list[index])
+        state, words_in_between = self.form_first_state()
+        next_state = self.form_next_state(words_in_between)
+        return (state, next_state)
+        '''
         # form the current state we want to examine
         for j in range(index, index + self.order):
             self.enqueue(self.words_list[j])
@@ -68,8 +103,10 @@ class HigherMarkovChain(MarkovChain):
         state_after = list()
         next_token = self.words_list[index + self.order]
         state_after = list(state[0:]).extend(list(next_token))
+        print(f'state_after: {state_after}')
         # return both states
         return (state, state_after)
+        '''
 
     def populate_chain(self):
         """Construct a dictionary to represent the MarkovChain state
@@ -79,7 +116,7 @@ class HigherMarkovChain(MarkovChain):
         chain = dict()
         i = 0
         while i < len(self.words_list) - 1:  # avoid IndexError at end of list
-            state, state_after = self.form_state(i)
+            state, state_after = self.form_states(i)
             # create a word frequency dict to go along with each state
             if chain.get(state, None) is None:
                 chain[state] = Dictogram([state_after])
