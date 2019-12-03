@@ -15,21 +15,33 @@ class HigherMarkovChain(MarkovChain):
         self.queue = list()
 
     def enqueue(self, item):
-        '''Add the item to the end of the current queue.'''
+        """Add the item to the end of the current queue.
+           0(1) runtime.
+
+        """
         self.queue.append(item)
 
     def dequeue(self):
-        '''Return the first item in the queue. Raises if there are no items.'''
+        """Return the first item in the queue.
+           Raises IndexErrorif there are no items.
+           0(1) runtime.
+
+        """
         if not len(self.queue) == 0:
             item = self.queue.pop(0)
             return item
         else:
             raise IndexError('There are currently no items in the queue.')
 
-    def __iter__(self):
-        '''Returns an iterable of the items in the queue.'''
+    def iterate_queue(self):
+        """Returns an iterable of the items in the queue.
+           Raises IndexError if there are no items.
+           O(n) runtime.
+
+        """
         if not len(self.queue) == 0:
-            return iter(self.queue)
+            for item in self.queue:
+                yield(item)
         else:
             raise IndexError('There are currently no items in the queue.')
 
@@ -38,3 +50,6 @@ if __name__ == "__main__":
     left_right_list = ['I', 'went', 'left', 'you', 'went', 'right',
                        'I', 'went', 'left', 'I', 'went', 'right']
     mark = HigherMarkovChain(left_right_list)
+    mark.queue = ['a', 'b', 'c']
+    for item in mark.queue:
+        print(item)
