@@ -5,7 +5,7 @@ import random
 
 
 class HigherMarkovChain(MarkovChain):
-    def __init__(self, words_list=None):
+    def __init__(self, words_list=None, order=2):
         """Extends all the properties of a First Order MarkovChain.
            Adds a queue property for calculating probabilities for state
            transitions.
@@ -13,6 +13,14 @@ class HigherMarkovChain(MarkovChain):
         """
         super().__init__(words_list)  # use a first order Markov Chain to start
         self.queue = list()
+        self.order = order  # the number of word types held in a state
+
+    def populate_chain(self):
+        """Construct a dictionary to represent the MarkovChain state
+           transitions of any order.
+
+        """
+        pass
 
     def enqueue(self, item):
         """Add the item to the end of the current queue.
