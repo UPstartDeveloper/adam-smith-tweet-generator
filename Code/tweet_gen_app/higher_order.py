@@ -57,7 +57,18 @@ class HigherMarkovChain(MarkovChain):
                   and a list of words to reuse in forming the following state
 
         """
-        pass
+        # add the first word to the state being formed
+        state = list()
+        state.append(self.dequeue())
+        # define the words reused between this state add the next state
+        words_in_between = list()
+        for i in range(self.order - 1):
+            words_in_between.append(self.dequeue())
+        # add the rest of the words that belong in this state
+        state.extend(words_in_between)
+        # return values
+        state = tuple(state)
+        return (state, words_in_between)
 
     def form_next_state(self, words_in_between):
         """
