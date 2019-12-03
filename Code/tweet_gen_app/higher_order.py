@@ -115,7 +115,8 @@ class HigherMarkovChain(MarkovChain):
             index += 1
         # define the new state
         state, words_in_between = self.form_first_state()
-        # define the next state
+        # define the next state, start by "backpeddalling" the index position
+        index -= 1
         self.enqueue(self.words_list[index + 1])
         next_state = self.form_next_state(words_in_between)
         # return both states
@@ -138,7 +139,6 @@ class HigherMarkovChain(MarkovChain):
             # if the state already exists, add the token and count
             else:
                 chain[state].add_count(state_after)
-            print(chain)
             i += 1  # move index over to start recording of next state
         return chain
 
