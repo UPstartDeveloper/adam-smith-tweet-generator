@@ -1,7 +1,5 @@
 from markov_chain import MarkovChain
-import clean_words
-from dictogram import Dictogram
-import random
+import sys
 
 
 class HigherMarkovChain(MarkovChain):
@@ -14,14 +12,14 @@ class HigherMarkovChain(MarkovChain):
         super().__init__(words_list)  # use a first order Markov Chain to start
         self.queue = list()
         self.order = order  # the number of word types held in a state
-
+    """
     def populate_chain(self):
-        """Construct a dictionary to represent the MarkovChain state
+        '''Construct a dictionary to represent the MarkovChain state
            transitions of any order.
 
-        """
+        '''
         pass
-
+    """
     def enqueue(self, *items):
         """Add the item to the end of the current queue.
            0(1) runtime.
@@ -55,9 +53,8 @@ class HigherMarkovChain(MarkovChain):
 
 
 if __name__ == "__main__":
+    order_num = sys.argv[0:]
     left_right_list = ['I', 'went', 'left', 'you', 'went', 'right',
                        'I', 'went', 'left', 'I', 'went', 'right']
-    mark = HigherMarkovChain(left_right_list)
-    mark.enqueue(('a', 'b', 'c'))
-    for item in mark.queue:
-        print(item)
+    mark = HigherMarkovChain(left_right_list, order=order_num)
+    print(mark.random_walk())
