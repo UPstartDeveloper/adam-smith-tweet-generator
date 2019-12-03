@@ -10,9 +10,9 @@ class HigherMarkovChain(MarkovChain):
            transitions.
 
         """
-        super().__init__(words_list)  # use a first order Markov Chain to start
         self.queue = list()
         self.order = order  # the number of word types held in a state
+        super().__init__(words_list)  # use a first order Markov Chain to start
 
     def enqueue(self, *items):
         """Add the item to the end of the current queue.
@@ -56,7 +56,20 @@ class HigherMarkovChain(MarkovChain):
            tuple: consists of tuples representing adjacent states
 
         """
-        return (1, 2)
+        # form the current state we want to examine
+        for j in range(index, index + self.order):
+            self.enqueue(self.words_list[j])
+        state = list()
+        for k in range(self.order):
+            state.append(self.dequeue())
+        # make it usuable as a dict key
+        state = tuple(state)
+        # form the state that follows
+        state_after = list()
+        next_token = self.words_list[index + self.order]
+        state_after = list(state[0:]).extend(list(next_token))
+        # return both states
+        return (state, state_after)
 
     def populate_chain(self):
         """Construct a dictionary to represent the MarkovChain state
@@ -78,7 +91,7 @@ class HigherMarkovChain(MarkovChain):
 
 
 if __name__ == "__main__":
-    order_num = sys.argv[0:]
+    order_num = int(sys.argv[1])
     left_right_list = ['I', 'went', 'left', 'you', 'went', 'right',
                        'I', 'went', 'left', 'I', 'went', 'right']
     mark = HigherMarkovChain(left_right_list, order_num)
