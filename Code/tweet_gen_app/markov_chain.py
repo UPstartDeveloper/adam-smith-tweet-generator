@@ -52,6 +52,6 @@ class MarkovChain:
 
 
 if __name__ == "__main__":
-    fish_list = ["one", "fish", "two", "fish", "red", "fish", "blue", "fish"]
+    fish_list = ['one', 'fish', 'two', 'fish', 'red', 'fish', 'blue', 'fish']
     mark = MarkovChain(fish_list)
     print(mark.random_walk())
