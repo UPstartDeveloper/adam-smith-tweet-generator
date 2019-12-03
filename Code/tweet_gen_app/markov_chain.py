@@ -7,9 +7,8 @@ class MarkovChain:
     def __init__(self, words_list=None):
         """Construct a Markov Chain model.
            Param: words_list(list of str)
+
         """
-        # Initialize an empty dictionary
-        self.chain = dict()
         # use the passed in list of words
         if words_list is not None:
             self.words_list = words_list
@@ -17,17 +16,34 @@ class MarkovChain:
             # use the Adam Smith corpus
             self.words_list = clean_words.get_clean_words()
         # populate the Markov Chain
+        self.chain = dict()
+        self.chain = self.populate_chain()
+
+    def populate_chain(self):
+        """Construct a dictionary representing the conditional probabilities
+           of transitioning from a given state in the word corpus to the next.
+
+           Parameters: MarkovChain object
+
+           Returns: (dict): where each key is a state, and each value
+                            is a nested dict containing the transitions
+                            out of that state, with int counts of their
+                            appearances after the state in the corpus
+
+        """
+        chain = dict()
         i = 0
         while i < len(self.words_list) - 1:  # avoiding IndexError
             state = self.words_list[i]
             token_after = self.words_list[i + 1]
             # create a word frequency dict to go along with each state
-            if self.chain.get(state, None) is None:
-                self.chain[state] = Dictogram([token_after])
+            if chain.get(state, None) is None:
+                chain[state] = Dictogram([token_after])
             # if the state already exists, add the token and count
             else:
-                self.chain[state].add_count(token_after)
+                chain[state].add_count(token_after)
             i += 1
+        return chain
 
     def random_walk(self, length=10):
         """Generate a sentence by randomly transitioning between states.
