@@ -83,7 +83,15 @@ class HigherMarkovChain(MarkovChain):
         tuple: stores the tokens which belong in this state
 
         """
-        pass
+        # define the next state
+        next_state = list()
+        # add the tokens that begin this state
+        next_state.extend(words_in_between)
+        # add the last token that defines this state
+        next_state.append(self.dequeue)
+        # return the state
+        next_state = tuple(next_state)
+        return next_state
 
     def form_states(self, index):
         """Assists in forming states based on the order of the Markov Chain.
@@ -96,28 +104,16 @@ class HigherMarkovChain(MarkovChain):
            tuple: consists of tuples representing adjacent states
 
         """
+        # add tokens for the new state to the queue
         for j in range(self.order):
             self.enqueue(self.words_list[index])
+        # define the new state
         state, words_in_between = self.form_first_state()
+        # define the next state
+        self.enqueue(self.words_list[index + 1])
         next_state = self.form_next_state(words_in_between)
-        return (state, next_state)
-        '''
-        # form the current state we want to examine
-        for j in range(index, index + self.order):
-            self.enqueue(self.words_list[j])
-        state = list()
-        for k in range(self.order):
-            state.append(self.dequeue())
-        # make it usuable as a dict key
-        state = tuple(state)
-        # form the state that follows
-        state_after = list()
-        next_token = self.words_list[index + self.order]
-        state_after = list(state[0:]).extend(list(next_token))
-        print(f'state_after: {state_after}')
         # return both states
-        return (state, state_after)
-        '''
+        return (state, next_state)
 
     def populate_chain(self):
         """Construct a dictionary to represent the MarkovChain state
