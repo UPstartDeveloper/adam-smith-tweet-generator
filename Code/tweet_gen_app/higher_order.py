@@ -140,8 +140,12 @@ class HigherMarkovChain(MarkovChain):
 
 
 if __name__ == "__main__":
-    order_num = int(sys.argv[1])
     left_right_list = ['I', 'went', 'left', 'you', 'went', 'right',
                        'I', 'went', 'left', 'I', 'went', 'right']
-    mark = HigherMarkovChain(left_right_list, order_num)
-    print(mark.random_walk())
+    if len(sys.argv) > 1:  # user has defined an order for the Markov Chain
+        order_num = int(sys.argv[1])
+        mark = HigherMarkovChain(left_right_list, order_num)
+    else:  # defaults to Second Order
+        mark = HigherMarkovChain(left_right_list)
+    print(mark.chain)
+    # print(mark.random_walk())
