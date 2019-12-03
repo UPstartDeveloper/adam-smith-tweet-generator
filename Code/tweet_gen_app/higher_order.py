@@ -9,10 +9,15 @@ class HigherMarkovChain(MarkovChain):
            Adds a queue property for calculating probabilities for state
            transitions.
 
+           Parameters:
+           words_list(list): a list of str represen the corpus text
+           order(int): the number of word types held in a state
+
         """
         self.queue = list()
-        self.order = order  # the number of word types held in a state
-        super().__init__(words_list)  # initialize self.words_list
+        self.order = order
+        # initialize self.words_list and self.chain
+        super().__init__(words_list)
 
     def enqueue(self, *items):
         """Add the item to the end of the current queue.
