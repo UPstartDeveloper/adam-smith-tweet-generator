@@ -12,14 +12,7 @@ class HigherMarkovChain(MarkovChain):
         super().__init__(words_list)  # use a first order Markov Chain to start
         self.queue = list()
         self.order = order  # the number of word types held in a state
-    """
-    def populate_chain(self):
-        '''Construct a dictionary to represent the MarkovChain state
-           transitions of any order.
 
-        '''
-        pass
-    """
     def enqueue(self, *items):
         """Add the item to the end of the current queue.
            0(1) runtime.
@@ -50,6 +43,17 @@ class HigherMarkovChain(MarkovChain):
                 yield(item)
         else:
             raise IndexError('There are currently no items in the queue.')
+
+    def form_state(self, chain):
+        '''Assists in forming states based on the order of the Markov Chain.'''
+        pass
+
+    def populate_chain(self):
+        """Construct a dictionary to represent the MarkovChain state
+           transitions of any order.
+
+        """
+        pass
 
 
 if __name__ == "__main__":
