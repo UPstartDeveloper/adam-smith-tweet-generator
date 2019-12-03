@@ -44,8 +44,15 @@ class HigherMarkovChain(MarkovChain):
         else:
             raise IndexError('There are currently no items in the queue.')
 
-    def form_state(self, chain):
-        '''Assists in forming states based on the order of the Markov Chain.'''
+    def form_state(self):
+        """Assists in forming states based on the order of the Markov Chain.
+
+           Parameters: self(HigherMarkovChain)
+
+           Returns:
+           tuple: consists of tuples representing adjacent states
+
+        """
         pass
 
     def populate_chain(self):
@@ -53,7 +60,19 @@ class HigherMarkovChain(MarkovChain):
            transitions of any order.
 
         """
-        pass
+        chain = dict()
+        i = 0
+        while i < len(self.words_list) - 1:  # avoid IndexError at end of list
+            state = self.form_state()[0]
+            state_after = self.form_state()[1]
+            # create a word frequency dict to go along with each state
+            if chain.get(state, None) is None:
+                chain[state] = Dictogram([state_after])
+            # if the state already exists, add the token and count
+            else:
+                chain[state].add_count(state_after)
+            i += self.order  # move index over to start recording of next state
+        return chain
 
 
 if __name__ == "__main__":
