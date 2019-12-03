@@ -142,14 +142,25 @@ class HigherMarkovChain(MarkovChain):
             i += 1  # move index over to start recording of next state
         return chain
 
+    def random_walk(self, length=10):
+        """Generate a sentence by randomly transitioning between states.
+           Implements safeguards to avoid repeating words.
+
+           Parameters:
+           length(int): number of words to be generated
+
+           Returns:
+           str: a sequence of word tokens originally from the corpus
+        """
+        pass
+
 
 if __name__ == "__main__":
     left_right_list = ['I', 'went', 'left', 'you', 'went', 'right',
                        'I', 'went', 'left', 'I', 'went', 'right']
-    if len(sys.argv) > 1:  # user has defined an order for the Markov Chain
+    if len(sys.argv) > 1:  # user-defined order for the Markov Chain
         order_num = int(sys.argv[1])
         mark = HigherMarkovChain(left_right_list, order_num)
-    else:  # defaults to Second Order
+    else:  # defaults to Second Order Markov Chain
         mark = HigherMarkovChain(left_right_list)
-    print(mark.chain)
-    # print(mark.random_walk())
+    print(mark.random_walk())
