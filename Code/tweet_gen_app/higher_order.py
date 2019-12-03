@@ -1,5 +1,6 @@
 from markov_chain import MarkovChain
 import sys
+from dictogram import Dictogram
 
 
 class HigherMarkovChain(MarkovChain):
@@ -44,16 +45,18 @@ class HigherMarkovChain(MarkovChain):
         else:
             raise IndexError('There are currently no items in the queue.')
 
-    def form_state(self):
+    def form_state(self, index):
         """Assists in forming states based on the order of the Markov Chain.
 
-           Parameters: self(HigherMarkovChain)
+           Parameters:
+           self(HigherMarkovChain): the instance of the class
+           index(int): the position currently being examined in the corpus
 
            Returns:
            tuple: consists of tuples representing adjacent states
 
         """
-        pass
+        return (1, 2)
 
     def populate_chain(self):
         """Construct a dictionary to represent the MarkovChain state
@@ -63,8 +66,7 @@ class HigherMarkovChain(MarkovChain):
         chain = dict()
         i = 0
         while i < len(self.words_list) - 1:  # avoid IndexError at end of list
-            state = self.form_state()[0]
-            state_after = self.form_state()[1]
+            state, state_after = self.form_state(i)
             # create a word frequency dict to go along with each state
             if chain.get(state, None) is None:
                 chain[state] = Dictogram([state_after])
@@ -79,5 +81,5 @@ if __name__ == "__main__":
     order_num = sys.argv[0:]
     left_right_list = ['I', 'went', 'left', 'you', 'went', 'right',
                        'I', 'went', 'left', 'I', 'went', 'right']
-    mark = HigherMarkovChain(left_right_list, order=order_num)
+    mark = HigherMarkovChain(left_right_list, order_num)
     print(mark.random_walk())
