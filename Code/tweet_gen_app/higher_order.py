@@ -181,8 +181,9 @@ if __name__ == "__main__":
         order_num = int(sys.argv[1])
         mark = HigherMarkovChain(left_right_list, order_num)
     else:  # defaults to Second Order Markov Chain
-        mark = HigherMarkovChain(left_right_list)
+        # mark = HigherMarkovChain(left_right_list)
+        mark = HigherMarkovChain()
     sentence = mark.random_walk()
     print(sentence)
-    length = len(sentence.split())
-    print(f'Length: {length}')
+    # length = len(sentence.split())
+    # print(f'Length: {length}')

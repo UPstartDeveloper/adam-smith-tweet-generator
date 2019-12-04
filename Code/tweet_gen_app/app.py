@@ -2,14 +2,14 @@ from flask import Flask, render_template, redirect, url_for, request
 from dictogram import Dictogram
 from stochastic_sampling import stochastic_sample
 from clean_words import get_clean_words
-from markov_chain import MarkovChain
+from higher_order import HigherMarkovChain
 from pymongo import MongoClient
 import os
 
 # Flask app for tweet generator
 app = Flask(__name__)
 # create a markov chain
-mark = MarkovChain()
+mark = HigherMarkovChain()
 
 # add Mongo database
 host = os.environ.get('MONGODB_URI', 'mongodb://localhost:27017/Tweets')

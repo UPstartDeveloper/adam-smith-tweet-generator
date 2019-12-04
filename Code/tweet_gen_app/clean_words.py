@@ -2,15 +2,17 @@ import sys
 import re
 
 
-def get_clean_words(file_name="adam_smith.txt"):
+def get_clean_words():
     """Get a list of single-word strings from source text.
         Param: file_name(str)
         Return: clean_words_as_str(list)
     """
     words = []
-    with open(file_name, "r") as file:
-        # make a list ofd words, contains non alphabetic chars
+    # collect words from .txt files
+    with open("adam_smith.txt", "r") as file:
         words = file.read().split()
+    with open("more_adam_smith.txt", "r") as file:
+        words.extend(file.read().split())
     # remove all occurences of non-alpha chars from data
     clean_words = []
     for word in words:
@@ -36,4 +38,4 @@ def get_clean_words(file_name="adam_smith.txt"):
 
 if __name__ == "__main__":
     file = "adam_smith.txt"
-    get_clean_words()
+    print(len(get_clean_words()))
