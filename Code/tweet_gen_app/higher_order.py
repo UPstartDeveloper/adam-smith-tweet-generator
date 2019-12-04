@@ -143,15 +143,10 @@ class HigherMarkovChain(MarkovChain):
             i += 1  # move index over to start recording of next state
         return chain
 
-    def random_walk(self, length=10):
-        """Generate a sentence by randomly transitioning between states.
-           Implements safeguards to avoid repeating words, and TypeErrors.
-
-           Parameters:
-           length(int): number of words to be generated
-
-           Returns:
-           str: a sequence of word tokens originally from the corpus
+    def generate_sentence(self, length):
+        """Generate a sentence from the state transitions (values)
+           in the Markov Chain.  Params and return values same as
+           random_walk method.
 
         """
         # pick a word randomly to start the sentence
@@ -171,6 +166,35 @@ class HigherMarkovChain(MarkovChain):
             else:
                 next_state = random.sample(state_types, 1)
             sentence += str(next_state[-1]) + " "
+        return sentence
+
+    def fake_walk(self, length):
+        """Generate a sentence from the states (keys) in the Markov Chain.
+           Params and return values same as random_walk method.
+
+        """
+        # if length < self.order
+        # sample a key from self.keys randomly
+        # then sample from the state stochastically to form the sentence
+        pass
+
+    def random_walk(self, length=10):
+        """Generate a sentence by randomly transitioning between states.
+           Implements safeguards to avoid repeating words, and TypeErrors.
+
+           Parameters:
+           length(int): number of words to be generated
+
+           Returns:
+           str: a sequence of word tokens originally from the corpus
+
+        """
+        sentence = ""
+        # decide which method to use to generate the sentence
+        if length >= self.order:
+            sentence = self.generate_sentence(length)
+        else:
+            sentence = self.fake_walk(length)
         return sentence
 
 
