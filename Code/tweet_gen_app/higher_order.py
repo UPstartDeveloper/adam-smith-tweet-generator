@@ -166,8 +166,6 @@ class HigherMarkovChain(MarkovChain):
             else:
                 next_state = random.sample(state_types, 1)
             sentence += str(next_state[-1]) + " "
-        # add punctuation
-        sentence += "."
         return sentence
 
     def fake_walk(self, length):
@@ -185,8 +183,6 @@ class HigherMarkovChain(MarkovChain):
             next_word = ""
             next_word = random.sample(state_to_sample_from, 1)[0]
             sentence += next_word
-        # add punctuation
-        sentence += "."
         return sentence
 
     def random_walk(self, length=10):
