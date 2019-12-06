@@ -29,7 +29,7 @@ class HigherMarkovChain(MarkovChain):
 
     def dequeue(self):
         """Return the first item in the queue.
-           Raises IndexErrorif there are no items.
+           Raises IndexError if there are no items.
            0(1) runtime.
 
         """
