@@ -25,9 +25,9 @@ def get_words(num_words):
     """
     # sentence tp be displayed
     words = mark.random_walk(num_words)
-    # capitalize first letter of starting word
+    # capitalize first letter of starting word, remove space after last word
     first_letter = words[0].upper()
-    words = first_letter + words[1:]
+    words = first_letter + words[1:len(words) - 1]
     return words
 
 

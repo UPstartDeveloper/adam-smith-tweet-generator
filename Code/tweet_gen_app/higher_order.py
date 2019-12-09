@@ -130,7 +130,8 @@ class HigherMarkovChain(MarkovChain):
         """
         chain = dict()
         i = 0
-        while i < len(self.words_list) - self.order:  # avoid IndexError at end
+        num_words = len(self.words_list)
+        while i < num_words - self.order:  # avoid IndexError at end
             state, state_after = self.form_states(i)
             # create a word frequency dict to go along with each state
             if chain.get(state, None) is None:
