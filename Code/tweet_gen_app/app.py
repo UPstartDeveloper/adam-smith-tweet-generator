@@ -22,6 +22,7 @@ def get_words(num_words):
     """Capitalize the word letter of a string.
        Param: num_words (int): amount of words to put in sentence
        Return: words(list): str where first str is capitalized, 10 for sentence
+
     """
     # sentence tp be displayed
     words = mark.random_walk(num_words)
@@ -42,14 +43,13 @@ def index():
     return render_template("index.html", words=words)
     # user has inputted a number of words to generate
     if request.method == 'POST':
-        # int_num_words = request.form.get('num')
         return redirect(url_for('index'))
 
 
-@app.route("/new_favorite", methods=['POST'])
+@app.route("/new_favorite/", methods=['POST'])
 def add_to_favorites():
-    """Add the sentence into the favorites database."""
-    words = request.form.get('words')
+    '''Add the sentence into the favorites database.'''
+    words = request.args.get('words')
     sentence = {
         'tweet_phrase': words
     }
@@ -59,7 +59,7 @@ def add_to_favorites():
 
 @app.route("/favorites")
 def show_favorites():
-    """List all Tweets marked as favorites by the users."""
+    '''List all Tweets marked as favorites by the users.'''
     return render_template("favorites.html", favorites=favorites.find())
 
 
