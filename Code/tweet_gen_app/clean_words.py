@@ -41,5 +41,5 @@ def get_clean_words():
 
 
 if __name__ == "__main__":
-    file = "adam_smith.txt"
+    # file = "adam_smith.txt"
     print(len(get_clean_words()))
