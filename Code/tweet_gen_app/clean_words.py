@@ -32,7 +32,7 @@ def get_clean_words():
     clean_words = []
     for word in words:
         # clean words for punctuation, unwanted symbols
-        clean_words.append(parse_word(word))
+        clean_words.append(parse_word(word.lower()))
     # make a list of whole words only containing letters
     clean_words_as_str = []
     for list_of_chars in clean_words:

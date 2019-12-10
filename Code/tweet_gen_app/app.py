@@ -9,7 +9,7 @@ import os
 # Flask app for tweet generator
 app = Flask(__name__)
 # create a markov chain
-mark = HigherMarkovChain()
+mark = HigherMarkovChain(order=7)
 
 # add Mongo database
 host = os.environ.get('MONGODB_URI', 'mongodb://localhost:27017/Tweets')
