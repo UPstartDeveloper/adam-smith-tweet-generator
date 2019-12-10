@@ -49,7 +49,7 @@ def index():
 @app.route("/new_favorite/", methods=['POST'])
 def add_to_favorites():
     '''Add the sentence into the favorites database.'''
-    words = request.args.get('words')
+    words = request.form.get('words')
     sentence = {
         'tweet_phrase': words
     }
@@ -57,7 +57,7 @@ def add_to_favorites():
     return redirect(url_for('index'))
 
 
-@app.route("/favorites")
+@app.route("/favorites/")
 def show_favorites():
     '''List all Tweets marked as favorites by the users.'''
     return render_template("favorites.html", favorites=favorites.find())

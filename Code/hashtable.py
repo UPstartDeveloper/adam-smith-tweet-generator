@@ -28,7 +28,6 @@ class HashTable(object):
 
     def _bucket_index(self, key):
         '''Return the bucket index where the given key would be stored.'''
-        # Calculate the given key's hash code and transform into bucket index
         return hash(key) % len(self.buckets)
 
     def keys(self):
@@ -179,7 +178,7 @@ class HashTable(object):
 
     def get_bucket_containing_key_on_set(self, key):
         """Return the bucket(LinkedList) whose Nodes reference the key.
-           Linear probing is used to resolve any collisions.
+           Closed hashing with bucketing is used to resolve any collisions.
 
         """
         index = self._bucket_index(key)
@@ -195,8 +194,8 @@ class HashTable(object):
     def get_bucket_containing_key_on_delete(self, key):
         """Return the bucket(LinkedList) whose Nodes reference the key.
            If not found, it will return the bucket after. This is because
-           due to linear probing, it may have moved over one bucket of where it
-           was supposed to be.
+           due to the collision (closed hashing combined with bucketing), it
+           may have moved over one bucket of where it was supposed to be.
 
         """
         index = self._bucket_index(key)
