@@ -12,6 +12,8 @@ def parse_word(word):
     word = word.replace(';', '')
     word = word.replace('(', '')
     word = word.replace(')', '')
+    word = word.replace('{', '')
+    word = word.replace('}', '')
     return word
 
 
