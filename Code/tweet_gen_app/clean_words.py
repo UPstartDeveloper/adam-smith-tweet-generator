@@ -2,6 +2,19 @@ import sys
 import re
 
 
+def parse_word(word):
+    '''Given a str, returns a str cleaned of undesirable symbols.'''
+    word = word.replace('.', '')
+    word = word.replace('?', '')
+    word = word.replace('!', '')
+    word = word.replace(',', '')
+    word = word.replace(':', '')
+    word = word.replace(';', '')
+    word = word.replace('(', '')
+    word = word.replace(')', '')
+    return word
+
+
 def get_clean_words():
     """Get a list of single-word strings from source text.
         Param: file_name(str)
@@ -16,17 +29,8 @@ def get_clean_words():
     # remove all occurences of non-alpha chars from data
     clean_words = []
     for word in words:
-        clean_word = ([char for char in word.lower() if not (
-            char == "." or
-            char == "?" or
-            char == "!" or
-            char == "," or
-            char == ":" or
-            char == ";" or
-            char == "(" or
-            char == ")"
-        )])
-        clean_words.append(clean_word)
+        # clean words for punctuation, unwanted symbols
+        clean_words.append(parse_word(word))
     # make a list of whole words only containing letters
     clean_words_as_str = []
     for list_of_chars in clean_words:
