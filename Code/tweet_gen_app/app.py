@@ -5,6 +5,7 @@ from clean_words import get_clean_words
 from higher_order import HigherMarkovChain
 from pymongo import MongoClient
 import os
+from twitter import tweet
 
 # Flask app for tweet generator
 app = Flask(__name__)
@@ -61,6 +62,15 @@ def add_to_favorites():
 def show_favorites():
     '''List all Tweets marked as favorites by the users.'''
     return render_template("favorites.html", favorites=favorites.find())
+
+
+@app.route("/tweet/", methods=['POST'])
+def tweet():
+    '''Send a status update to @AdamChain on Twitter.'''
+    status = request.form.get('sentence')
+    print(status)
+    # tweet(status=status)
+    return redirect(url_for('index'))
 
 
 if __name__ == "__main__":

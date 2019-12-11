@@ -46,5 +46,5 @@ def tweet(status):
 
 
 if __name__ == "__main__":
-    tweet(status="Enjoy Capitalism")
+    tweet(status="Capitalism... does it still work?")
     print('did it work?')
