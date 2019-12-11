@@ -30,6 +30,21 @@ url = 'https://api.twitter.com/1.1/statuses/update.json'
 # The contents of status (i.e. tweet text)
 status = 'Woohoo!'
 
-authenticated.update_status(status=status)
+# authenticated.update_status(status=status)
 
-# Show the text from the response
+
+def tweet(status):
+    """Send a status update to @AdamChain on Twitter.
+
+       Parameters:
+       status(str): the text in the post to be Tweeted
+
+       Returns:
+       None
+    """
+    authenticated.update_status(status=status)
+
+
+if __name__ == "__main__":
+    tweet(status="Enjoy Capitalism")
+    print('did it work?')
