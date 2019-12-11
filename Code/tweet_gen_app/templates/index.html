@@ -17,18 +17,27 @@
                         <p>Here are a few words. These are randomly selected one-by-one from <i>The Wealth of Nations</i> (1776), often cited as the <i> magnum opus</i> of the Scottish philosopher: <br></p>
                     </div>
                     <div class="row justify-content-center">
-                        <!-- Show Sentence, and Display Option to Add to Favorites -->
-                        <form action="/new_favorite/" method="POST">
-                            <input type="hidden" name="words" value="{{ words }}.">
+                        <!-- Show Sentence, and Display Option to Tweet This -->
+                        <form class="form-group-inline" action="/tweet/" method="POST">
+                            <input type="hidden" name="sentence" value="{{ words }}.">
                             <p><strong>"{{ words }}."</strong></p>
-                            <input class="btn btn-danger" type="submit" value="Add to Favorites!">
+                            <button type="submit" class="btn btn-primary">Tweet This!</button>
                         </form>
+                    </div>
+                    <div class="row justify-content-center">
+                        <!-- Add to Favorites -->
+                        <div class="d-inline p-2">
+                            <form class="form-group-inline" action="/new_favorite/" method="POST">
+                                <input type="hidden" name="words" value="{{ words }}">
+                                <input class="btn btn-success" type="submit" value="Add to Favorites!">
+                            </form>
+                        </div>
                     </div>
                     <div class="row justify-content-center">
                         <!-- See Favorites -->
                         <div class="d-inline p-2">
-                            <form action="/favorites/" method="GET">
-                                <button class="btn btn-info" type="submit">See Favorites</button>
+                            <form class="form-group-inline" action="/favorites/" method="GET">
+                                <button class="btn btn-danger" type="submit">See Favorites</button>
                             </form>
                         </div>
                     </div>
@@ -39,7 +48,7 @@
                     <!-- Get a new sentence -->
                     <form class="form-group" action="{{ url_for('index') }}" method="POST">
                         <input class="form-control mb-2" name="num" type="text" placeholder="How Many Words Shall I Generate?">
-                        <input type="submit" value="Show Another (Computer-Generated) Sentence" class="btn btn-primary">
+                        <input type="submit" value="Show Another (Computer-Generated) Sentence" class="btn btn-info">
                     </form>
                 </div>
             </div>

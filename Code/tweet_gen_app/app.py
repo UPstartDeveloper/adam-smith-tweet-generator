@@ -69,7 +69,7 @@ def tweet():
     '''Send a status update to @AdamChain on Twitter.'''
     status = request.form.get('sentence')
     print(status)
-    # tweet(status=status)
+    tweet(status=status)
     return redirect(url_for('index'))
 
 
