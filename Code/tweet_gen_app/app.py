@@ -5,7 +5,7 @@ from clean_words import get_clean_words
 from higher_order import HigherMarkovChain
 from pymongo import MongoClient
 import os
-from twitter import tweet
+import twitter
 
 # Flask app for tweet generator
 app = Flask(__name__)
@@ -67,9 +67,9 @@ def show_favorites():
 @app.route("/tweet/", methods=['POST'])
 def tweet():
     '''Send a status update to @AdamChain on Twitter.'''
-    status = request.form.get('sentence')
-    print(status)
-    tweet(status=status)
+    status_update = request.form.get('sentence')
+    print(status_update)
+    twitter.tweet(status_update)
     return redirect(url_for('index'))
 
 

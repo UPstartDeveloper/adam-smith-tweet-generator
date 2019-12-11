@@ -33,16 +33,16 @@ status = 'Woohoo!'
 # authenticated.update_status(status=status)
 
 
-def tweet(status):
+def tweet(status_update):
     """Send a status update to @AdamChain on Twitter.
 
        Parameters:
-       status(str): the text in the post to be Tweeted
+       status_update(str): the text in the post to be Tweeted
 
        Returns:
        None
     """
-    authenticated.update_status(status=status)
+    authenticated.update_status(status=status_update)
 
 
 if __name__ == "__main__":
