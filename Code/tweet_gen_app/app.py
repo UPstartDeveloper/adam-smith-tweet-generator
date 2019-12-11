@@ -66,9 +66,8 @@ def show_favorites():
 
 @app.route("/tweet/", methods=['POST'])
 def tweet():
-    '''Send a status update to @AdamChain on Twitter.'''
+    '''Posts a status update to the @AdamChain Twitter account.'''
     status_update = request.form.get('sentence')
-    print(status_update)
     twitter.tweet(status_update)
     return redirect(url_for('index'))
 

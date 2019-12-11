@@ -8,7 +8,7 @@ import tweepy
 dotenv.load_dotenv('.env')
 
 consumer_key = (
-    os.environ.get('TWITTER_CONSUMER_KEY'))
+    os.environ.get('TWITTER_CONSUMER_KEY')).encode('utf-8')
 consumer_secret = (
     os.environ.get('TWITTER_CONSUMER_SECRET'))
 access_token = (
