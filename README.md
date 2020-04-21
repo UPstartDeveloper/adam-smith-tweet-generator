@@ -1,5 +1,3 @@
-![]()
-
 # The Words of Adam Smith
 "*On the road from the City of Skepticism, I had to pass through the Valley of Ambiguity*" - Adam Smith, 17th-century philosopher and economist
 ## Table of Contents
@@ -12,14 +10,43 @@
 4. [Running the Tests](#running-the-tests)
 5. [Tech Stack](#tech-stack)
 6. [Authors](#authors)
-7. [License](#license)
+7. [Open Source License](#open-source-license)
 8. [Acknowledgements](#acknowledgements)
+9. [Resources](#resources)
 
 ## Motivation
+![This project is intended to inspire critical debate and discussion around economics and computer science, not political grandstanding.](https://i.postimg.cc/yxRXL2ZL/Screen-Shot-2020-04-21-at-3-31-13-PM.png)
 
+What if you could go back and have a conversation with Adam Smith?
+
+Smith's work has inspired the basis for much of what became consumer capitalism - and also predicted much of its worst excesses.
+
+This aim of this project is NOT to espouse any particular political viewpoint.
+
+### The Real Aim of the Project
+At the end of the day, I, Zain Raza, aim to help myself and others take a critical look at the following questions:
+
+1. Why does society struggle with poverty?
+2. Who was the real Adam Smith?
+3. How does capitalism even work?
+4. and What can we do to de-polarize economic debates?
 
 ## But what is a Markov Chain?
+The technical foundation of this is nothing more than a *Markov Chain*, a mathematical construct that enables **stochastic sampling between random states.**
 
+If that didn't a whole lot of make sense, don't worry! I remember Markov Chains being one of the most difficult concepts to grasp, when I first learned about them in the CS 1.2: Intro to Data Structures course taught at [Make School](https://makeschool.com).
+
+For our purposes, let it suffice to say this data structure is what allows the underlying backend for this project to work. Currently, the project is nothing more than a website, where users can send Tweets to the @Adam-Chain twitter account (managed by Zain Raza).
+
+These tweets are built by randomly picking words of the text of Smith's magnum opus, *The Wealth of Nations* (1776). I encourage you whole heartedly to check out the website and the Twitter profile - looking at some of these Tweets, you may get a little nervous... for instance, how was the Markov Chain model able to generate a sentence like *this* on its own?
+
+"Of discerning the remote parts of the people."
+
+"Is artificially split and divided in the second offence to."
+
+"Of negligence which does not diminish the necessity of diligence."
+
+Are these phrases life-like enough for you? Please share your feedback by opening an issue on this repository! And to learn more about Markov Chain, be sure to check out the links in the [Resources](#resources) section of this document.
 
 ## Getting Started
 ### Prerequisites
@@ -91,8 +118,8 @@ Thank you in advance for contributing to this project!
     * Want to see more? Take a peek at Zain's entire portfolio, at [https://www.makeschool.com/portfolio/Syed-Raza](https://www.makeschool.com/portfolio/Syed-Raza).
 
 
-## License
-This project is licensed under the MIT License - see [LICENSE.md](LICENSE.md) for more details.
+## Open Source License
+This project is licensed under the MIT License - see [LICENSE](LICENSE) for more details. I welcome all open source efforts!
 
 ## Acknowledgements
 - Mom and Dad - Thank you both for the sacrifices you have made for our family. I have been traveling on planes
