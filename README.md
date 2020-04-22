@@ -106,7 +106,7 @@ you may need to use for this project:
 Thank you in advance for contributing to this project!
 
 ## Running the Tests
-
+Tests are not implemented for this site at the moment. Please come back to this section later, I appreciate your patience.
 
 ## Frameworks/APIs Used
 - Flask - web framework for the backend
@@ -118,3 +118,16 @@ This project is licensed under the MIT License - see [LICENSE](LICENSE) for more
 
 ## Acknowledgements
 - [Alan Davis](https://github.com/neptunius), instructor at Make School, alias "Captain Rainbow" - thanks for introducing me to the concepts behind this project in CS 1.2!
+
+## Resources
+This project taught me a lot about how data structures work, and what they can be used to accomplish. To learn more about how Markov Chains work, and as well as help in implementing Markov Chains using data structures, please check out the following links!
+
+*On Markov Chains:*
+1. [Alex Dejeu's Explanation and Guide on Building Markov Models](https://hackernoon.com/from-what-is-a-markov-model-to-here-is-how-markov-models-work-1ac5f4629b71)
+2. [Victor Powell's Visual Explanation of Markov Chains](https://setosa.io/blog/2014/07/26/markov-chains/)
+3. [Make School's Tutorial on Building a Tweet Generator Bot](https://www.makeschool.com/academy/track/tweet-generator--data-structures---probability-with-python)
+4. [Make School's Lecture on Markov Chains](https://youtu.be/dNaJg-mLobQ)
+5. [Khan Academy's Deep Dive into the Origin of Markov Chain](https://www.khanacademy.org/computing/computer-science/informationtheory/moderninfotheory/v/markov_chains)
+*On Adam Smith:*
+6. [The School of Life's Historical Lesson on Adam Smith's Life and Ideas](https://youtu.be/ejJRhn53X2M)
+7. "Rescuing Adam Smith from myth and misrepresentation", [on The Economist website](https://www.economist.com/books-and-arts/2018/07/26/rescuing-adam-smith-from-myth-and-misrepresentation)
