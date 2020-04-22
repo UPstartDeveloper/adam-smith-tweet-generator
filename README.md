@@ -109,9 +109,10 @@ Thank you in advance for contributing to this project!
 ## Running the Tests
 
 
-## Tech Stack
+## Frameworks/APIs Used
 - Flask - web framework for the backend
 - Bootstrap 4 - styling the front end
+- Twitter API - used to send Tweets [@AdamChain](https://twitter.com/AdamChain) on Twitter, using HTTP POST requests.
 
 ## Authors
 1. **Zain Raza** - *Initial work* - Make School Student, Data Science Concentration
@@ -122,6 +123,4 @@ Thank you in advance for contributing to this project!
 This project is licensed under the MIT License - see [LICENSE](LICENSE) for more details. I welcome all open source efforts!
 
 ## Acknowledgements
-- Mom and Dad - Thank you both for the sacrifices you have made for our family. I have been traveling on planes
-since I was two years old, and it is all thanks to your commitment to giving us a better life.
-- Alan Davis, instructor at Make School, alias "Captain Rainbow"
+- [Alan Davis](https://github.com/neptunius), instructor at Make School, alias "Captain Rainbow" - thanks for introducing me to the concepts behind this project in CS 1.2!
