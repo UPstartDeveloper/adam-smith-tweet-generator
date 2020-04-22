@@ -1,8 +1,9 @@
 # The Words of Adam Smith
+
 "*On the road from the City of Skepticism, I had to pass through the Valley of Ambiguity*" - Adam Smith, 17th-century philosopher and economist
 ## Table of Contents
 1. [Motivation](#motivation)
-2. [But what is a Markov Chain?](#)
+2. [But what is a Markov Chain?](#but-what-is-a-markov-chain)
 3. [Getting Started](#getting-started)
     - [Prerequisites](#prerequisites)
     - [How to Contribute To This Project](#how-to-contribute-to-this-project)
@@ -35,7 +36,7 @@ The technical foundation of this is nothing more than a *Markov Chain*, a mathem
 
 If that didn't a whole lot of make sense, don't worry! I remember Markov Chains being one of the most difficult concepts to grasp, when I first learned about them in the CS 1.2: Intro to Data Structures course taught at [Make School](https://makeschool.com).
 
-For our purposes, let it suffice to say this data structure is what allows the underlying backend for this project to work. Currently, the project is nothing more than a website, where users can send Tweets to the @Adam-Chain twitter account (managed by Zain Raza).
+For our purposes, let it suffice to say this data structure is what allows the underlying backend for this project to work. Currently, the project is nothing more than a website, where users can send Tweets to the [@Adam-Chain](https://twitter.com/AdamChain) twitter account (managed by Zain Raza).
 
 These tweets are built by randomly picking words of the text of Smith's magnum opus, *The Wealth of Nations* (1776). I encourage you whole heartedly to check out the website and the Twitter profile - looking at some of these Tweets, you may get a little nervous... for instance, how was the Markov Chain model able to generate a sentence like *this* on its own?
 
@@ -45,7 +46,7 @@ These tweets are built by randomly picking words of the text of Smith's magnum o
 
 "Of negligence which does not diminish the necessity of diligence."
 
-Are these phrases life-like enough for you? Please share your feedback by opening an issue on this repository! And to learn more about Markov Chain, be sure to check out the links in the [Resources](#resources) section of this document.
+Are these phrases life-like enough for you? Please take a look at the [deployed version of this site](https://adam-smith-tweets.herokuapp.com/), and share your feedback by opening an issue on this repository! And to learn more about Markov Chain, be sure to check out the links in the [Resources](#resources) section of this document.
 
 ## Getting Started
 ### Prerequisites
