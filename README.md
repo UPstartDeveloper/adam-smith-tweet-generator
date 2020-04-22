@@ -9,10 +9,9 @@
     - [Installing Requirements](#installing-requirements)
 4. [Running the Tests](#running-the-tests)
 5. [Tech Stack](#tech-stack)
-6. [Authors](#authors)
-7. [Open Source License](#open-source-license)
-8. [Acknowledgements](#acknowledgements)
-9. [Resources](#resources)
+6. [Open Source License](#open-source-license)
+7. [Acknowledgements](#acknowledgements)
+8. [Resources](#resources)
 
 ## Motivation
 ![This project is intended to inspire critical debate and discussion around economics and computer science, not political grandstanding.](https://i.postimg.cc/yxRXL2ZL/Screen-Shot-2020-04-21-at-3-31-13-PM.png)
@@ -91,18 +90,18 @@ Fun Fact: optional trivia about yourself!
 ### Installing Requirements
 To ensure you have a development experience that's **as smooth as possible**, please follow these instructions:
 
-- Once you have activated your Python virtual environment, please be sure to run the following command from the command line, to ensure you have all the dependencies
+- Once you have activated your Python virtual environment (here mine is called "env"), please be sure to run the following command from the command line, to ensure you have all the dependencies
 you may need to use for this project:
 ```
-python -m pip install -r requirements.txt
+(env) python -m pip install -r requirements.txt
 ```
 - You may always double check the dependencies you have using this command:
 ```
-python -m pip list
+(env) python -m pip list
 ```
 - If you install any new dependencies, please be sure to record them using
 ```
-python -m pip freeze > requirements.txt
+(env) python -m pip freeze > requirements.txt
 ```
 Thank you in advance for contributing to this project!
 
@@ -113,11 +112,6 @@ Thank you in advance for contributing to this project!
 - Flask - web framework for the backend
 - Bootstrap 4 - styling the front end
 - Twitter API - used to send Tweets [@AdamChain](https://twitter.com/AdamChain) on Twitter, using HTTP POST requests.
-
-## Authors
-1. **Zain Raza** - *Initial work* - Make School Student, Data Science Concentration
-    * Want to see more? Take a peek at Zain's entire portfolio, at [https://www.makeschool.com/portfolio/Syed-Raza](https://www.makeschool.com/portfolio/Syed-Raza).
-
 
 ## Open Source License
 This project is licensed under the MIT License - see [LICENSE](LICENSE) for more details. I welcome all open source efforts!
