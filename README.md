@@ -61,7 +61,7 @@ These instructions will help you get a copy of the repository up and running on 
 - Fork this repository (click the "Fork" button at the top right of the page, then click on your profile image).
 - Clone your forked repository onto your local machine
 ```
-git clone https://github.com/<YOUR_GITHUB_USERNAME>/fiercely-souvenir.git
+git clone https://github.com/<YOUR_GITHUB_USERNAME>/adam-smith-tweet-generator.git
 ```
 - Start your virtual environment, and be sure to see the 'Installing Requirements' section below to make sure you have all the required dependencies!
 
