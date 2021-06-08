@@ -1,2 +1,2 @@
-Pillow==8.1.1
+Pillow==8.2.0
 pypandoc==1.4
